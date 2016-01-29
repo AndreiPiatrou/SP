@@ -15,5 +15,17 @@ namespace SP.Extensions
         {
             return new ObservableCollection<string>(list);
         }
+
+        public static List<List<string>> NormalizeCollection(this List<List<string>> list)
+        {
+            var headersCount = list.Select(i => i.Count).Max();
+
+            foreach (var row in list)
+            {
+                row.AddRange(Enumerable.Repeat(string.Empty, headersCount - row.Count));
+            }
+
+            return list;
+        }
     }
 }

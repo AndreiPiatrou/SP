@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -35,7 +34,8 @@ namespace SP.Shell.Behaviors
             if (data != null)
             {
                 data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
-                dataGrid.KeyUp += (sender, args) => data.UpdateRowsAndHeaders();
+                dataGrid.CellEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
+                dataGrid.RowEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
             }
         }
 
@@ -51,9 +51,7 @@ namespace SP.Shell.Behaviors
                         Header = t.ToString(),
                         Binding = new Binding("[" + indexer + "]")
                         {
-                            Mode = BindingMode.TwoWay,
-                            UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
-                            NotifyOnTargetUpdated = true
+                            UpdateSourceTrigger = UpdateSourceTrigger.LostFocus
                         },
                     });
                     ++indexer;
@@ -68,11 +66,10 @@ namespace SP.Shell.Behaviors
             {
                 return;
             }
-
-            dataGrid.DataContext = data;
+            
             dataGrid.SetBinding(
                 ItemsControl.ItemsSourceProperty,
-                new Binding("Records")
+                new Binding("Records.Records")
                     {
                         UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
                     });
@@ -86,9 +83,7 @@ namespace SP.Shell.Behaviors
                         Header = column,
                         Binding = new Binding("[" + indexer + "]")
                         {
-                            Mode = BindingMode.TwoWay,
                             UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
-                            NotifyOnTargetUpdated = true
                         }
                     });
                 ++indexer;

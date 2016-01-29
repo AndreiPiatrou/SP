@@ -14,6 +14,7 @@ namespace SP.Shell.ViewModel
     public class TabViewModel : ViewModelBase
     {
         private string title;
+        private RecordsCollection records;
 
         public TabViewModel(string title)
         {
@@ -47,7 +48,19 @@ namespace SP.Shell.ViewModel
             }
         }
 
-        public RecordsCollection Records { get; private set; }
+        public RecordsCollection Records
+        {
+            get
+            {
+                return records;
+            }
+
+            private set
+            {
+                records = value;
+                RaisePropertyChanged(() => Records);
+            }
+        }
 
         public RelayCommand OpenFileCommand { get; private set; }
 
@@ -57,8 +70,6 @@ namespace SP.Shell.ViewModel
 
             Title = fileName;
             Records = new RecordsCollection(data);
-
-            RaisePropertyChanged(() => Records);
         }
     }
 }

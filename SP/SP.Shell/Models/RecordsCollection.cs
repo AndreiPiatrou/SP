@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 
 using SP.Extensions;
@@ -26,7 +24,7 @@ namespace SP.Shell.Models
 
         public RecordsCollection(List<List<string>> records)
         {
-            records.Add(new List<string>());
+            records = records.NormalizeCollection();
             ObservableCollection<string> potentialHeaders;
             var headerExtracted = TryExtractHeaders(records[0], out potentialHeaders);
             Headers = headerExtracted
@@ -40,6 +38,7 @@ namespace SP.Shell.Models
                     record.Add(string.Empty);
                 }
             }
+
 
             Records =
                 new ObservableCollection<ObservableCollection<string>>(
@@ -106,4 +105,3 @@ namespace SP.Shell.Models
         }
     }
 }
-

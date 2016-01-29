@@ -6,7 +6,9 @@
         <DataGrid AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   CanUserReorderColumns="False"
-                  behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records}">
+                  HorizontalGridLinesBrush="DarkGray"
+                  VerticalGridLinesBrush="DarkGray"
+                  behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
     </DataTemplate>
 </ResourceDictionary>
