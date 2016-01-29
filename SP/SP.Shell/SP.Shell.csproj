@@ -123,6 +123,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SP.PSPP.Integration\SP.PSPP.Integration.csproj">
+      <Project>{9a2e1c78-2c03-4707-b779-6119e3065bc0}</Project>
+      <Name>SP.PSPP.Integration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SP.Resources\SP.Resources.csproj">
       <Project>{45073fda-eab1-4e62-854e-3e0ef082debd}</Project>
       <Name>SP.Resources</Name>
