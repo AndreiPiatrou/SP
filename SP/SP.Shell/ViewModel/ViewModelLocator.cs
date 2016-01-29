@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
 
 using SP.PSPP.Integration;
+using SP.Shell.Services;
 
 namespace SP.Shell.ViewModel
 {
@@ -44,6 +45,7 @@ namespace SP.Shell.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<StatisticProcessRunner>();
             SimpleIoc.Default.Register<Messenger>();
+            SimpleIoc.Default.Register<DataReadService>();
         }
 
         public MainViewModel Main

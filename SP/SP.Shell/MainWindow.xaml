@@ -14,8 +14,19 @@
                       Height="640" 
                       Width="800"
                       DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <dockablz:Layout>
-        <dragablz:TabablzControl TextElement.Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="{x:Static resources:Strings.OpenFile}" Command="{Binding SelectedTab.OpenFileCommand}"></Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dockablz:Layout>
+            <dragablz:TabablzControl Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
                                  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
                                  BorderThickness="0"
                                  Margin="0,-1,0,1"
@@ -25,9 +36,12 @@
                                  ShowDefaultCloseButton="True"
                                  SelectedItem="{Binding SelectedTab}"
                                  ItemsSource="{Binding Tabs}">
-            <dragablz:TabablzControl.InterTabController>
-                <dragablz:InterTabController />
-            </dragablz:TabablzControl.InterTabController>
-        </dragablz:TabablzControl>
-    </dockablz:Layout>
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController />
+                </dragablz:TabablzControl.InterTabController>
+            </dragablz:TabablzControl>
+        </dockablz:Layout>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        </StackPanel>
+    </Grid>
 </controls:MetroWindow>
