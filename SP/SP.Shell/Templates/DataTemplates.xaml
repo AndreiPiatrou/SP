@@ -3,8 +3,10 @@
                     xmlns:local="clr-namespace:SP.Shell.ViewModel"
                     xmlns:behaviors="clr-namespace:SP.Shell.Behaviors">
     <DataTemplate DataType="{x:Type local:TabViewModel}">
-        <DataGrid behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records}">
-            
+        <DataGrid AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserReorderColumns="False"
+                  behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records}">
         </DataGrid>
     </DataTemplate>
 </ResourceDictionary>

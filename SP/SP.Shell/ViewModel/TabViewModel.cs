@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 using SP.Shell.Messages;
+using SP.Shell.Models;
 using SP.Shell.Services;
 
 namespace SP.Shell.ViewModel
@@ -18,7 +19,7 @@ namespace SP.Shell.ViewModel
         {
             Title = title;
 
-            Records = new ObservableCollection<ObservableCollection<string>>();
+            Records = new RecordsCollection();
             OpenFileCommand = new RelayCommand(() => Messenger.Send(new OpenFileMessage(ReadOpenedFile)));
         }
 
@@ -46,18 +47,18 @@ namespace SP.Shell.ViewModel
             }
         }
 
-        public ObservableCollection<ObservableCollection<string>> Records { get; private set; }
+        public RecordsCollection Records { get; private set; }
 
         public RelayCommand OpenFileCommand { get; private set; }
 
         private void ReadOpenedFile(string path, string fileName)
         {
-            Title = fileName;
+            var data = DataReadService.ReadFile(path).Select(i => i.ToList()).ToList();
 
-            foreach (var columns in DataReadService.ReadFile(path))
-            {
-                Records.Add(new ObservableCollection<string>(columns));
-            }
+            Title = fileName;
+            Records = new RecordsCollection(data);
+
+            RaisePropertyChanged(() => Records);
         }
     }
 }

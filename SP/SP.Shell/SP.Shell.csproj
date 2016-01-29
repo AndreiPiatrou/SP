@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SP.Shell</RootNamespace>
     <AssemblyName>SP.Shell</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -103,6 +104,7 @@
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
     <Compile Include="Messages\ShowPopupMessage.cs" />
+    <Compile Include="Models\RecordsCollection.cs" />
     <Compile Include="Services\FileReadService\CsvReadService.cs" />
     <Compile Include="Services\DataReadService.cs" />
     <Compile Include="Services\FileReadService\IFileReadService.cs" />
@@ -156,6 +158,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SP.Extensions\SP.Extensions.csproj">
+      <Project>{5f68cc30-6bd2-4469-bc89-302b63e2709f}</Project>
+      <Name>SP.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SP.PSPP.Integration\SP.PSPP.Integration.csproj">
       <Project>{9a2e1c78-2c03-4707-b779-6119e3065bc0}</Project>
       <Name>SP.PSPP.Integration</Name>
@@ -167,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
