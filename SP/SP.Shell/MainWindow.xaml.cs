@@ -4,9 +4,11 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.SimpleChildWindow;
 
 using Microsoft.Win32;
 
+using SP.Shell.Controls;
 using SP.Shell.Messages;
 
 namespace SP.Shell
@@ -37,6 +39,14 @@ namespace SP.Shell
                                 Path.GetFileNameWithoutExtension(openFileDialog.FileName));
                         }
                     });
+            messenger.Register<AnalyzeDataMessage>(
+                this,
+                async message => await this.ShowChildWindowAsync(
+                    new AnalyzeDataWindow
+                    {
+                        DataContext = message.Model
+                    },
+                    ChildWindowManager.OverlayFillBehavior.FullWindow));
         }
     }
 }

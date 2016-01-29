@@ -1,0 +1,29 @@
+﻿<simpleChildWindow:ChildWindow
+    x:Name="ChildWindow"
+    x:Class="SP.Shell.Controls.AnalyzeDataWindow"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+    xmlns:commands="clr-namespace:SP.Shell.Commands"
+    Padding="15"
+    AllowMove="True"
+    Title="{x:Static resources:Strings.DataAnalyze}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentPresenter Margin="20" Content="{Binding ElementName=ChildWindow, Path=DataContext}"/>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="20, 5, 20, 5">
+            <Button Content="{x:Static resources:Strings.Analyze}" Margin="0, 0, 20, 0"/>
+            <Button Content="{x:Static resources:Strings.Close}"
+                    Command="{x:Static commands:WindowCommands.CloseWindowCommand}" 
+                    CommandParameter="{Binding ElementName=ChildWindow}"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
+        </StackPanel>
+    </Grid>
+</simpleChildWindow:ChildWindow>

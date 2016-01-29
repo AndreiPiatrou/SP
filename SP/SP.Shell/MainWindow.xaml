@@ -7,25 +7,38 @@
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+                      xmlns:controls1="clr-namespace:SP.Shell.Controls"
                       Background="{DynamicResource MaterialDesignPaper}"					  
                       GlowBrush="{DynamicResource AccentColorBrush}"					  
                       FontFamily="{StaticResource DefaultFont}"
                       Title="{x:Static resources:Strings.MainWindowTitle}" 
+                      DataContext="{Binding Main, Source={StaticResource Locator}}"
                       Height="640" 
-                      Width="800"
-                      DataContext="{Binding Main, Source={StaticResource Locator}}">
+                      Width="800">
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="LeftFlyout" 
+                             Header="{x:Static resources:Strings.File}" 
+                             Position="Left" 
+                             ExternalCloseButton="Left"
+                             IsModal="True">
+                <controls1:FileActions OpenFileCommand="{Binding Main.SelectedTab.OpenFileCommand, Source={StaticResource Locator}}" />
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
-            <Button Content="{x:Static resources:Strings.OpenFile}" Command="{Binding SelectedTab.OpenFileCommand}"></Button>
+            <ToggleButton Content="{x:Static resources:Strings.File}" IsChecked="{Binding ElementName=LeftFlyout, Path=IsOpen}"/>
+            <Button Content="{x:Static resources:Strings.Analyze}" Command="{Binding SelectedTab.AnalyzeCommand}"/>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <dockablz:Layout>
+        <dockablz:Layout Grid.Row="1">
             <dragablz:TabablzControl Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
                                  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
                                  BorderThickness="0"
@@ -41,7 +54,5 @@
                 </dragablz:TabablzControl.InterTabController>
             </dragablz:TabablzControl>
         </dockablz:Layout>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-        </StackPanel>
     </Grid>
 </controls:MetroWindow>

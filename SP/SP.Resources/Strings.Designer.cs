@@ -61,6 +61,51 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Анализ.
+        /// </summary>
+        public static string Analyze {
+            get {
+                return ResourceManager.GetString("Analyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите переменные.
+        /// </summary>
+        public static string ChooseVariables {
+            get {
+                return ResourceManager.GetString("ChooseVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Закрыть.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Анализ данных.
+        /// </summary>
+        public static string DataAnalyze {
+            get {
+                return ResourceManager.GetString("DataAnalyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Файл.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Статистический пакет PSPP.
         /// </summary>
         public static string MainWindowTitle {
@@ -75,6 +120,15 @@ namespace SP.Resources {
         public static string OpenFile {
             get {
                 return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить в файл.
+        /// </summary>
+        public static string SaveToFile {
+            get {
+                return ResourceManager.GetString("SaveToFile", resourceCulture);
             }
         }
     }

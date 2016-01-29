@@ -11,9 +11,9 @@ namespace SP.Extensions
             return list.All(string.IsNullOrWhiteSpace);
         }
 
-        public static ObservableCollection<string> ToObservable(this IEnumerable<string> list)
+        public static ObservableCollection<T> ToObservable<T>(this IEnumerable<T> list)
         {
-            return new ObservableCollection<string>(list);
+            return new ObservableCollection<T>(list);
         }
 
         public static List<List<string>> NormalizeCollection(this List<List<string>> list)

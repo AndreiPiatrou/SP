@@ -60,6 +60,10 @@
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MahApps.Metro.SimpleChildWindow, Version=1.3.0.0, Culture=neutral, PublicKeyToken=bbbfdff7f500a992, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.SimpleChildWindow.1.3.0\lib\net45\MahApps.Metro.SimpleChildWindow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -102,16 +106,34 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
+    <Compile Include="Commands\WindowCommands.cs" />
+    <Compile Include="Controls\AnalyzeDataWindow.xaml.cs">
+      <DependentUpon>AnalyzeDataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileActions.xaml.cs">
+      <DependentUpon>FileActions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
     <Compile Include="Messages\ShowPopupMessage.cs" />
+    <Compile Include="Models\CheckableHeaderModel.cs" />
     <Compile Include="Models\RecordsCollection.cs" />
     <Compile Include="Services\FileReadService\CsvReadService.cs" />
     <Compile Include="Services\DataReadService.cs" />
     <Compile Include="Services\FileReadService\IFileReadService.cs" />
     <Compile Include="Settings\Settings.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\AnalyzeDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FileActions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,7 +194,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

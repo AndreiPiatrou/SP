@@ -22,6 +22,7 @@ namespace SP.Shell.ViewModel
 
             Records = new RecordsCollection();
             OpenFileCommand = new RelayCommand(() => Messenger.Send(new OpenFileMessage(ReadOpenedFile)));
+            AnalyzeCommand = new RelayCommand(() => Messenger.Send(new AnalyzeDataMessage(new AnalyzeDataViewModel(Records))));
         }
 
         public Messenger Messenger
@@ -63,6 +64,8 @@ namespace SP.Shell.ViewModel
         }
 
         public RelayCommand OpenFileCommand { get; private set; }
+
+        public RelayCommand AnalyzeCommand { get; private set; }
 
         private void ReadOpenedFile(string path, string fileName)
         {

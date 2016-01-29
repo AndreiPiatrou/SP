@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Analyze" xml:space="preserve">
+    <value>Анализ</value>
+  </data>
+  <data name="ChooseVariables" xml:space="preserve">
+    <value>Выберите переменные</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="DataAnalyze" xml:space="preserve">
+    <value>Анализ данных</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Файл</value>
+  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Статистический пакет PSPP</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>
+  </data>
+  <data name="SaveToFile" xml:space="preserve">
+    <value>Сохранить в файл</value>
   </data>
 </root>
