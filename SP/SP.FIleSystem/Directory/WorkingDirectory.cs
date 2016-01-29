@@ -40,6 +40,11 @@ namespace SP.FIleSystem.Directory
 
         private string CreateDirectory(string root)
         {
+            if (root == "%Temp%")
+            {
+                root = Path.GetTempPath();
+            }
+
             var name = Guid.NewGuid().ToString();
 
             return System.IO.Directory.CreateDirectory(PathOperations.Combine(root, name)).FullName;

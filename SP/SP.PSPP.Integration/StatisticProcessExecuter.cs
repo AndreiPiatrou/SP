@@ -28,7 +28,9 @@ namespace SP.PSPP.Integration
                 statisticProcess.Start();
                 statisticProcess.WaitForExit();
 
-                return new StatisticProcessExecutionResult(true);
+                return output.Any()
+                           ? new StatisticProcessExecutionResult(string.Join(Environment.NewLine, output))
+                           : new StatisticProcessExecutionResult(true);
             }
             catch (Exception ex)
             {
@@ -47,10 +49,11 @@ namespace SP.PSPP.Integration
             var process = new Process
             {
                 StartInfo = CreateProcessStartInfo(arguments),
-                EnableRaisingEvents = true
+                EnableRaisingEvents = true,
             };
 
             process.ErrorDataReceived += ProcessOnErrorDataReceived;
+            process.OutputDataReceived += ProcessOnErrorDataReceived;
 
             return process;
         }
@@ -69,7 +72,7 @@ namespace SP.PSPP.Integration
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
-                CreateNoWindow = true
+                CreateNoWindow = false
             };
 
             return processStartInfo;
