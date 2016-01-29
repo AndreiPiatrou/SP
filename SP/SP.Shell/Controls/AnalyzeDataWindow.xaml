@@ -6,8 +6,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
     xmlns:commands="clr-namespace:SP.Shell.Commands"
+    xmlns:behaviors="clr-namespace:SP.Shell.Behaviors"
     Padding="15"
     AllowMove="True"
+    behaviors:CloseWindowBehavior.CloseRequested="{Binding CloseRequested}"
     Title="{x:Static resources:Strings.DataAnalyze}">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +21,9 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="20, 5, 20, 5">
-            <Button Content="{x:Static resources:Strings.Analyze}" Margin="0, 0, 20, 0"/>
+            <Button Content="{x:Static resources:Strings.Analyze}" 
+                    Command="{Binding ElementName=ChildWindow,Path=DataContext.AnalyzeCommand}" 
+                    Margin="0, 0, 20, 0"/>
             <Button Content="{x:Static resources:Strings.Close}"
                     Command="{x:Static commands:WindowCommands.CloseWindowCommand}" 
                     CommandParameter="{Binding ElementName=ChildWindow}"

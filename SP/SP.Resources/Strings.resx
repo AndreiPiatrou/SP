@@ -120,9 +120,6 @@
   <data name="Analyze" xml:space="preserve">
     <value>Анализ</value>
   </data>
-  <data name="ChooseVariables" xml:space="preserve">
-    <value>Выберите переменные</value>
-  </data>
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
   </data>
@@ -140,5 +137,11 @@
   </data>
   <data name="SaveToFile" xml:space="preserve">
     <value>Сохранить в файл</value>
+  </data>
+  <data name="SelectAnalysisType" xml:space="preserve">
+    <value>Выберите вид анализа</value>
+  </data>
+  <data name="SelectVariables" xml:space="preserve">
+    <value>Выберите переменные</value>
   </data>
 </root>

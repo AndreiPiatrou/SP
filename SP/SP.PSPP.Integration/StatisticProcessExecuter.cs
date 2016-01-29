@@ -7,34 +7,34 @@ using SP.FIleSystem;
 
 namespace SP.PSPP.Integration
 {
-    public class StatisticProcessRunner
+    public class StatisticProcessExecuter
     {
         private const string RelativeExecutablePath = "\\Executable\\pspp.exe";
 
         private readonly IList<string> output;
         private readonly Process statisticProcess;
 
-        public StatisticProcessRunner(string arguments)
+        public StatisticProcessExecuter(string arguments)
         {
             output = new List<string>();
 
             statisticProcess = CreateProcess(arguments);
         }
 
-        public StatisticProcessRunResult Start()
+        public StatisticProcessExecutionResult Execute()
         {
             try
             {
                 statisticProcess.Start();
                 statisticProcess.WaitForExit();
 
-                return new StatisticProcessRunResult(true);
+                return new StatisticProcessExecutionResult(true);
             }
             catch (Exception ex)
             {
                 return output.Any()
-                           ? new StatisticProcessRunResult(string.Join(Environment.NewLine, output))
-                           : new StatisticProcessRunResult(ex.ToString());
+                           ? new StatisticProcessExecutionResult(string.Join(Environment.NewLine, output))
+                           : new StatisticProcessExecutionResult(ex.ToString());
             }
             finally
             {

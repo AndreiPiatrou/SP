@@ -1,51 +1,25 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:SP.Shell"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 using Microsoft.Practices.ServiceLocation;
 
-using SP.PSPP.Integration;
+using SP.FIleSystem.Directory;
 using SP.Shell.Services;
 
 namespace SP.Shell.ViewModel
 {
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
-
+            
+            SimpleIoc.Default.Register<Settings.Settings>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<StatisticProcessRunner>();
             SimpleIoc.Default.Register<Messenger>();
             SimpleIoc.Default.Register<DataReadService>();
+            SimpleIoc.Default.Register(() => new WorkingDirectory(SimpleIoc.Default.GetInstance<Settings.Settings>().RootWorkingDirectoryPath));
+            SimpleIoc.Default.Register<AnalysisService>();
         }
 
         public MainViewModel Main
@@ -58,6 +32,7 @@ namespace SP.Shell.ViewModel
         
         public static void Cleanup()
         {
+            SimpleIoc.Default.GetInstance<WorkingDirectory>().Dispose();
         }
     }
 }

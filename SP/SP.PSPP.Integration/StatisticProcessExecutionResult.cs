@@ -1,18 +1,18 @@
 ﻿namespace SP.PSPP.Integration
 {
-    public class StatisticProcessRunResult
+    public class StatisticProcessExecutionResult
     {
-        public StatisticProcessRunResult(bool success) :
+        public StatisticProcessExecutionResult(bool success) :
             this(success, string.Empty)
         {
         }
 
-        public StatisticProcessRunResult(string message) :
+        public StatisticProcessExecutionResult(string message) :
             this(false, message)
         {
         }
 
-        public StatisticProcessRunResult(bool successed, string message)
+        public StatisticProcessExecutionResult(bool successed, string message)
         {
             Successed = successed;
             Message = message;

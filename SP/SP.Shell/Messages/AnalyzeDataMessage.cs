@@ -1,14 +1,18 @@
-﻿using SP.Shell.ViewModel;
+﻿using SP.PSPP.Integration.Commands;
+using SP.PSPP.Integration.Models;
 
 namespace SP.Shell.Messages
 {
     public class AnalyzeDataMessage
     {
-        public AnalyzeDataMessage(AnalyzeDataViewModel model)
+        public AnalyzeDataMessage(InputData inputData, AnalyzeType type)
         {
-            Model = model;
+            InputData = inputData;
+            Type = type;
         }
 
-        public AnalyzeDataViewModel Model { get; private set; }
+        public InputData InputData { get; private set; }
+
+        public AnalyzeType Type { get; private set; }
     }
 }

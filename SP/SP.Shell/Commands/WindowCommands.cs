@@ -10,9 +10,9 @@ namespace SP.Shell.Commands
     public class WindowCommands
     {
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
-        public static RelayCommand<FrameworkElement> CloseWindowCommand = new RelayCommand<FrameworkElement>(Closeelement);
+        public static RelayCommand<FrameworkElement> CloseWindowCommand = new RelayCommand<FrameworkElement>(CloseElement);
 
-        private static void Closeelement(FrameworkElement element)
+        private static void CloseElement(FrameworkElement element)
         {
             if (element is Window)
             {

@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+
+using Microsoft.Practices.ServiceLocation;
 
 using SP.Shell.Messages;
 using SP.Shell.Models;
@@ -18,21 +20,24 @@ namespace SP.Shell.ViewModel
 
         public TabViewModel(string title)
         {
+            MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
             Title = title;
-
             Records = new RecordsCollection();
-            OpenFileCommand = new RelayCommand(() => Messenger.Send(new OpenFileMessage(ReadOpenedFile)));
-            AnalyzeCommand = new RelayCommand(() => Messenger.Send(new AnalyzeDataMessage(new AnalyzeDataViewModel(Records))));
+
+            InitializeCommands();
         }
 
-        public Messenger Messenger
+        public TabViewModel(string title, List<List<string>> list)
         {
-            get { return SimpleIoc.Default.GetInstance<Messenger>(); }
+            Title = title;
+            Records = new RecordsCollection(list);
+
+            InitializeCommands();
         }
 
         public DataReadService DataReadService
         {
-            get { return SimpleIoc.Default.GetInstance<DataReadService>(); }
+            get { return ServiceLocator.Current.GetInstance<DataReadService>(); }
         }
 
         public string Title
@@ -66,6 +71,12 @@ namespace SP.Shell.ViewModel
         public RelayCommand OpenFileCommand { get; private set; }
 
         public RelayCommand AnalyzeCommand { get; private set; }
+
+        private void InitializeCommands()
+        {
+            OpenFileCommand = new RelayCommand(() => MessengerInstance.Send(new OpenFileMessage(ReadOpenedFile)));
+            AnalyzeCommand = new RelayCommand(() => MessengerInstance.Send(new PrepareAnalyzeDataMessage(new AnalyzeDataViewModel(Records))));
+        }
 
         private void ReadOpenedFile(string path, string fileName)
         {

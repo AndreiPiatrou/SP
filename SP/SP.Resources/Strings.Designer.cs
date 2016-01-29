@@ -70,15 +70,6 @@ namespace SP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите переменные.
-        /// </summary>
-        public static string ChooseVariables {
-            get {
-                return ResourceManager.GetString("ChooseVariables", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Закрыть.
         /// </summary>
         public static string Close {
@@ -129,6 +120,24 @@ namespace SP.Resources {
         public static string SaveToFile {
             get {
                 return ResourceManager.GetString("SaveToFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите вид анализа.
+        /// </summary>
+        public static string SelectAnalysisType {
+            get {
+                return ResourceManager.GetString("SelectAnalysisType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите переменные.
+        /// </summary>
+        public static string SelectVariables {
+            get {
+                return ResourceManager.GetString("SelectVariables", resourceCulture);
             }
         }
     }

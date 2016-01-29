@@ -41,9 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StatisticProcessRunner.cs" />
+    <Compile Include="Commands\AnalyzeCommandFactory.cs" />
+    <Compile Include="Commands\AnalyzeType.cs" />
+    <Compile Include="Commands\IAnalyzeCommand.cs" />
+    <Compile Include="Commands\Implementations\AnalyzeCommandBase.cs" />
+    <Compile Include="Commands\Implementations\CorrelationCommand.cs" />
+    <Compile Include="Constants\CommandConstants.cs" />
+    <Compile Include="Models\InputData.cs" />
+    <Compile Include="Models\OutputData.cs" />
+    <Compile Include="Services\InputDataWriter.cs" />
+    <Compile Include="Services\OutputDataReader.cs" />
+    <Compile Include="StatisticProcessExecuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticProcessRunResult.cs" />
+    <Compile Include="StatisticProcessExecutionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SP.FIleSystem\SP.FIleSystem.csproj">
@@ -185,6 +195,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

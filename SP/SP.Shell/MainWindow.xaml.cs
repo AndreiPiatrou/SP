@@ -1,11 +1,16 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
 
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 
 using SP.Shell.Controls;
@@ -19,10 +24,10 @@ namespace SP.Shell
         {
             InitializeComponent();
 
-            RegisterForMessages(SimpleIoc.Default.GetInstance<Messenger>());
+            RegisterForMessages(ServiceLocator.Current.GetInstance<Messenger>());
         }
 
-        private void RegisterForMessages(Messenger messenger)
+        private void RegisterForMessages(IMessenger messenger)
         {
             messenger.Register<ShowPopupMessage>(
                 this,
@@ -39,14 +44,19 @@ namespace SP.Shell
                                 Path.GetFileNameWithoutExtension(openFileDialog.FileName));
                         }
                     });
-            messenger.Register<AnalyzeDataMessage>(
+            messenger.Register<PrepareAnalyzeDataMessage>(
                 this,
-                async message => await this.ShowChildWindowAsync(
-                    new AnalyzeDataWindow
-                    {
-                        DataContext = message.Model
-                    },
-                    ChildWindowManager.OverlayFillBehavior.FullWindow));
+                async message => await OpenAnalyzeDataChildWindow(message));
+        }
+
+        private async Task OpenAnalyzeDataChildWindow(PrepareAnalyzeDataMessage message)
+        {
+            var window = new AnalyzeDataWindow
+            {
+                DataContext = message.Model
+            };
+
+            await this.ShowChildWindowAsync(window, ChildWindowManager.OverlayFillBehavior.FullWindow);
         }
     }
 }
