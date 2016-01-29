@@ -4,40 +4,30 @@
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
                       xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+                      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
-                      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       Background="{DynamicResource MaterialDesignPaper}"					  
                       GlowBrush="{DynamicResource AccentColorBrush}"					  
                       FontFamily="{StaticResource DefaultFont}"
-                      Title="{x:Static resources:Strings.MainWindowTitle}" Height="640" Width="800">
-    <controls:MetroWindow.Flyouts>
-        <controls:FlyoutsControl>
-            <controls:Flyout x:Name="LeftFlyout" Position="Left" Header="Settings">
-                <TextBlock Text="TEST"></TextBlock>
-            </controls:Flyout>
-        </controls:FlyoutsControl>
-    </controls:MetroWindow.Flyouts>
+                      Title="{x:Static resources:Strings.MainWindowTitle}" 
+                      Height="640" 
+                      Width="800"
+                      DataContext="{Binding Main, Source={StaticResource Locator}}">
     <dockablz:Layout>
         <dragablz:TabablzControl TextElement.Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
                                  Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
                                  BorderThickness="0"
-                                 Margin="0,-1,0,1">
+                                 Margin="0,-1,0,1"
+                                 HeaderMemberPath="Title"
+                                 NewItemFactory="{Binding AddNewTabCommand}"
+                                 ShowDefaultAddButton="True"
+                                 ShowDefaultCloseButton="True"
+                                 SelectedItem="{Binding SelectedTab}"
+                                 ItemsSource="{Binding Tabs}">
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
-            <TabItem Header="CARDS">
-            </TabItem>
-            <TabItem Header="BUTTONS">
-            </TabItem>
-            <TabItem Header="FIELDS">
-            </TabItem>
-            <TabItem Header="PALETTE">
-            </TabItem>
-            <TabItem Header="DIALOGS">
-            </TabItem>
-            <TabItem Header="MAHAPPS">
-            </TabItem>
         </dragablz:TabablzControl>
     </dockablz:Layout>
 </controls:MetroWindow>

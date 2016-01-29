@@ -1,4 +1,4 @@
-﻿namespace SP.FIleSystem
+﻿namespace SP.PSPP.Integration
 {
     public class StatisticProcessRunResult
     {

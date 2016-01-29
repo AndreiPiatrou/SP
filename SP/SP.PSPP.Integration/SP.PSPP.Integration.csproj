@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="StatisticProcessRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticProcessRunResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SP.FIleSystem\SP.FIleSystem.csproj">
