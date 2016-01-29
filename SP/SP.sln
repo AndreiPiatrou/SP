@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Shell", "SP.Shell\SP.She
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Resources", "SP.Resources\SP.Resources.csproj", "{45073FDA-EAB1-4E62-854E-3E0EF082DEBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.FIleSystem", "SP.FIleSystem\SP.FIleSystem.csproj", "{197D6BE7-FE9A-4175-80BE-176081065B1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{45073FDA-EAB1-4E62-854E-3E0EF082DEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45073FDA-EAB1-4E62-854E-3E0EF082DEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45073FDA-EAB1-4E62-854E-3E0EF082DEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197D6BE7-FE9A-4175-80BE-176081065B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197D6BE7-FE9A-4175-80BE-176081065B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197D6BE7-FE9A-4175-80BE-176081065B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197D6BE7-FE9A-4175-80BE-176081065B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
