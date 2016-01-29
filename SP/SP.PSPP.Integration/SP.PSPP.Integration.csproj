@@ -40,9 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StatisticProcessRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SP.FIleSystem\SP.FIleSystem.csproj">
+      <Project>{197d6be7-fe9a-4175-80be-176081065b1c}</Project>
+      <Name>SP.FIleSystem</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Executable\libatk-1.0-0.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

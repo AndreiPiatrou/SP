@@ -24,18 +24,18 @@ namespace SP.FIleSystem.Directory
             return CreateFileWithContent(newFIlePath, content);
         }
 
+        public string GenerateNewFilePath(string extension = ".csv")
+        {
+            var name = Guid.NewGuid() + extension;
+
+            return PathOperations.Combine(directory, name);
+        }
+
         private string CreateFileWithContent(string path, string content)
         {
             File.WriteAllText(path, content);
 
             return path;
-        }
-
-        private string GenerateNewFilePath(string extension)
-        {
-            var name = Guid.NewGuid() + extension;
-
-            return PathOperations.Combine(directory, name);
         }
 
         private string CreateDirectory(string root)
