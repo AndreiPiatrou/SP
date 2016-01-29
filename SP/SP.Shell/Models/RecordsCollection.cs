@@ -24,6 +24,7 @@ namespace SP.Shell.Models
 
         public RecordsCollection(List<List<string>> records)
         {
+            records.Add(new List<string>());
             records = records.NormalizeCollection();
             ObservableCollection<string> potentialHeaders;
             var headerExtracted = TryExtractHeaders(records[0], out potentialHeaders);
@@ -38,8 +39,7 @@ namespace SP.Shell.Models
                     record.Add(string.Empty);
                 }
             }
-
-
+            
             Records =
                 new ObservableCollection<ObservableCollection<string>>(
                     records.Skip(headerExtracted ? 1 : 0).Select(i => new ObservableCollection<string>(i)));
