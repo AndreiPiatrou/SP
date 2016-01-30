@@ -5,16 +5,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+             xmlns:commands="clr-namespace:SP.Shell.Commands"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300">
-    <StackPanel Margin="10">
-        <Button Content="{x:Static resources:Strings.OpenFile}" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel >
+            <Button Content="{x:Static resources:Strings.OpenFile}" 
                 Command="{Binding OpenFileCommand, ElementName=UserControl}" 
                 Margin="0, 0, 0, 5" 
                 Style="{DynamicResource MaterialDesignFlatButton}"/>
-        <Button Content="{x:Static resources:Strings.SaveToFile}"
+            <Button Content="{x:Static resources:Strings.SaveToFile}"
                 Style="{DynamicResource MaterialDesignFlatButton}"/>
-    </StackPanel>
+        </StackPanel>
+        <Button Grid.Row="1" 
+                Content="{x:Static resources:Strings.Exit}" 
+                Command="{x:Static commands:WindowCommands.CloseApplication}" 
+                Margin="10" 
+                Style="{DynamicResource MaterialDesignFlatButton}"/>
+    </Grid>
 </UserControl>
