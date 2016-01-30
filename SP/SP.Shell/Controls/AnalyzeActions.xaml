@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+             xmlns:commands="clr-namespace:SP.Shell.Commands"
+             xmlns:commands1="clr-namespace:SP.PSPP.Integration.Commands;assembly=SP.PSPP.Integration"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Margin="10">
-        <Button Content="{x:Static resources:Strings.AverageValue}" 
+        <Button Content="{x:Static resources:Strings.CorrelationCoefficient}"
+                Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
+                CommandParameter="{x:Static commands1:AnalyzeType.Correlation}"
                 Margin="0, 0, 0, 5" 
                 Style="{DynamicResource MaterialDesignFlatButton}"/>
     </StackPanel>

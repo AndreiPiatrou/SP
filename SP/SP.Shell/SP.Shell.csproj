@@ -107,6 +107,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
+    <Compile Include="Commands\AnalyzeCommands.cs" />
     <Compile Include="Commands\WindowCommands.cs" />
     <Compile Include="Controls\AnalyzeActions.xaml.cs">
       <DependentUpon>AnalyzeActions.xaml</DependentUpon>
@@ -117,6 +118,7 @@
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factories\AnalyzeChildWindowFactory.cs" />
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
@@ -128,7 +130,8 @@
     <Compile Include="Services\DataReadService.cs" />
     <Compile Include="Services\FileReadService\IFileReadService.cs" />
     <Compile Include="Settings\Settings.cs" />
-    <Compile Include="ViewModel\AnalyzeDataViewModel.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

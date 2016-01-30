@@ -3,7 +3,8 @@
                     xmlns:local="clr-namespace:SP.Shell.ViewModel"
                     xmlns:behaviors="clr-namespace:SP.Shell.Behaviors"
                     xmlns:models="clr-namespace:SP.Shell.Models"
-                    xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources">
+                    xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+                    xmlns:analyzeDataViewModels="clr-namespace:SP.Shell.ViewModel.AnalyzeDataViewModels">
     <DataTemplate DataType="{x:Type local:TabViewModel}">
         <DataGrid AutoGenerateColumns="False"
                   CanUserAddRows="False"
@@ -13,7 +14,7 @@
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type local:AnalyzeDataViewModel}">
+    <DataTemplate DataType="{x:Type analyzeDataViewModels:BivariateCorrelationViewModel}">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>
             <ListView ItemsSource="{Binding Headers}" 
@@ -29,8 +30,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock Text="{x:Static resources:Strings.SelectAnalysisType}"/>
-            <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

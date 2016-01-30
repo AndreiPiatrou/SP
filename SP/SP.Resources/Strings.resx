@@ -126,6 +126,9 @@
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="CorrelationCoefficient" xml:space="preserve">
+    <value>Коэффициент порядковой корреляции</value>
+  </data>
   <data name="DataAnalyze" xml:space="preserve">
     <value>Анализ данных</value>
   </data>

@@ -70,12 +70,9 @@ namespace SP.Shell.ViewModel
 
         public RelayCommand OpenFileCommand { get; private set; }
 
-        public RelayCommand AnalyzeCommand { get; private set; }
-
         private void InitializeCommands()
         {
             OpenFileCommand = new RelayCommand(() => MessengerInstance.Send(new OpenFileMessage(ReadOpenedFile)));
-            AnalyzeCommand = new RelayCommand(() => MessengerInstance.Send(new PrepareAnalyzeDataMessage(new AnalyzeDataViewModel(Records))));
         }
 
         private void ReadOpenedFile(string path, string fileName)

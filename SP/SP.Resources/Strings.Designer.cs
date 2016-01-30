@@ -88,6 +88,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Коэффициент порядковой корреляции.
+        /// </summary>
+        public static string CorrelationCoefficient {
+            get {
+                return ResourceManager.GetString("CorrelationCoefficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Анализ данных.
         /// </summary>
         public static string DataAnalyze {

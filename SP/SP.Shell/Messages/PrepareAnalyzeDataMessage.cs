@@ -1,14 +1,19 @@
-﻿using SP.Shell.ViewModel;
+﻿using System.Collections.ObjectModel;
+
+using SP.Shell.Models;
+using SP.Shell.ViewModel.AnalyzeDataViewModels;
 
 namespace SP.Shell.Messages
 {
     public class PrepareAnalyzeDataMessage
     {
-        public PrepareAnalyzeDataMessage(AnalyzeDataViewModel model)
+        public PrepareAnalyzeDataMessage(AnalyzeDataViewModelBase model)
         {
             Model = model;
         }
 
-        public AnalyzeDataViewModel Model { get; private set; }
+        public ObservableCollection<CheckableHeaderModel> Headers { get; private set; }
+
+        public AnalyzeDataViewModelBase Model { get; private set; }
     }
 }
