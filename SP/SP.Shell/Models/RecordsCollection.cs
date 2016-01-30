@@ -56,7 +56,7 @@ namespace SP.Shell.Models
                 yield return Headers.SkipLast();
                 foreach (var record in Records.SkipLast())
                 {
-                    yield return record;
+                    yield return record.SkipLast();
                 }
             }
         } 
