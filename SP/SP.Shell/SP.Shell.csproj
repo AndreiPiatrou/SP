@@ -108,6 +108,9 @@
     <Compile Include="Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
     <Compile Include="Commands\WindowCommands.cs" />
+    <Compile Include="Controls\AnalyzeActions.xaml.cs">
+      <DependentUpon>AnalyzeActions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AnalyzeDataWindow.xaml.cs">
       <DependentUpon>AnalyzeDataWindow.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\AnalyzeActions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AnalyzeDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

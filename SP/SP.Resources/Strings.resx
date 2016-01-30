@@ -120,6 +120,9 @@
   <data name="Analyze" xml:space="preserve">
     <value>Анализ</value>
   </data>
+  <data name="AverageValue" xml:space="preserve">
+    <value>Среднее значение</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
   </data>

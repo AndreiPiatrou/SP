@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -68,11 +69,13 @@ namespace SP.Shell.ViewModel
 
         private InputData ExtractInputData()
         {
-            // TODO: update to fill correct info.
+            var checkedHeaders = Headers.Where(h => h.IsChecked).ToList();
+            var indexes = checkedHeaders.Select(h => h.Index);
+
             return new InputData
             {
-                Variables = records.Headers,
-                Rows = records.Records
+                Variables = checkedHeaders.Select(h => h.Header),
+                Rows = records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
             };
         }
     }

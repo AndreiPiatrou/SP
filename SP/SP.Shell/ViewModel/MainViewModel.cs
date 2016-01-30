@@ -1,12 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 
 using Microsoft.Practices.ServiceLocation;
 
+using SP.Extensions;
 using SP.Shell.Messages;
 using SP.Shell.Services;
 
@@ -57,11 +57,18 @@ namespace SP.Shell.ViewModel
 
         private void AnalyzeDataExecute(AnalyzeDataMessage message)
         {
-            var result = Service.Analyze(message.InputData, message.Type);
-            var newTab = new TabViewModel("RESULT", result.Rows.Select(i => i.ToList()).ToList());
+            try
+            {
+                var result = Service.Analyze(message.InputData, message.Type);
+                var newTab = new TabViewModel("RESULT", result.Rows.ToCompleteList());
 
-            Tabs.Add(newTab);
-            SelectedTab = newTab;
+                Tabs.Add(newTab);
+                SelectedTab = newTab;
+            }
+            catch (Exception e)
+            {
+                MessengerInstance.Send(new ShowPopupMessage("ERROR OCCURED", e.Message));
+            }
         }
     }
 }

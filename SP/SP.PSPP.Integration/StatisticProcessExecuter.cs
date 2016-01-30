@@ -26,6 +26,8 @@ namespace SP.PSPP.Integration
             try
             {
                 statisticProcess.Start();
+                statisticProcess.BeginOutputReadLine();
+                statisticProcess.BeginErrorReadLine();
                 statisticProcess.WaitForExit();
 
                 return output.Any()
@@ -60,7 +62,10 @@ namespace SP.PSPP.Integration
 
         private void ProcessOnErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            output.Add(e.Data);
+            if (!string.IsNullOrEmpty(e.Data))
+            {
+                output.Add(e.Data);
+            }
         }
 
         private ProcessStartInfo CreateProcessStartInfo(string arguments)
@@ -72,7 +77,7 @@ namespace SP.PSPP.Integration
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
-                CreateNoWindow = false
+                CreateNoWindow = true
             };
 
             return processStartInfo;

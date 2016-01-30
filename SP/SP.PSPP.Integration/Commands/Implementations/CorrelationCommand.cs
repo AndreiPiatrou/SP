@@ -33,7 +33,7 @@ namespace SP.PSPP.Integration.Commands.Implementations
             return string.Format(
                 CommandConstants.CorrelationCommandFormat,
                 inputFilePath,
-                string.Join(Environment.NewLine, inputData.Variables),
+                string.Join(" F4" + Environment.NewLine, inputData.Variables),
                 string.Join(Environment.NewLine, inputData.Variables));
         }
     }

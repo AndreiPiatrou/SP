@@ -27,5 +27,15 @@ namespace SP.Extensions
 
             return list;
         }
+
+        public static List<List<string>> ToCompleteList(this IEnumerable<IEnumerable<string>> list)
+        {
+            return list.Select(i => i.ToList()).ToList();
+        }
+
+        public static IEnumerable<T> SkipLast<T>(this IEnumerable<T> list)
+        {
+            return list.Reverse().Skip(1).Reverse();
+        } 
     }
 }

@@ -70,6 +70,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Среднее значение.
+        /// </summary>
+        public static string AverageValue {
+            get {
+                return ResourceManager.GetString("AverageValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Закрыть.
         /// </summary>
         public static string Close {
