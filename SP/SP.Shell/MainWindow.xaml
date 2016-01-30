@@ -15,6 +15,7 @@
                       DataContext="{Binding Main, Source={StaticResource Locator}}"
                       Height="800" 
                       Width="1000"
+                      WindowState="Maximized"
                       WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
