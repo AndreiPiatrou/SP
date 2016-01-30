@@ -121,18 +121,23 @@
     </Compile>
     <Compile Include="Factories\AnalyzeChildWindowFactory.cs" />
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
+    <Compile Include="Messages\AskForFilePathMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
+    <Compile Include="Messages\SaveRecordsToFileMessage.cs" />
     <Compile Include="Messages\ShowPopupMessage.cs" />
     <Compile Include="Models\CheckableHeaderModel.cs" />
     <Compile Include="Models\RecordsCollection.cs" />
     <Compile Include="Services\AnalysisService.cs" />
+    <Compile Include="Services\DataWriteService.cs" />
     <Compile Include="Services\FileReadService\CsvReadService.cs" />
     <Compile Include="Services\DataReadService.cs" />
     <Compile Include="Services\FileReadService\IFileReadService.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
+    <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
+    <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

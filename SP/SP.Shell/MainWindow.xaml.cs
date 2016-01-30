@@ -32,10 +32,12 @@ namespace SP.Shell
             messenger.Register<ShowPopupMessage>(
                 this,
                 async message => { await this.ShowMessageAsync(message.Title, message.Content); });
-            messenger.Register<OpenFileMessage>(this, OpenFile);
             messenger.Register<PrepareAnalyzeDataMessage>(
                 this,
                 async message => await OpenAnalyzeDataChildWindow(message));
+
+            messenger.Register<OpenFileMessage>(this, OpenFile);
+            messenger.Register<AskForFilePathMessage>(this, AskForFilePathMessage);
         }
 
         private void OpenFile(OpenFileMessage message)
@@ -46,6 +48,15 @@ namespace SP.Shell
                 message.PositiveCallback(
                     openFileDialog.FileName,
                     Path.GetFileNameWithoutExtension(openFileDialog.FileName));
+            }
+        }
+
+        private void AskForFilePathMessage(AskForFilePathMessage message)
+        {
+            var openFileDialog = new SaveFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                message.PositiveCallback(openFileDialog.FileName);
             }
         }
 

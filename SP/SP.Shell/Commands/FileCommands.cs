@@ -16,11 +16,22 @@ namespace SP.Shell.Commands
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand OpenFileCommand = new RelayCommand(OpenFileCommandExecute);
 
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static ICommand SaveToFileCommand = new RelayCommand(SaveToFileCommandExecute);
+
         private static void OpenFileCommandExecute()
         {
             var messenger = GetMessenger();
 
             messenger.Send(new OpenFileMessage(OpenFilePositiveCallback));
+        }
+
+        private static void SaveToFileCommandExecute()
+        {
+            var messenger = GetMessenger();
+            var records = GetCurrentTab().Records;
+
+            messenger.Send(new AskForFilePathMessage(s => messenger.Send(new SaveRecordsToFileMessage(records, s))));
         }
 
         private static void OpenFilePositiveCallback(string filePath, string fileName)

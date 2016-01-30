@@ -49,6 +49,18 @@ namespace SP.Shell.Models
 
         public ObservableCollection<string> Headers { get; private set; }
 
+        public IEnumerable<IEnumerable<string>> Rows
+        {
+            get
+            {
+                yield return Headers.SkipLast();
+                foreach (var record in Records.SkipLast())
+                {
+                    yield return record;
+                }
+            }
+        } 
+
         public void UpdateRowsAndHeaders()
         {
             var lastColumn = Records.Select(r => r.Last()).ToList();
