@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <StackPanel >
             <Button Content="{x:Static resources:Strings.OpenFile}" 
-                Command="{Binding OpenFileCommand, ElementName=UserControl}" 
+                Command="{x:Static commands:FileCommands.OpenFileCommand}" 
                 Style="{DynamicResource MaterialDesignFlatButton}"/>
             <Button Content="{x:Static resources:Strings.SaveToFile}"
                 Style="{DynamicResource MaterialDesignFlatButton}"/>

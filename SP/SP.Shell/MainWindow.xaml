@@ -23,7 +23,7 @@
                              Position="Left" 
                              ExternalCloseButton="Left"
                              IsModal="True">
-                <controls1:FileActions OpenFileCommand="{Binding Main.SelectedTab.OpenFileCommand, Source={StaticResource Locator}}" />
+                <controls1:FileActions />
             </controls:Flyout>
             <controls:Flyout x:Name="LeftAnalyzeActionsFlyout" 
                              Header="{x:Static resources:Strings.Analyze}" 

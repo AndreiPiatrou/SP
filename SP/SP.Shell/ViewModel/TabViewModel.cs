@@ -3,7 +3,6 @@ using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 
 using Microsoft.Practices.ServiceLocation;
 
@@ -20,19 +19,14 @@ namespace SP.Shell.ViewModel
 
         public TabViewModel(string title)
         {
-            MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
             Title = title;
             Records = new RecordsCollection();
-
-            InitializeCommands();
         }
 
         public TabViewModel(string title, List<List<string>> list)
         {
             Title = title;
             Records = new RecordsCollection(list);
-
-            InitializeCommands();
         }
 
         public DataReadService DataReadService
@@ -68,14 +62,7 @@ namespace SP.Shell.ViewModel
             }
         }
 
-        public RelayCommand OpenFileCommand { get; private set; }
-
-        private void InitializeCommands()
-        {
-            OpenFileCommand = new RelayCommand(() => MessengerInstance.Send(new OpenFileMessage(ReadOpenedFile)));
-        }
-
-        private void ReadOpenedFile(string path, string fileName)
+        public void LoadFileToRecords(string path, string fileName)
         {
             var data = DataReadService.ReadFile(path).Select(i => i.ToList()).ToList();
 

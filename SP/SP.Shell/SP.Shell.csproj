@@ -108,6 +108,7 @@
     <Compile Include="Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
     <Compile Include="Commands\AnalyzeCommands.cs" />
+    <Compile Include="Commands\FileCommands.cs" />
     <Compile Include="Commands\WindowCommands.cs" />
     <Compile Include="Controls\AnalyzeActions.xaml.cs">
       <DependentUpon>AnalyzeActions.xaml</DependentUpon>

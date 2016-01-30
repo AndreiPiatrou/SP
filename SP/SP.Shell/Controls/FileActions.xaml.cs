@@ -9,13 +9,6 @@ namespace SP.Shell.Controls
 {
     public partial class FileActions
     {
-        public static readonly DependencyProperty OpenFileCommandProperty =
-            DependencyProperty.Register(
-                "OpenFileCommand",
-                typeof(RelayCommand),
-                typeof(FileActions),
-                new PropertyMetadata(default(RelayCommand)));
-
         private Flyout parent;
 
         public FileActions()
@@ -26,12 +19,6 @@ namespace SP.Shell.Controls
                     NotifyOnInternalButtonClick();
                     parent = this.GetParentObject() as Flyout;
                 };
-        }
-
-        public RelayCommand OpenFileCommand
-        {
-            get { return (RelayCommand)GetValue(OpenFileCommandProperty); }
-            set { SetValue(OpenFileCommandProperty, value); }
         }
 
         private void NotifyOnInternalButtonClick()

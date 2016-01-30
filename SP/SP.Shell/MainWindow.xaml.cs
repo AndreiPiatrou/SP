@@ -32,21 +32,21 @@ namespace SP.Shell
             messenger.Register<ShowPopupMessage>(
                 this,
                 async message => { await this.ShowMessageAsync(message.Title, message.Content); });
-            messenger.Register<OpenFileMessage>(
-                this,
-                message =>
-                    {
-                        var openFileDialog = new OpenFileDialog();
-                        if (openFileDialog.ShowDialog() == true)
-                        {
-                            message.PositiveCallback(
-                                openFileDialog.FileName,
-                                Path.GetFileNameWithoutExtension(openFileDialog.FileName));
-                        }
-                    });
+            messenger.Register<OpenFileMessage>(this, OpenFile);
             messenger.Register<PrepareAnalyzeDataMessage>(
                 this,
                 async message => await OpenAnalyzeDataChildWindow(message));
+        }
+
+        private void OpenFile(OpenFileMessage message)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                message.PositiveCallback(
+                    openFileDialog.FileName,
+                    Path.GetFileNameWithoutExtension(openFileDialog.FileName));
+            }
         }
 
         private async Task OpenAnalyzeDataChildWindow(PrepareAnalyzeDataMessage message)
