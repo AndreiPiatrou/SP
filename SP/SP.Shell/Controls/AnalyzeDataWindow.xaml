@@ -10,7 +10,7 @@
     Padding="15"
     AllowMove="True"
     behaviors:CloseWindowBehavior.CloseRequested="{Binding CloseRequested}"
-    Title="{x:Static resources:Strings.DataAnalyze}">
+    Title="{Binding Title}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

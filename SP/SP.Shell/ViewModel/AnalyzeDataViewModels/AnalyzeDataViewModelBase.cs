@@ -15,10 +15,11 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
         private bool closeRequested;
 
-        protected AnalyzeDataViewModelBase(RecordsCollection records, AnalyzeType type)
+        protected AnalyzeDataViewModelBase(RecordsCollection records, AnalyzeType type, string title)
         {
             Records = records;
             SelectedType = type;
+            Title = title;
             MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
             AnalyzeCommand = new RelayCommand(
                 () =>
@@ -41,8 +42,10 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                 RaisePropertyChanged(() => CloseRequested);
             }
         }
-        
+
         public AnalyzeType SelectedType { get; private set; }
+
+        public string Title { get; private set; }
 
         public RelayCommand AnalyzeCommand { get; private set; }
 

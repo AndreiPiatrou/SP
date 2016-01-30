@@ -5,6 +5,7 @@ using System.Linq;
 using SP.Extensions;
 using SP.PSPP.Integration.Commands;
 using SP.PSPP.Integration.Models;
+using SP.Resources;
 using SP.Shell.Messages;
 using SP.Shell.Models;
 
@@ -13,7 +14,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
     public class BivariateCorrelationViewModel : AnalyzeDataViewModelBase
     {
         public BivariateCorrelationViewModel(RecordsCollection records)
-            : base(records, AnalyzeType.Correlation)
+            : base(records, AnalyzeType.Correlation, Strings.CorrelationCoefficient)
         {
             Headers = ExtractHeaders().ToObservable();
         }

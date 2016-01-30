@@ -46,14 +46,7 @@ namespace SP.Shell.Behaviors
                 var indexer = e.NewStartingIndex;
                 foreach (var t in e.NewItems)
                 {
-                    dataGrid.Columns.Add(new DataGridTextColumn
-                    {
-                        Header = t.ToString(),
-                        Binding = new Binding("[" + indexer + "]")
-                        {
-                            UpdateSourceTrigger = UpdateSourceTrigger.LostFocus
-                        },
-                    });
+                    dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer));
                     ++indexer;
                 }
             }
@@ -66,28 +59,33 @@ namespace SP.Shell.Behaviors
             {
                 return;
             }
-            
+
             dataGrid.SetBinding(
                 ItemsControl.ItemsSourceProperty,
                 new Binding("Records.Records")
-                    {
-                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-                    });
+                {
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                });
 
             var indexer = 0;
             foreach (var column in data.Headers)
             {
-                dataGrid.Columns.Add(
-                    new DataGridTextColumn
-                    {
-                        Header = column,
-                        Binding = new Binding("[" + indexer + "]")
-                        {
-                            UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
-                        }
-                    });
+                dataGrid.Columns.Add(CreateDataGridColumn(column, indexer));
                 ++indexer;
             }
+        }
+
+        private static DataGridColumn CreateDataGridColumn(string column, int index)
+        {
+            return new DataGridTextColumn
+            {
+                Header = column,
+                Binding = new Binding("[" + index + "]")
+                {
+                    UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
+                },
+                IsReadOnly = false
+            };
         }
     }
 }

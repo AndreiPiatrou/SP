@@ -10,6 +10,7 @@
                   CanUserAddRows="False"
                   CanUserReorderColumns="False"
                   HorizontalGridLinesBrush="DarkGray"
+                  CanUserSortColumns="False"
                   VerticalGridLinesBrush="DarkGray"
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
@@ -24,7 +25,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="models:CheckableHeaderModel">
                         <StackPanel Orientation="Horizontal">
-                            <ToggleButton IsChecked="{Binding IsChecked}" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                            <ToggleButton IsChecked="{Binding IsChecked}" 
+                                          Margin="5, 0" 
+                                          VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
