@@ -119,7 +119,7 @@
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Factories\AnalyzeChildWindowFactory.cs" />
+    <Compile Include="Factories\AnalyzeDataViewModelFactory.cs" />
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\AskForFilePathMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />

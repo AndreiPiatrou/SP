@@ -5,6 +5,7 @@ using System.Linq;
 using SP.Extensions;
 using SP.PSPP.Integration.Commands;
 using SP.PSPP.Integration.Models;
+using SP.PSPP.Integration.Models.Configuration;
 using SP.Resources;
 using SP.Shell.Messages;
 using SP.Shell.Models;
@@ -40,10 +41,13 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             var indexes = checkedHeaders.Select(h => h.Index);
 
             return new InputData
-                       {
-                           Variables = checkedHeaders.Select(h => h.Header),
-                           Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
-                       };
+            {
+                Configuration = new BivariateCorrelationConfiguration
+                {
+                    Variables = checkedHeaders.Select(h => h.Header)
+                },
+                Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
+            };
         }
     }
 }

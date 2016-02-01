@@ -7,16 +7,17 @@ using SP.PSPP.Integration.Models.Configuration;
 
 namespace SP.PSPP.Integration.Commands.Implementations
 {
-    public class CorrelationCommand : AnalyzeCommandBase<BivariateCorrelationConfiguration>
+    public class MiddleMeanCommand : AnalyzeCommandBase<MiddleMeanConfiguration>
     {
-        public CorrelationCommand(WorkingDirectory directory) : base(directory)
+        public MiddleMeanCommand(WorkingDirectory directory)
+            : base(directory)
         {
         }
 
-        protected override string GetScript(InputData inputData, BivariateCorrelationConfiguration configuration, string inputFilePath)
+        protected override string GetScript(InputData inputData, MiddleMeanConfiguration configuration, string inputFilePath)
         {
             return string.Format(
-                CommandConstants.CorrelationCommandFormat,
+                CommandConstants.MiddleMeanFormat,
                 inputFilePath,
                 string.Join(" F4" + Environment.NewLine, configuration.Variables),
                 string.Join(Environment.NewLine, configuration.Variables));

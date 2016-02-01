@@ -1,23 +1,38 @@
-﻿using SP.FIleSystem.Directory;
+﻿using System;
+
+using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Services;
 
 namespace SP.PSPP.Integration.Commands.Implementations
 {
-    public class AnalyzeCommandBase : IAnalyzeCommand
+    public abstract class AnalyzeCommandBase<T> : IAnalyzeCommand
     {
         protected const string DefaultArgumentsFormat = " \"{0}\" -o \"{1}\"";
         protected readonly WorkingDirectory Directory;
 
-        public AnalyzeCommandBase(WorkingDirectory directory)
+        protected AnalyzeCommandBase(WorkingDirectory directory)
         {
             Directory = directory;
         }
 
         public virtual OutputData Analyze(InputData inputData)
         {
-            throw new System.NotImplementedException();
+            var inputFilePath = CreateInputDataFile(inputData);
+            var outputFilePath = Directory.GenerateNewFilePath();
+            var scriptPath = CreateScriptFile(GetScript(inputData, (T)inputData.Configuration, inputFilePath));
+            var arguments = CreateArguments(scriptPath, outputFilePath);
+            var result = ExecuteScript(arguments);
+
+            if (!result.Successed)
+            {
+                throw new Exception(result.Message);
+            }
+
+            return ReadOutputData(outputFilePath);
         }
+
+        protected abstract string GetScript(InputData inputData, T configuration, string inputFilePath);
 
         protected string CreateInputDataFile(InputData inputData)
         {

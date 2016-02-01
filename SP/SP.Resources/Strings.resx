@@ -141,6 +141,9 @@
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Статистический пакет PSPP</value>
   </data>
+  <data name="MiddleMean" xml:space="preserve">
+    <value>Среднее значение</value>
+  </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>
   </data>

@@ -133,6 +133,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Среднее значение.
+        /// </summary>
+        public static string MiddleMean {
+            get {
+                return ResourceManager.GetString("MiddleMean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Открыть файл.
         /// </summary>
         public static string OpenFile {

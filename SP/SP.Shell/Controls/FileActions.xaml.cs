@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-using GalaSoft.MvvmLight.Command;
+﻿using System.Windows.Controls;
 
 using MahApps.Metro.Controls;
 

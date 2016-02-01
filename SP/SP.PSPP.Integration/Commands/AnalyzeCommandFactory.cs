@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Commands.Implementations;
@@ -7,15 +8,20 @@ namespace SP.PSPP.Integration.Commands
 {
     public class AnalyzeCommandFactory
     {
+        private static readonly IDictionary<AnalyzeType, Func<WorkingDirectory, IAnalyzeCommand>> Dictionary = new Dictionary<AnalyzeType, Func<WorkingDirectory, IAnalyzeCommand>>
+        {
+            { AnalyzeType.Correlation, directory => new CorrelationCommand(directory) },
+            { AnalyzeType.MiddleMean, directory => new MiddleMeanCommand(directory) }
+        };
+
         public static IAnalyzeCommand CreateCommand(AnalyzeType commandType, WorkingDirectory workingDirectory)
         {
-            switch (commandType)
+            if (!Dictionary.ContainsKey(commandType))
             {
-                case AnalyzeType.Correlation:
-                    return new CorrelationCommand(workingDirectory);
-                default:
-                    throw new NotImplementedException();
+                throw new NotImplementedException();
             }
+
+            return Dictionary[commandType](workingDirectory);
         }
     }
 }

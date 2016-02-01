@@ -23,7 +23,7 @@ namespace SP.PSPP.Integration.Services
 
         private IEnumerable<string> GetDataLines(InputData data)
         {
-            yield return string.Join(",", data.Variables);
+            yield return string.Join(",", data.Configuration.Headers);
 
             foreach (var row in data.Rows)
             {
