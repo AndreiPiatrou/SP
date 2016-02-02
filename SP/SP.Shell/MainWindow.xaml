@@ -15,6 +15,7 @@
                       DataContext="{Binding Main, Source={StaticResource Locator}}"
                       Height="800" 
                       Width="1000"
+                      Icon="icon.ico"
                       WindowState="Maximized"
                       WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.Flyouts>
@@ -48,15 +49,15 @@
         </Grid.RowDefinitions>
         <dockablz:Layout Grid.Row="1">
             <dragablz:TabablzControl Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
-                                 Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
-                                 BorderThickness="0"
-                                 Margin="0,-1,0,1"
-                                 HeaderMemberPath="Title"
-                                 NewItemFactory="{Binding AddNewTabCommand}"
-                                 ShowDefaultAddButton="True"
-                                 ShowDefaultCloseButton="True"
-                                 SelectedItem="{Binding SelectedTab}"
-                                 ItemsSource="{Binding Tabs}">
+                                     Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
+                                     BorderThickness="0"
+                                     Margin="0,-1,0,1"
+                                     HeaderMemberPath="Title"
+                                     NewItemFactory="{Binding AddNewTabCommand}"
+                                     ShowDefaultAddButton="True"
+                                     ShowDefaultCloseButton="True"
+                                     SelectedItem="{Binding SelectedTab}"
+                                     ItemsSource="{Binding Tabs}">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController InterTabClient="{Binding Client}"/>
                 </dragablz:TabablzControl.InterTabController>
