@@ -15,7 +15,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
     public class MiddleMeadViewModel : AnalyzeDataViewModelBase
     {
         public MiddleMeadViewModel(RecordsCollection records)
-            : base(records, AnalyzeType.MiddleMean, Strings.CorrelationCoefficient)
+            : base(records, AnalyzeType.MiddleMean, Strings.MiddleMean)
         {
             Headers = ExtractHeaders().ToObservable();
         }
