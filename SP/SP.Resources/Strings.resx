@@ -132,6 +132,9 @@
   <data name="DataAnalyze" xml:space="preserve">
     <value>Анализ данных</value>
   </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>Произошла ошибка</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
@@ -144,8 +147,14 @@
   <data name="MiddleMean" xml:space="preserve">
     <value>Среднее значение</value>
   </data>
+  <data name="NewTab" xml:space="preserve">
+    <value>  Новая вкладка</value>
+  </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Результат</value>
   </data>
   <data name="SaveToFile" xml:space="preserve">
     <value>Сохранить в файл</value>

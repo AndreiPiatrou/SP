@@ -107,6 +107,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
+    <Compile Include="Behaviors\NoNewWindowInterTabClient.cs" />
     <Compile Include="Commands\AnalyzeCommands.cs" />
     <Compile Include="Commands\FileCommands.cs" />
     <Compile Include="Commands\WindowCommands.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeadViewModel.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
