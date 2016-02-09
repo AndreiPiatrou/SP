@@ -142,6 +142,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вероятность заданного значения.
+        /// </summary>
+        public static string MeanChance {
+            get {
+                return ResourceManager.GetString("MeanChance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Среднее значение.
         /// </summary>
         public static string MiddleMean {

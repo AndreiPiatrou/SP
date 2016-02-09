@@ -144,6 +144,9 @@
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Статистический пакет PSPP</value>
   </data>
+  <data name="MeanChance" xml:space="preserve">
+    <value>Вероятность заданного значения</value>
+  </data>
   <data name="MiddleMean" xml:space="preserve">
     <value>Среднее значение</value>
   </data>

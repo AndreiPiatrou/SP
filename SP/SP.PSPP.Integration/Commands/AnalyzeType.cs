@@ -3,6 +3,7 @@
     public enum AnalyzeType
     {
         Correlation,
-        MiddleMean
+        MiddleMean,
+        MeanChance
     }
 }

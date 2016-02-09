@@ -18,5 +18,9 @@
                 Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
                 CommandParameter="{x:Static commands1:AnalyzeType.MiddleMean}"
                 Style="{DynamicResource MaterialDesignFlatButton}"/>
+        <Button Content="{x:Static resources:Strings.MeanChance}"
+                Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
+                CommandParameter="{x:Static commands1:AnalyzeType.MeanChance}"
+                Style="{DynamicResource MaterialDesignFlatButton}"/>
     </StackPanel>
 </UserControl>

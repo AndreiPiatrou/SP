@@ -25,7 +25,7 @@
                                                           /VARIABLES={2}
                                                           /STATISTICS=MEAN.";
 
-        public const string ChanceFormat = @"SET DECIMAL=dot.
+        public const string MeanChanceFormat = @"SET DECIMAL=dot.
                                              GET DATA /TYPE=TXT 
 		                                              /FILE=""{0}""
 		                                              /ENCODING=""UTF-8""

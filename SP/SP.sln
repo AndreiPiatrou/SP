@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Resources", "SP.Resource
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.FIleSystem", "SP.FIleSystem\SP.FIleSystem.csproj", "{197D6BE7-FE9A-4175-80BE-176081065B1C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notes", "notes", "{5BAD2D51-C188-4767-8C20-6B31A306E961}"
+	ProjectSection(SolutionItems) = preProject
+		tasks.txt = tasks.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

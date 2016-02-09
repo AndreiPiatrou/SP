@@ -56,4 +56,24 @@
             </ListView>
         </StackPanel>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type analyzeDataViewModels:MeanChanceViewModel}">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>
+            <ListView ItemsSource="{Binding Headers}" 
+                      Margin="0, 0, 0, 10" 
+                      Height="200" 
+                      Width="300">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="models:CheckableHeaderModel">
+                        <StackPanel Orientation="Horizontal">
+                            <ToggleButton IsChecked="{Binding IsChecked}" 
+                                          Margin="5, 0" 
+                                          VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

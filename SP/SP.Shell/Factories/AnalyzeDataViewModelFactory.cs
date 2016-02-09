@@ -13,6 +13,7 @@ namespace SP.Shell.Factories
         {
             { AnalyzeType.Correlation, collection => new BivariateCorrelationViewModel(collection) },
             { AnalyzeType.MiddleMean, collection => new MiddleMeanViewModel(collection) },
+            { AnalyzeType.MeanChance, collection => new MeanChanceViewModel(collection) },
         };
 
         public static AnalyzeDataViewModelBase GetModel(AnalyzeType analyzeType, RecordsCollection records)
