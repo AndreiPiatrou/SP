@@ -156,7 +156,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
-    <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeadViewModel.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeanViewModel.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

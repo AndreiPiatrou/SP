@@ -12,7 +12,7 @@ namespace SP.Shell.Factories
         private static readonly IDictionary<AnalyzeType, Func<RecordsCollection, AnalyzeDataViewModelBase>> Dictionary = new Dictionary<AnalyzeType, Func<RecordsCollection, AnalyzeDataViewModelBase>>
         {
             { AnalyzeType.Correlation, collection => new BivariateCorrelationViewModel(collection) },
-            { AnalyzeType.MiddleMean, collection => new MiddleMeadViewModel(collection) },
+            { AnalyzeType.MiddleMean, collection => new MiddleMeanViewModel(collection) },
         };
 
         public static AnalyzeDataViewModelBase GetModel(AnalyzeType analyzeType, RecordsCollection records)

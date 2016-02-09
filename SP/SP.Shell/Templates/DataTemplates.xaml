@@ -36,7 +36,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type analyzeDataViewModels:MiddleMeadViewModel}">
+    <DataTemplate DataType="{x:Type analyzeDataViewModels:MiddleMeanViewModel}">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>
             <ListView ItemsSource="{Binding Headers}" 

@@ -12,9 +12,9 @@ using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 {
-    public class MiddleMeadViewModel : AnalyzeDataViewModelBase
+    public class MiddleMeanViewModel : AnalyzeDataViewModelBase
     {
-        public MiddleMeadViewModel(RecordsCollection records)
+        public MiddleMeanViewModel(RecordsCollection records)
             : base(records, AnalyzeType.MiddleMean, Strings.MiddleMean)
         {
             Headers = ExtractHeaders().ToObservable();
