@@ -15,7 +15,7 @@
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type analyzeDataViewModels:BivariateCorrelationViewModel}">
+    <DataTemplate DataType="{x:Type analyzeDataViewModels:PearsonCorrelationViewModel}">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>
             <ListView ItemsSource="{Binding Headers}" 

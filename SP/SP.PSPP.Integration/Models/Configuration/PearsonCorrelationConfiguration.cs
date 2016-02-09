@@ -2,7 +2,7 @@
 
 namespace SP.PSPP.Integration.Models.Configuration
 {
-    public class BivariateCorrelationConfiguration : IConfiguration
+    public class PearsonCorrelationConfiguration : IConfiguration
     {
         public IEnumerable<string> Variables { get; set; }
 

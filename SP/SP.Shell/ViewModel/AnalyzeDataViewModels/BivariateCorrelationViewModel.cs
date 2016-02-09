@@ -12,10 +12,10 @@ using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 {
-    public class BivariateCorrelationViewModel : AnalyzeDataViewModelBase
+    public class PearsonCorrelationViewModel : AnalyzeDataViewModelBase
     {
-        public BivariateCorrelationViewModel(RecordsCollection records)
-            : base(records, AnalyzeType.Correlation, Strings.CorrelationCoefficient)
+        public PearsonCorrelationViewModel(RecordsCollection records)
+            : base(records, AnalyzeType.PearsonCorrelation, Strings.CorrelationCoefficient)
         {
             Headers = ExtractHeaders().ToObservable();
         }
@@ -42,7 +42,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
             return new InputData
             {
-                Configuration = new BivariateCorrelationConfiguration
+                Configuration = new PearsonCorrelationConfiguration
                 {
                     Variables = checkedHeaders.Select(h => h.Header)
                 },

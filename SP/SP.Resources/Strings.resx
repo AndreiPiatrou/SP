@@ -127,7 +127,7 @@
     <value>Закрыть</value>
   </data>
   <data name="CorrelationCoefficient" xml:space="preserve">
-    <value>Коэффициент порядковой корреляции</value>
+    <value>Коэффициент корреляции Пирсона</value>
   </data>
   <data name="DataAnalyze" xml:space="preserve">
     <value>Анализ данных</value>

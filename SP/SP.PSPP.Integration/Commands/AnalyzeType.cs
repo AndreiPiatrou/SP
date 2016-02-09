@@ -2,7 +2,7 @@
 {
     public enum AnalyzeType
     {
-        Correlation,
+        PearsonCorrelation,
         MiddleMean,
         MeanChance
     }

@@ -45,11 +45,11 @@
     <Compile Include="Commands\AnalyzeType.cs" />
     <Compile Include="Commands\IAnalyzeCommand.cs" />
     <Compile Include="Commands\Implementations\AnalyzeCommandBase.cs" />
-    <Compile Include="Commands\Implementations\CorrelationCommand.cs" />
+    <Compile Include="Commands\Implementations\PearsonCorrelationCommand.cs" />
     <Compile Include="Commands\Implementations\MeanChanceCommand.cs" />
     <Compile Include="Commands\Implementations\MiddleMeanCommand.cs" />
     <Compile Include="Constants\CommandConstants.cs" />
-    <Compile Include="Models\Configuration\BivariateCorrelationConfiguration.cs" />
+    <Compile Include="Models\Configuration\PearsonCorrelationConfiguration.cs" />
     <Compile Include="Models\Configuration\IConfiguration.cs" />
     <Compile Include="Models\Configuration\MeanChanceConfiguration.cs" />
     <Compile Include="Models\Configuration\MiddleMeanConfiguration.cs" />

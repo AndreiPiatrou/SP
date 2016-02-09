@@ -2,16 +2,16 @@
 {
     public class CommandConstants
     {
-        public const string CorrelationCommandFormat = @"SET DECIMAL=dot.
-                                                         GET DATA /TYPE=TXT 
-		                                                     /FILE=""{0}""
-		                                                     /ENCODING=""UTF-8""
-		                                                     /DELIMITERS="","" 
-		                                                     /FIRSTCASE=2 
-		                                                     /VARIABLES={1} F4.
+        public const string PearsonCorrelationCommandFormat = @"SET DECIMAL=dot.
+                                                                GET DATA /TYPE=TXT 
+		                                                             /FILE=""{0}""
+		                                                             /ENCODING=""UTF-8""
+		                                                             /DELIMITERS="","" 
+		                                                             /FIRSTCASE=2 
+		                                                             /VARIABLES={1} F4.
 
-                                                        CORRELATION
-	                                                        /VARIABLES= {2}.";
+                                                                CORRELATION
+	                                                                /VARIABLES= {2}.";
 
         public const string MiddleMeanFormat = @"SET DECIMAL=dot.
                                                  GET DATA /TYPE=TXT 
@@ -21,21 +21,21 @@
 		                                                  /FIRSTCASE=2 
 		                                                  /VARIABLES={1} F4.
 
-                                                DESCRIPTIVES 
+                                                 DESCRIPTIVES 
                                                           /VARIABLES={2}
                                                           /STATISTICS=MEAN.";
 
         public const string MeanChanceFormat = @"SET DECIMAL=dot.
-                                             GET DATA /TYPE=TXT 
-		                                              /FILE=""{0}""
-		                                              /ENCODING=""UTF-8""
-		                                              /DELIMITERS="","" 
-		                                              /FIRSTCASE=2 
-		                                              /VARIABLES={1} F4.
+                                                 GET DATA /TYPE=TXT 
+		                                                  /FILE=""{0}""
+		                                                  /ENCODING=""UTF-8""
+		                                                  /DELIMITERS="","" 
+		                                                  /FIRSTCASE=2 
+		                                                  /VARIABLES={1} F4.
 
-                                            FREQUENCIES
-                                                     /VARIABLES={2}
-                                                     /FORMAT=AVALUE TABLE
-                                                     /STATISTICS=MEAN STDDEV.";
+                                                FREQUENCIES
+                                                         /VARIABLES={2}
+                                                         /FORMAT=AVALUE TABLE
+                                                         /STATISTICS=MEAN STDDEV.";
     }
 }

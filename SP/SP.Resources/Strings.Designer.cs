@@ -88,7 +88,7 @@ namespace SP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Коэффициент порядковой корреляции.
+        ///   Looks up a localized string similar to Коэффициент корреляции Пирсона.
         /// </summary>
         public static string CorrelationCoefficient {
             get {
