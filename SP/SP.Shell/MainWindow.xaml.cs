@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -38,6 +35,7 @@ namespace SP.Shell
 
             messenger.Register<OpenFileMessage>(this, OpenFile);
             messenger.Register<AskForFilePathMessage>(this, AskForFilePathMessage);
+            messenger.Register<LoaderMessage>(this, ManageLoader);
         }
 
         private void OpenFile(OpenFileMessage message)
@@ -68,6 +66,12 @@ namespace SP.Shell
             };
 
             await this.ShowChildWindowAsync(window, ChildWindowManager.OverlayFillBehavior.FullWindow);
+        }
+
+        private void ManageLoader(LoaderMessage message)
+        {
+            LoaderGrid.Visibility = message.IsActive ? Visibility.Visible : Visibility.Collapsed;
+            Loaded.IsActive = message.IsActive;
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using SP.Shell.Messages;
 using SP.Shell.Services;
+using SP.Shell.Tasks;
 
 namespace SP.Shell.ViewModel.CommandListeners
 {
@@ -16,7 +17,7 @@ namespace SP.Shell.ViewModel.CommandListeners
         {
             var writer = ServiceLocator.Current.GetInstance<DataWriteService>();
 
-            writer.WriteToFile(message.Records.Rows, message.FilePath);
+            TaskService.WrapToTask(() => writer.WriteToFile(message.Records.Rows, message.FilePath));
         }
     }
 }

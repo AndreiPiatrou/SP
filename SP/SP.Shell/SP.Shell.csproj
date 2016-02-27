@@ -58,8 +58,8 @@
       <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dragablz, Version=0.0.3.150, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.150\lib\net45\Dragablz.dll</HintPath>
+    <Reference Include="Dragablz, Version=0.0.3.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.157\lib\net45\Dragablz.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
@@ -98,8 +98,8 @@
       <HintPath>..\packages\MaterialDesignThemes.MahApps.0.0.4\lib\net45\MaterialDesignThemes.MahApps.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=1.4.0.473, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.1.4.0.473\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=1.4.1.485, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.1.4.1.485\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -147,9 +147,11 @@
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\MessengerExtensions.cs" />
     <Compile Include="Factories\AnalyzeDataViewModelFactory.cs" />
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\AskForFilePathMessage.cs" />
+    <Compile Include="Messages\LoaderMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
     <Compile Include="Messages\SaveRecordsToFileMessage.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Services\FileReadService\ExcelDataReadService.cs" />
     <Compile Include="Services\FileReadService\IFileReadService.cs" />
     <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Tasks\TaskService.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MeanChanceViewModel.cs" />

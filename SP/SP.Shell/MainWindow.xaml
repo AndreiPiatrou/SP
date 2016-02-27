@@ -63,5 +63,7 @@
                 </dragablz:TabablzControl.InterTabController>
             </dragablz:TabablzControl>
         </dockablz:Layout>
+        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="LoaderGrid" Background="Gray" Opacity="0.3" Visibility="Collapsed"/>
+        <controls:ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="Loaded" Foreground="{DynamicResource HighlightBrush}" IsActive="False"/>
     </Grid>
 </controls:MetroWindow>

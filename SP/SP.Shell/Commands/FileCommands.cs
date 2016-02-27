@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.CommandWpf;
@@ -8,6 +10,7 @@ using Microsoft.Practices.ServiceLocation;
 
 using SP.Shell.Messages;
 using SP.Shell.Services;
+using SP.Shell.Tasks;
 using SP.Shell.ViewModel;
 
 namespace SP.Shell.Commands
@@ -37,10 +40,21 @@ namespace SP.Shell.Commands
 
         private static void OpenFilePositiveCallback(string filePath, string fileName)
         {
+            TaskService.WrapToTask(() => ReadDataFromfile(filePath), data => ApplyDataFromfile(data, fileName));
+        }
+
+        private static IEnumerable<IEnumerable<IEnumerable<string>>> ReadDataFromfile(string filePath)
+        {
             var readService = GetDataReadService();
+
+            return readService.ReadWorksheets(filePath).ToList();
+        }
+
+        private static void ApplyDataFromfile(IEnumerable<IEnumerable<IEnumerable<string>>> data, string fileName)
+        {
             var newTab = false;
 
-            foreach (var worksheet in readService.ReadWorksheets(filePath))
+            foreach (var worksheet in data)
             {
                 var tab = GetTab(newTab);
                 tab.LoadRecords(worksheet, fileName);
