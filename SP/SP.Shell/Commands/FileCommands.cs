@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
 
 using SP.Shell.Messages;
+using SP.Shell.Services;
 using SP.Shell.ViewModel;
 
 namespace SP.Shell.Commands
@@ -36,9 +37,15 @@ namespace SP.Shell.Commands
 
         private static void OpenFilePositiveCallback(string filePath, string fileName)
         {
-            var tab = GetCurrentTab();
+            var readService = GetDataReadService();
+            var newTab = false;
 
-            tab.LoadFileToRecords(filePath, fileName);
+            foreach (var worksheet in readService.ReadWorksheets(filePath))
+            {
+                var tab = GetTab(newTab);
+                tab.LoadRecords(worksheet, fileName);
+                newTab = true;
+            }
         }
 
         private static TabViewModel GetCurrentTab()
@@ -46,9 +53,31 @@ namespace SP.Shell.Commands
             return ServiceLocator.Current.GetInstance<MainViewModel>().SelectedTab;
         }
 
+        private static DataReadService GetDataReadService()
+        {
+            return ServiceLocator.Current.GetInstance<DataReadService>();
+        }
+
         private static IMessenger GetMessenger()
         {
             return ServiceLocator.Current.GetInstance<Messenger>();
+        }
+
+        private static TabViewModel GetTab(bool newTab)
+        {
+            var mainModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+
+            if (!newTab)
+            {
+                return mainModel.SelectedTab;
+            }
+
+            var newTabModel = mainModel.AddNewTabCommand();
+
+            mainModel.Tabs.Add(newTabModel);
+            mainModel.SelectedTab = newTabModel;
+
+            return newTabModel;
         }
     }
 }

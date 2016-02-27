@@ -2,11 +2,9 @@
 using System.Linq;
 
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 
 using Microsoft.Practices.ServiceLocation;
 
-using SP.Shell.Messages;
 using SP.Shell.Models;
 using SP.Shell.Services;
 
@@ -62,12 +60,10 @@ namespace SP.Shell.ViewModel
             }
         }
 
-        public void LoadFileToRecords(string path, string fileName)
+        public void LoadRecords(IEnumerable<IEnumerable<string>> newRecords, string fileName)
         {
-            var data = DataReadService.ReadFile(path).Select(i => i.ToList()).ToList();
-
             Title = fileName;
-            Records = new RecordsCollection(data);
+            Records = new RecordsCollection(newRecords.Select(i => i.ToList()).ToList());
         }
     }
 }
