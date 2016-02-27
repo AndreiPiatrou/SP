@@ -10,6 +10,7 @@ using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 
+using SP.Resources;
 using SP.Shell.Controls;
 using SP.Shell.Messages;
 
@@ -40,7 +41,7 @@ namespace SP.Shell
 
         private void OpenFile(OpenFileMessage message)
         {
-            var openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog { Filter = Strings.FileFIlter };
             if (openFileDialog.ShowDialog() == true)
             {
                 message.PositiveCallback(
@@ -52,10 +53,10 @@ namespace SP.Shell
         private void AskForFilePathMessage(AskForFilePathMessage message)
         {
             var openFileDialog = new SaveFileDialog
-                                     {
-                                         DefaultExt = "csv",
-                                         AddExtension = true,
-                                         Filter = "csv|*.csv|Excel|*.xls;*.xlsx"
+            {
+                DefaultExt = "csv",
+                AddExtension = true,
+                Filter = Strings.FileFIlter
             };
 
             if (openFileDialog.ShowDialog() == true)
