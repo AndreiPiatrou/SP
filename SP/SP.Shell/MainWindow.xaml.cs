@@ -51,7 +51,13 @@ namespace SP.Shell
 
         private void AskForFilePathMessage(AskForFilePathMessage message)
         {
-            var openFileDialog = new SaveFileDialog();
+            var openFileDialog = new SaveFileDialog
+                                     {
+                                         DefaultExt = "csv",
+                                         AddExtension = true,
+                                         Filter = "csv|*.csv|Excel|*.xls;*.xlsx"
+            };
+
             if (openFileDialog.ShowDialog() == true)
             {
                 message.PositiveCallback(openFileDialog.FileName);
@@ -71,7 +77,7 @@ namespace SP.Shell
         private void ManageLoader(LoaderMessage message)
         {
             LoaderGrid.Visibility = message.IsActive ? Visibility.Visible : Visibility.Collapsed;
-            Loaded.IsActive = message.IsActive;
+            Loader.IsActive = message.IsActive;
         }
     }
 }
