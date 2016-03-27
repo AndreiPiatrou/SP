@@ -69,7 +69,13 @@
                                  Style="{StaticResource MaterialDesignMultiFloatingActionDarkPopupBox}" 
                                  VerticalAlignment="Bottom"
                                  HorizontalAlignment="Right"
-                                 Margin="20">
+                                 Margin="20"
+                                 ToolTip="{x:Static resources:Strings.Actions}">
+            <materialDesign:PopupBox.ToggleContentTemplate>
+                <DataTemplate>
+                    <materialDesign:PackIcon Kind="DotsHorizontal"/>
+                </DataTemplate>
+            </materialDesign:PopupBox.ToggleContentTemplate>
             <StackPanel>
                 <Button Background="{StaticResource ValidationErrorBrush}" 
                         Command="commands:RecordsCollectionCommands.RemoveRowCommand" 
