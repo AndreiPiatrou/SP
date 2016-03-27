@@ -36,12 +36,20 @@
                              IsModal="True">
                 <controls1:AnalyzeActions />
             </controls:Flyout>
+            <controls:Flyout x:Name="LeftAboutActionsFlyout" 
+                             Header="{x:Static resources:Strings.AboutProgramm}" 
+                             Position="Left" 
+                             ExternalCloseButton="Left"
+                             IsModal="True">
+                <controls1:AboutActions />
+            </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <ToggleButton Content="{x:Static resources:Strings.File}" IsChecked="{Binding ElementName=LeftFileActionsFlyout, Path=IsOpen}"/>
             <ToggleButton Content="{x:Static resources:Strings.Analyze}" IsChecked="{Binding ElementName=LeftAnalyzeActionsFlyout, Path=IsOpen}"/>
+            <ToggleButton Content="{x:Static resources:Strings.AboutProgramm}" IsChecked="{Binding ElementName=LeftAboutActionsFlyout, Path=IsOpen}"/>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
     <Grid>

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutProgramm" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Программа предназначена для исследовани возможностей статистического пакета PSPP</value>
+  </data>
   <data name="Actions" xml:space="preserve">
     <value>Действия</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="NewTab" xml:space="preserve">
     <value>  Новая вкладка</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>ОК</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>

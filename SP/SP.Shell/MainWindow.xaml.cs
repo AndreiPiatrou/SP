@@ -37,6 +37,7 @@ namespace SP.Shell
             messenger.Register<OpenFileMessage>(this, OpenFile);
             messenger.Register<AskForFilePathMessage>(this, AskForFilePathMessage);
             messenger.Register<LoaderMessage>(this, ManageLoader);
+            messenger.Register<OpenChildWindowMessage>(this, async message => { await OpenChildWindow(message); });
         }
 
         private void OpenFile(OpenFileMessage message)
@@ -79,6 +80,11 @@ namespace SP.Shell
         {
             LoaderGrid.Visibility = message.IsActive ? Visibility.Visible : Visibility.Collapsed;
             Loader.IsActive = message.IsActive;
+        }
+
+        private async Task OpenChildWindow(OpenChildWindowMessage message)
+        {
+            await this.ShowChildWindowAsync(message.Window, ChildWindowManager.OverlayFillBehavior.FullWindow);
         }
     }
 }

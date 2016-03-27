@@ -61,6 +61,24 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to О программе.
+        /// </summary>
+        public static string AboutProgramm {
+            get {
+                return ResourceManager.GetString("AboutProgramm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Программа предназначена для исследовани возможностей статистического пакета PSPP.
+        /// </summary>
+        public static string AboutText {
+            get {
+                return ResourceManager.GetString("AboutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Действия.
         /// </summary>
         public static string Actions {
@@ -183,6 +201,15 @@ namespace SP.Resources {
         public static string NewTab {
             get {
                 return ResourceManager.GetString("NewTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ОК.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

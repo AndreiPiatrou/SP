@@ -146,6 +146,9 @@
     <Compile Include="Controls\AnalyzeDataWindow.xaml.cs">
       <DependentUpon>AnalyzeDataWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AboutActions.xaml.cs">
+      <DependentUpon>AboutActions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,7 @@
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\AskForFilePathMessage.cs" />
     <Compile Include="Messages\LoaderMessage.cs" />
+    <Compile Include="Messages\OpenChildWindowMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />
     <Compile Include="Messages\OpenFileMessage.cs" />
     <Compile Include="Messages\SaveRecordsToFileMessage.cs" />
@@ -177,6 +181,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AnalyzeActions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +191,10 @@
     <Page Include="Controls\AnalyzeDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AboutActions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\FileActions.xaml">
       <SubType>Designer</SubType>
@@ -202,6 +213,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Templates\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,9 +267,7 @@
       <Name>SP.Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
