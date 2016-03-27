@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 
 using SP.Shell.Models;
@@ -33,6 +34,8 @@ namespace SP.Shell.Commands
 
             if (data == null)
             {
+                Debug.WriteLine("Data is null");
+
                 return false;
             }
 

@@ -149,6 +149,9 @@
     <Compile Include="Controls\AboutActions.xaml.cs">
       <DependentUpon>AboutActions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContextActions.xaml.cs">
+      <DependentUpon>ContextActions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,10 @@
     <Page Include="Controls\AboutActions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ContextActions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FileActions.xaml">
       <SubType>Designer</SubType>
