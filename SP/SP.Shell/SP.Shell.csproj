@@ -137,6 +137,8 @@
     <Compile Include="Behaviors\NoNewWindowInterTabClient.cs" />
     <Compile Include="Commands\AnalyzeCommands.cs" />
     <Compile Include="Commands\FileCommands.cs" />
+    <Compile Include="Commands\GuiListenCommand.cs" />
+    <Compile Include="Commands\RecordsCollectionCommands.cs" />
     <Compile Include="Commands\WindowCommands.cs" />
     <Compile Include="Controls\AnalyzeActions.xaml.cs">
       <DependentUpon>AnalyzeActions.xaml</DependentUpon>

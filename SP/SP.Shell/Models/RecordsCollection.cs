@@ -39,7 +39,7 @@ namespace SP.Shell.Models
                     record.Add(string.Empty);
                 }
             }
-            
+
             Records =
                 new ObservableCollection<ObservableCollection<string>>(
                     records.Skip(headerExtracted ? 1 : 0).Select(i => new ObservableCollection<string>(i)));
@@ -59,7 +59,11 @@ namespace SP.Shell.Models
                     yield return record.SkipLast();
                 }
             }
-        } 
+        }
+        
+        public int SelectedRow { get; set; }
+
+        public int SelectedHeader { get; set; }
 
         public void UpdateRowsAndHeaders()
         {
@@ -80,6 +84,26 @@ namespace SP.Shell.Models
                 Records.Add(Enumerable.Repeat(string.Empty, Headers.Count).ToObservable());
                 UpdateRowsAndHeaders();
             }
+        }
+
+        public void RemoveRow(int index)
+        {
+            if (index > Records.Count - 2 || index < 0)
+            {
+                return;
+            }
+
+            Records.RemoveAt(index);
+        }
+
+        public void RemoveColumn(int index)
+        {
+            if (index > Headers.Count - 2 || index < 0)
+            {
+                return;
+            }
+
+            Headers.RemoveAt(index);
         }
 
         private bool TryExtractHeaders(IList<string> firstLine, out ObservableCollection<string> headers)

@@ -6,6 +6,8 @@
                       xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
                       xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
                       xmlns:controls1="clr-namespace:SP.Shell.Controls"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      xmlns:commands="clr-namespace:SP.Shell.Commands"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       Background="{DynamicResource MaterialDesignPaper}"					  
@@ -63,6 +65,26 @@
                 </dragablz:TabablzControl.InterTabController>
             </dragablz:TabablzControl>
         </dockablz:Layout>
+        <materialDesign:PopupBox Grid.Row="1" 
+                                 Style="{StaticResource MaterialDesignMultiFloatingActionDarkPopupBox}" 
+                                 VerticalAlignment="Bottom"
+                                 HorizontalAlignment="Right"
+                                 Margin="20">
+            <StackPanel>
+                <Button Background="{StaticResource ValidationErrorBrush}" 
+                        Command="commands:RecordsCollectionCommands.RemoveRowCommand" 
+                        CommandParameter="{Binding SelectedTab.Records}"
+                        ToolTip="{x:Static resources:Strings.RemoveRow}">
+                    <materialDesign:PackIcon Kind="TableRowRemove"></materialDesign:PackIcon>
+                </Button>
+                <Button Background="{StaticResource ValidationErrorBrush}"
+                        Command="commands:RecordsCollectionCommands.RemoveColumnCommand"
+                        CommandParameter="{Binding SelectedTab.Records}"
+                        ToolTip="{x:Static resources:Strings.RemoveColumn}">
+                    <materialDesign:PackIcon Kind="TableColumnRemove"></materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+        </materialDesign:PopupBox>
         <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="LoaderGrid" Background="Gray" Opacity="0.3" Visibility="Collapsed"/>
         <controls:ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="Loader" Foreground="{DynamicResource HighlightBrush}" IsActive="False"/>
     </Grid>

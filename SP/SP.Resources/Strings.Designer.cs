@@ -187,6 +187,24 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удалить колонку.
+        /// </summary>
+        public static string RemoveColumn {
+            get {
+                return ResourceManager.GetString("RemoveColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить строку.
+        /// </summary>
+        public static string RemoveRow {
+            get {
+                return ResourceManager.GetString("RemoveRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Результат.
         /// </summary>
         public static string Result {

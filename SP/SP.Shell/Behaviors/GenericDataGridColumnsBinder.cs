@@ -1,4 +1,7 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -36,6 +39,22 @@ namespace SP.Shell.Behaviors
                 data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
                 dataGrid.CellEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
                 dataGrid.RowEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
+                dataGrid.SelectedCellsChanged += (sender, args) =>
+                    {
+                        if (!args.AddedCells.Any())
+                        {
+                            data.SelectedRow = -1;
+                            data.SelectedHeader = -1;
+                            Debug.WriteLine("Selection:" + data.SelectedRow + ", " + data.SelectedHeader);
+
+                            return;
+                        }
+
+                        data.SelectedRow = data.Records.IndexOf((ObservableCollection<string>)args.AddedCells[0].Item);
+                        data.SelectedHeader = args.AddedCells[0].Column.DisplayIndex;
+
+                        Debug.WriteLine("Selection:" + data.SelectedRow + ", " + data.SelectedHeader);
+                    };
             }
         }
 
@@ -49,6 +68,10 @@ namespace SP.Shell.Behaviors
                     dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer));
                     ++indexer;
                 }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                dataGrid.Columns.RemoveAt(e.OldStartingIndex);
             }
         }
 

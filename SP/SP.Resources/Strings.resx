@@ -159,6 +159,12 @@
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>
   </data>
+  <data name="RemoveColumn" xml:space="preserve">
+    <value>Удалить колонку</value>
+  </data>
+  <data name="RemoveRow" xml:space="preserve">
+    <value>Удалить строку</value>
+  </data>
   <data name="Result" xml:space="preserve">
     <value>Результат</value>
   </data>

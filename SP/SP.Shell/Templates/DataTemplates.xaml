@@ -12,6 +12,8 @@
                   HorizontalGridLinesBrush="DarkGray"
                   CanUserSortColumns="False"
                   VerticalGridLinesBrush="DarkGray"
+                  SelectionMode="Single"
+                  SelectionUnit="Cell"
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
     </DataTemplate>

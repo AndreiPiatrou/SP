@@ -31,7 +31,7 @@ namespace SP.Shell.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DataReadService>(); }
         }
-
+        
         public string Title
         {
             get
