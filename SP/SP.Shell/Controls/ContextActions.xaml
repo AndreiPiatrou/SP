@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SP.Shell.Controls.ContextActions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+             xmlns:commands="clr-namespace:SP.Shell.Commands"
+             xmlns:controls="clr-namespace:SP.Shell.Controls"
+             mc:Ignorable="d">
+    <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionDarkPopupBox}" 
+                                 VerticalAlignment="Bottom"
+                                 HorizontalAlignment="Right"
+                                 Margin="20"
+                                 ToolTip="{x:Static resources:Strings.Actions}">
+        <materialDesign:PopupBox.ToggleContentTemplate>
+            <DataTemplate>
+                <materialDesign:PackIcon Kind="DotsHorizontal"/>
+            </DataTemplate>
+        </materialDesign:PopupBox.ToggleContentTemplate>
+        <StackPanel>
+            <Button Background="{StaticResource ValidationErrorBrush}" 
+                        Command="commands:RecordsCollectionCommands.RemoveRowCommand" 
+                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                        ToolTip="{x:Static resources:Strings.RemoveRow}">
+                <materialDesign:PackIcon Kind="TableRowRemove"/>
+            </Button>
+            <Button Background="{StaticResource ValidationErrorBrush}"
+                        Command="commands:RecordsCollectionCommands.RemoveColumnCommand"
+                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                        ToolTip="{x:Static resources:Strings.RemoveColumn}">
+                <materialDesign:PackIcon Kind="TableColumnRemove"/>
+            </Button>
+        </StackPanel>
+    </materialDesign:PopupBox>
+</UserControl>

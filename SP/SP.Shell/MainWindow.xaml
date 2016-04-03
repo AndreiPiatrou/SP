@@ -1,0 +1,78 @@
+﻿<controls:MetroWindow x:Class="SP.Shell.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+                      xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+                      xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+                      xmlns:controls1="clr-namespace:SP.Shell.Controls"
+                      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                      WindowTransitionsEnabled="False"
+                      Background="{DynamicResource MaterialDesignPaper}"					  
+                      GlowBrush="{DynamicResource AccentColorBrush}"					  
+                      FontFamily="{StaticResource DefaultFont}"
+                      Title="{x:Static resources:Strings.MainWindowTitle}" 
+                      DataContext="{Binding Main, Source={StaticResource Locator}}"
+                      Height="800" 
+                      Width="1000"
+                      Icon="icon.ico"
+                      WindowState="Maximized"
+                      WindowStartupLocation="CenterScreen">
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="LeftFileActionsFlyout" 
+                             Header="{x:Static resources:Strings.File}" 
+                             Position="Left" 
+                             ExternalCloseButton="Left"
+                             IsModal="True">
+                <controls1:FileActions />
+            </controls:Flyout>
+            <controls:Flyout x:Name="LeftAnalyzeActionsFlyout" 
+                             Header="{x:Static resources:Strings.Analyze}" 
+                             Position="Left" 
+                             ExternalCloseButton="Left"
+                             IsModal="True">
+                <controls1:AnalyzeActions />
+            </controls:Flyout>
+            <controls:Flyout x:Name="LeftAboutActionsFlyout" 
+                             Header="{x:Static resources:Strings.AboutProgramm}" 
+                             Position="Left" 
+                             ExternalCloseButton="Left"
+                             IsModal="True">
+                <controls1:AboutActions />
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <ToggleButton Content="{x:Static resources:Strings.File}" IsChecked="{Binding ElementName=LeftFileActionsFlyout, Path=IsOpen}"/>
+            <ToggleButton Content="{x:Static resources:Strings.Analyze}" IsChecked="{Binding ElementName=LeftAnalyzeActionsFlyout, Path=IsOpen}"/>
+            <ToggleButton Content="{x:Static resources:Strings.AboutProgramm}" IsChecked="{Binding ElementName=LeftAboutActionsFlyout, Path=IsOpen}"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <dockablz:Layout Grid.Row="1">
+            <dragablz:TabablzControl Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=(TextElement.Foreground)}" 
+                                     Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Background}"
+                                     BorderThickness="0"
+                                     Margin="0,-1,0,1"
+                                     HeaderMemberPath="Title"
+                                     NewItemFactory="{Binding AddNewTabCommand}"
+                                     ShowDefaultAddButton="True"
+                                     ShowDefaultCloseButton="True"
+                                     SelectedItem="{Binding SelectedTab}"
+                                     ItemsSource="{Binding Tabs}">
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController InterTabClient="{Binding Client}"/>
+                </dragablz:TabablzControl.InterTabController>
+            </dragablz:TabablzControl>
+        </dockablz:Layout>
+        <controls1:ContextActions Grid.Row="1" Records="{Binding SelectedTab.Records}"/>
+        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="LoaderGrid" Background="Gray" Opacity="0.3" Visibility="Collapsed"/>
+        <controls:ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="Loader" Foreground="{DynamicResource HighlightBrush}" IsActive="False"/>
+    </Grid>
+</controls:MetroWindow>

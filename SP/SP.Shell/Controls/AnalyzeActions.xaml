@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="SP.Shell.Controls.AnalyzeActions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+             xmlns:commands="clr-namespace:SP.Shell.Commands"
+             xmlns:commands1="clr-namespace:SP.PSPP.Integration.Commands;assembly=SP.PSPP.Integration"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <Button Content="{x:Static resources:Strings.CorrelationCoefficient}"
+                Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
+                CommandParameter="{x:Static commands1:AnalyzeType.PearsonCorrelation}"
+                Style="{DynamicResource MaterialDesignFlatButton}"/>
+        <Button Content="{x:Static resources:Strings.MiddleMean}"
+                Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
+                CommandParameter="{x:Static commands1:AnalyzeType.MiddleMean}"
+                Style="{DynamicResource MaterialDesignFlatButton}"/>
+        <Button Content="{x:Static resources:Strings.MeanChance}"
+                Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
+                CommandParameter="{x:Static commands1:AnalyzeType.MeanChance}"
+                Style="{DynamicResource MaterialDesignFlatButton}"/>
+    </StackPanel>
+</UserControl>
