@@ -31,6 +31,12 @@
                         ToolTip="{x:Static resources:Strings.RemoveColumn}">
                 <materialDesign:PackIcon Kind="TableColumnRemove"/>
             </Button>
+            <Button Background="{StaticResource ValidationErrorBrush}"
+                        Command="commands:RecordsCollectionCommands.RenameColumnCommand"
+                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                        ToolTip="{x:Static resources:Strings.RenameColumn}">
+                <materialDesign:PackIcon Kind="RenameBox"/>
+            </Button>
         </StackPanel>
     </materialDesign:PopupBox>
 </UserControl>

@@ -129,6 +129,9 @@
   <data name="Analyze" xml:space="preserve">
     <value>Анализ</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
   <data name="AverageValue" xml:space="preserve">
     <value>Среднее значение</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="DataAnalyze" xml:space="preserve">
     <value>Анализ данных</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактирование</value>
   </data>
   <data name="ErrorOccured" xml:space="preserve">
     <value>Произошла ошибка</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="RemoveRow" xml:space="preserve">
     <value>Удалить строку</value>
+  </data>
+  <data name="RenameColumn" xml:space="preserve">
+    <value>Переименовать колонку</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Результат</value>

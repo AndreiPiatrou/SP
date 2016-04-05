@@ -106,6 +106,11 @@ namespace SP.Shell.Models
             Headers.RemoveAt(index);
         }
 
+        public void RenameHeader(int index, string value)
+        {
+            Headers[index] = value;
+        }
+
         private bool TryExtractHeaders(IList<string> firstLine, out ObservableCollection<string> headers)
         {
             headers = new ObservableCollection<string>(firstLine);

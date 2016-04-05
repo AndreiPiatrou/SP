@@ -60,18 +60,24 @@ namespace SP.Shell.Behaviors
 
         private static void HandleHeadersCollectionChange(NotifyCollectionChangedEventArgs e, DataGrid dataGrid)
         {
-            if (e.Action == NotifyCollectionChangedAction.Add)
+            switch (e.Action)
             {
-                var indexer = e.NewStartingIndex;
-                foreach (var t in e.NewItems)
-                {
-                    dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer));
-                    ++indexer;
-                }
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                dataGrid.Columns.RemoveAt(e.OldStartingIndex);
+                case NotifyCollectionChangedAction.Add:
+                    var indexer = e.NewStartingIndex;
+                    foreach (var t in e.NewItems)
+                    {
+                        dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer));
+                        ++indexer;
+                    }
+
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    dataGrid.Columns.RemoveAt(e.OldStartingIndex);
+                    break;
+                default:
+                    dataGrid.Columns.Clear();
+                    BindHeaders(dataGrid, GetDataSource(dataGrid));
+                    break;
             }
         }
 
@@ -90,6 +96,11 @@ namespace SP.Shell.Behaviors
                     UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
                 });
 
+            BindHeaders(dataGrid, data);
+        }
+
+        private static void BindHeaders(DataGrid dataGrid, RecordsCollection data)
+        {
             var indexer = 0;
             foreach (var column in data.Headers)
             {

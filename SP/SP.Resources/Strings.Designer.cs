@@ -97,6 +97,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Применить.
+        /// </summary>
+        public static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Среднее значение.
         /// </summary>
         public static string AverageValue {
@@ -129,6 +138,15 @@ namespace SP.Resources {
         public static string DataAnalyze {
             get {
                 return ResourceManager.GetString("DataAnalyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактирование.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -237,6 +255,15 @@ namespace SP.Resources {
         public static string RemoveRow {
             get {
                 return ResourceManager.GetString("RemoveRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Переименовать колонку.
+        /// </summary>
+        public static string RenameColumn {
+            get {
+                return ResourceManager.GetString("RenameColumn", resourceCulture);
             }
         }
         
