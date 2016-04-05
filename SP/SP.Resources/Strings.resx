@@ -157,7 +157,7 @@
     <value>Файл</value>
   </data>
   <data name="FileFIlter" xml:space="preserve">
-    <value>csv|*.csv|Excel|*.xls;*.xlsx|Все|*.*</value>
+    <value>csv,Excel|*.csv;*.xls;*.xlsx|Все|*.*</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Статистический пакет PSPP</value>

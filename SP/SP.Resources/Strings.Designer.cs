@@ -178,7 +178,7 @@ namespace SP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to csv|*.csv|Excel|*.xls;*.xlsx|Все|*.*.
+        ///   Looks up a localized string similar to csv,Excel|*.csv;*.xls;*.xlsx|Все|*.*.
         /// </summary>
         public static string FileFIlter {
             get {

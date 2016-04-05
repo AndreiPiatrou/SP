@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 using SP.Shell.Models;
+using SP.Shell.ViewModel;
 
 namespace SP.Shell.Behaviors
 {
@@ -63,10 +65,11 @@ namespace SP.Shell.Behaviors
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
+                    var style = dataGrid.FindResource("MaterialDesignDataGridColumnHeader") as Style;
                     var indexer = e.NewStartingIndex;
                     foreach (var t in e.NewItems)
                     {
-                        dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer));
+                        dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer, style));
                         ++indexer;
                     }
 
@@ -101,17 +104,19 @@ namespace SP.Shell.Behaviors
 
         private static void BindHeaders(DataGrid dataGrid, RecordsCollection data)
         {
+            var style = dataGrid.FindResource("MaterialDesignDataGridColumnHeader") as Style;
             var indexer = 0;
+
             foreach (var column in data.Headers)
             {
-                dataGrid.Columns.Add(CreateDataGridColumn(column, indexer));
+                dataGrid.Columns.Add(CreateDataGridColumn(column, indexer, style));
                 ++indexer;
             }
         }
 
-        private static DataGridColumn CreateDataGridColumn(string column, int index)
+        private static DataGridColumn CreateDataGridColumn(string column, int index, Style baseStyle)
         {
-            return new DataGridTextColumn
+            var element = new DataGridTextColumn
             {
                 Header = column,
                 Binding = new Binding("[" + index + "]")
@@ -120,6 +125,12 @@ namespace SP.Shell.Behaviors
                 },
                 IsReadOnly = false
             };
+            
+            //var style = new Style(typeof(DataGridColumnHeader), baseStyle);
+            //style.Setters.Add(new Setter(ToolTipService.ToolTipProperty, column));
+            //element.HeaderStyle = style;
+
+            return element;
         }
     }
 }
