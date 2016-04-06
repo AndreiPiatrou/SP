@@ -136,6 +136,7 @@
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
     <Compile Include="Behaviors\NoNewWindowInterTabClient.cs" />
     <Compile Include="Behaviors\SelectValueOnLoad.cs" />
+    <Compile Include="Behaviors\ToggleButtonGroup.cs" />
     <Compile Include="Commands\AnalyzeCommands.cs" />
     <Compile Include="Commands\FileCommands.cs" />
     <Compile Include="Commands\GuiListenCommand.cs" />

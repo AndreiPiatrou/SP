@@ -6,6 +6,7 @@
                       xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
                       xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
                       xmlns:controls1="clr-namespace:SP.Shell.Controls"
+                      xmlns:behaviors="clr-namespace:SP.Shell.Behaviors"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       Background="{DynamicResource MaterialDesignPaper}"					  
@@ -47,7 +48,7 @@
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <controls:MetroWindow.LeftWindowCommands>
-        <controls:WindowCommands>
+        <controls:WindowCommands behaviors:ToggleButtonGroup.Name="WindowCommands">
             <ToggleButton Content="{x:Static resources:Strings.File}" IsChecked="{Binding ElementName=LeftFileActionsFlyout, Path=IsOpen}"/>
             <ToggleButton Content="{x:Static resources:Strings.Analyze}" IsChecked="{Binding ElementName=LeftAnalyzeActionsFlyout, Path=IsOpen}"/>
             <ToggleButton Content="{x:Static resources:Strings.AboutProgramm}" IsChecked="{Binding ElementName=LeftAboutActionsFlyout, Path=IsOpen}"/>
