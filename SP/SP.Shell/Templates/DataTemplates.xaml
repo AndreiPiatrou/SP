@@ -15,6 +15,29 @@
     <Style x:Key="DataGridCellWithBorder" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}" >
         <Setter Property="BorderThickness" Value="0, 0, 1, 0"/>
         <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+                <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
+            </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value=".56"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <DataTemplate DataType="{x:Type local:TabViewModel}">
@@ -32,7 +55,7 @@
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type analyzeDataViewModels:PearsonCorrelationViewModel}">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>

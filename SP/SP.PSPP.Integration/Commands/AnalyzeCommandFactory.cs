@@ -11,7 +11,8 @@ namespace SP.PSPP.Integration.Commands
         private static readonly IDictionary<AnalyzeType, Func<WorkingDirectory, IAnalyzeCommand>> Dictionary = new Dictionary<AnalyzeType, Func<WorkingDirectory, IAnalyzeCommand>>
         {
             { AnalyzeType.PearsonCorrelation, directory => new PearsonCorrelationCommand(directory) },
-            { AnalyzeType.MiddleMean, directory => new MiddleMeanCommand(directory) }
+            { AnalyzeType.MiddleMean, directory => new MiddleMeanCommand(directory) },
+            { AnalyzeType.MeanChance, directory => new MeanChanceCommand(directory) }
         };
 
         public static IAnalyzeCommand CreateCommand(AnalyzeType commandType, WorkingDirectory workingDirectory)

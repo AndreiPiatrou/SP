@@ -23,6 +23,7 @@
             <controls:Flyout x:Name="LeftFileActionsFlyout" 
                              Header="{x:Static resources:Strings.File}" 
                              Position="Left" 
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:FileActions />
@@ -30,13 +31,15 @@
             <controls:Flyout x:Name="LeftAnalyzeActionsFlyout" 
                              Header="{x:Static resources:Strings.Analyze}" 
                              Position="Left" 
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:AnalyzeActions />
             </controls:Flyout>
             <controls:Flyout x:Name="LeftAboutActionsFlyout" 
                              Header="{x:Static resources:Strings.AboutProgramm}" 
-                             Position="Left" 
+                             Position="Left"  
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:AboutActions />
@@ -71,8 +74,20 @@
                 </dragablz:TabablzControl.InterTabController>
             </dragablz:TabablzControl>
         </dockablz:Layout>
-        <controls1:ContextActions Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Records="{Binding SelectedTab.Records}"/>
-        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="LoaderGrid" Background="Gray" Opacity="0.3" Visibility="Collapsed"/>
-        <controls:ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="Loader" Foreground="{DynamicResource HighlightBrush}" IsActive="False"/>
+        <controls1:ContextActions Grid.Row="1"
+                                  HorizontalAlignment="Right" 
+                                  VerticalAlignment="Bottom" 
+                                  Records="{Binding SelectedTab.Records}"/>
+        <Grid Grid.Row="0" 
+              Grid.RowSpan="2" 
+              x:Name="LoaderGrid" 
+              Background="Gray" 
+              Opacity="0.3" 
+              Visibility="Collapsed"/>
+        <controls:ProgressRing Grid.Row="0" 
+                               Grid.RowSpan="2" 
+                               x:Name="Loader" 
+                               Foreground="{DynamicResource HighlightBrush}" 
+                               IsActive="False"/>
     </Grid>
 </controls:MetroWindow>

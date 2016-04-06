@@ -18,6 +18,7 @@ namespace SP.Shell.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private int resultsCounter;
         private TabViewModel selectedTab;
 
         public MainViewModel()
@@ -69,7 +70,7 @@ namespace SP.Shell.ViewModel
             try
             {
                 var result = Service.Analyze(message.InputData, message.Type);
-                var newTab = new TabViewModel(Strings.Result, result.Rows.ToCompleteList());
+                var newTab = new TabViewModel(ExtractTabName(), result.Rows.ToCompleteList());
 
                 Tabs.Add(newTab);
                 SelectedTab = newTab;
@@ -78,6 +79,18 @@ namespace SP.Shell.ViewModel
             {
                 MessengerInstance.Send(new ShowPopupMessage(Strings.ErrorOccured, e.Message));
             }
+        }
+
+        private string ExtractTabName()
+        {
+            if (resultsCounter == 0)
+            {
+                ++resultsCounter;
+
+                return Strings.Result;
+            }
+
+            return Strings.Result + " (" + resultsCounter++ + ")";
         }
     }
 }

@@ -9,7 +9,7 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
+    <StackPanel Width="230">
         <Button Content="{x:Static resources:Strings.CorrelationCoefficient}"
                 Command="{x:Static commands:AnalyzeCommands.AnalyzeDataCommand}"
                 CommandParameter="{x:Static commands1:AnalyzeType.PearsonCorrelation}"
