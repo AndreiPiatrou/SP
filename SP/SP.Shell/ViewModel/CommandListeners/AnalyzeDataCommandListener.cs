@@ -18,10 +18,11 @@ namespace SP.Shell.ViewModel.CommandListeners
             try
             {
                 var result = AnalyzeService.Analyze(message.InputData, message.Type);
-                var newTab = new TabViewModel(TabNameService.GetResults(), result.Rows.ToCompleteList());
+                var newTabName = TabNameService.GetResults();
+                var resultList = result.Rows.ToCompleteList();
+                var newTab = new TabViewModel(newTabName, resultList);
 
-                Main.Tabs.Add(newTab);
-                Main.SelectedTab = newTab;
+                Main.AddAndSelectTab(newTab);
             }
             catch (Exception e)
             {

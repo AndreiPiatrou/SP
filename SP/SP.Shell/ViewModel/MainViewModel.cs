@@ -37,6 +37,12 @@ namespace SP.Shell.ViewModel
             }
         }
 
+        public void AddAndSelectTab(TabViewModel tab)
+        {
+            Tabs.Add(tab);
+            SelectedTab = tab;
+        }
+
         public IInterTabClient Client
         {
             get { return new NoNewWindowInterTabClient(); }
