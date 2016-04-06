@@ -6,6 +6,8 @@
                       xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
                       xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
                       xmlns:controls1="clr-namespace:SP.Shell.Controls"
+                      xmlns:behaviors="clr-namespace:SP.Shell.Behaviors"
+                      xmlns:commands="clr-namespace:SP.Shell.Commands"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       Background="{DynamicResource MaterialDesignPaper}"					  
@@ -23,6 +25,7 @@
             <controls:Flyout x:Name="LeftFileActionsFlyout" 
                              Header="{x:Static resources:Strings.File}" 
                              Position="Left" 
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:FileActions />
@@ -30,13 +33,15 @@
             <controls:Flyout x:Name="LeftAnalyzeActionsFlyout" 
                              Header="{x:Static resources:Strings.Analyze}" 
                              Position="Left" 
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:AnalyzeActions />
             </controls:Flyout>
             <controls:Flyout x:Name="LeftAboutActionsFlyout" 
                              Header="{x:Static resources:Strings.AboutProgramm}" 
-                             Position="Left" 
+                             Position="Left"  
+                             IsPinned="False"
                              ExternalCloseButton="Left"
                              IsModal="True">
                 <controls1:AboutActions />
@@ -44,7 +49,7 @@
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <controls:MetroWindow.LeftWindowCommands>
-        <controls:WindowCommands>
+        <controls:WindowCommands behaviors:ToggleButtonGroup.Name="WindowCommands">
             <ToggleButton Content="{x:Static resources:Strings.File}" IsChecked="{Binding ElementName=LeftFileActionsFlyout, Path=IsOpen}"/>
             <ToggleButton Content="{x:Static resources:Strings.Analyze}" IsChecked="{Binding ElementName=LeftAnalyzeActionsFlyout, Path=IsOpen}"/>
             <ToggleButton Content="{x:Static resources:Strings.AboutProgramm}" IsChecked="{Binding ElementName=LeftAboutActionsFlyout, Path=IsOpen}"/>
@@ -61,7 +66,7 @@
                                      BorderThickness="0"
                                      Margin="0,-1,0,1"
                                      HeaderMemberPath="Title"
-                                     NewItemFactory="{Binding AddNewTabCommand}"
+                                     NewItemFactory="{x:Static commands:FileCommands.CreateNewTabCommand}"
                                      ShowDefaultAddButton="True"
                                      ShowDefaultCloseButton="True"
                                      SelectedItem="{Binding SelectedTab}"
@@ -71,8 +76,20 @@
                 </dragablz:TabablzControl.InterTabController>
             </dragablz:TabablzControl>
         </dockablz:Layout>
-        <controls1:ContextActions Grid.Row="1" Records="{Binding SelectedTab.Records}"/>
-        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="LoaderGrid" Background="Gray" Opacity="0.3" Visibility="Collapsed"/>
-        <controls:ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="Loader" Foreground="{DynamicResource HighlightBrush}" IsActive="False"/>
+        <controls1:ContextActions Grid.Row="1"
+                                  HorizontalAlignment="Right" 
+                                  VerticalAlignment="Bottom" 
+                                  Records="{Binding SelectedTab.Records}"/>
+        <Grid Grid.Row="0" 
+              Grid.RowSpan="2" 
+              x:Name="LoaderGrid" 
+              Background="Gray" 
+              Opacity="0.3" 
+              Visibility="Collapsed"/>
+        <controls:ProgressRing Grid.Row="0" 
+                               Grid.RowSpan="2" 
+                               x:Name="Loader" 
+                               Foreground="{DynamicResource HighlightBrush}" 
+                               IsActive="False"/>
     </Grid>
 </controls:MetroWindow>

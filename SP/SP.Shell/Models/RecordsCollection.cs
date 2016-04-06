@@ -20,6 +20,9 @@ namespace SP.Shell.Models
                                       string.Empty
                                   }
                           };
+
+            SelectedRow = -1;
+            SelectedHeader = -1;
         }
 
         public RecordsCollection(List<List<string>> records)
@@ -60,7 +63,7 @@ namespace SP.Shell.Models
                 }
             }
         }
-        
+
         public int SelectedRow { get; set; }
 
         public int SelectedHeader { get; set; }
@@ -104,6 +107,26 @@ namespace SP.Shell.Models
             }
 
             Headers.RemoveAt(index);
+        }
+
+        public void RenameHeader(int index, string value)
+        {
+            Headers[index] = value;
+        }
+
+        public void InsertHeader(int index)
+        {
+            foreach (var record in Records)
+            {
+                record.Insert(index, string.Empty);
+            }
+
+            Headers.Insert(index, GenerateNextColumnName());
+        }
+
+        public void InsertRow(int index)
+        {
+            Records.Insert(index, Enumerable.Repeat(string.Empty, Headers.Count).ToObservable());
         }
 
         private bool TryExtractHeaders(IList<string> firstLine, out ObservableCollection<string> headers)

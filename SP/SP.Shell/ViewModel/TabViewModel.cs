@@ -3,10 +3,7 @@ using System.Linq;
 
 using GalaSoft.MvvmLight;
 
-using Microsoft.Practices.ServiceLocation;
-
 using SP.Shell.Models;
-using SP.Shell.Services;
 
 namespace SP.Shell.ViewModel
 {
@@ -27,11 +24,6 @@ namespace SP.Shell.ViewModel
             Records = new RecordsCollection(list);
         }
 
-        public DataReadService DataReadService
-        {
-            get { return ServiceLocator.Current.GetInstance<DataReadService>(); }
-        }
-        
         public string Title
         {
             get

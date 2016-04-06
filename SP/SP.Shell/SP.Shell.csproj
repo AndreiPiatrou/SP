@@ -58,8 +58,8 @@
       <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dragablz, Version=0.0.3.157, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.157\lib\net45\Dragablz.dll</HintPath>
+    <Reference Include="Dragablz, Version=0.0.3.158, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.158\lib\net45\Dragablz.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
@@ -135,6 +135,8 @@
     <Compile Include="Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Behaviors\GenericDataGridColumnsBinder.cs" />
     <Compile Include="Behaviors\NoNewWindowInterTabClient.cs" />
+    <Compile Include="Behaviors\SelectValueOnLoad.cs" />
+    <Compile Include="Behaviors\ToggleButtonGroup.cs" />
     <Compile Include="Commands\AnalyzeCommands.cs" />
     <Compile Include="Commands\FileCommands.cs" />
     <Compile Include="Commands\GuiListenCommand.cs" />
@@ -179,13 +181,18 @@
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MeanChanceViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeanViewModel.cs" />
+    <Compile Include="ViewModel\CommandListeners\AnalyzeDataCommandListener.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
+    <Compile Include="ViewModel\EditStringViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditStringWindow.xaml.cs">
+      <DependentUpon>EditStringWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\AnalyzeActions.xaml">
       <SubType>Designer</SubType>
@@ -224,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditStringWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

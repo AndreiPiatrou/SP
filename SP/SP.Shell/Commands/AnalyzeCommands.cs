@@ -14,9 +14,9 @@ using SP.Shell.ViewModel;
 
 namespace SP.Shell.Commands
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
     public class AnalyzeCommands
     {
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand AnalyzeDataCommand = new RelayCommand<AnalyzeType>(AnalyzeDataCommandExecute);
 
         private static void AnalyzeDataCommandExecute(AnalyzeType analyzeType)

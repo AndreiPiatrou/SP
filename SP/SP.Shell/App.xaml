@@ -5,7 +5,8 @@
              StartupUri="MainWindow.xaml" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              d1P1:Ignorable="d" 
-             xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+             xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=mscorlib">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml"/>
                 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>
@@ -49,6 +51,8 @@
             <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
 
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:SP.Shell.ViewModel" />
+
+            <system:Double x:Key="MenuFlyoutWidth">235</system:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

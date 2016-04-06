@@ -81,7 +81,7 @@ namespace SP.Shell
             LoaderGrid.Visibility = message.IsActive ? Visibility.Visible : Visibility.Collapsed;
             Loader.IsActive = message.IsActive;
         }
-
+        
         private async Task OpenChildWindow(OpenChildWindowMessage message)
         {
             await this.ShowChildWindowAsync(message.Window, ChildWindowManager.OverlayFillBehavior.FullWindow);
