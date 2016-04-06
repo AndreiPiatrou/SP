@@ -14,15 +14,13 @@ using SP.Shell.Views;
 
 namespace SP.Shell.Commands
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
     public class WindowCommands
     {
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand CloseWindowCommand = new RelayCommand<FrameworkElement>(CloseElement);
 
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand CloseApplication = new RelayCommand(() => Application.Current.Shutdown());
 
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand AboutCommand = new GalaSoft.MvvmLight.CommandWpf.RelayCommand(SendOpenAboutMessage);
 
         private static void SendOpenAboutMessage()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 using Microsoft.Practices.ServiceLocation;
 
+using SP.Resources;
 using SP.Shell.Messages;
 using SP.Shell.Services;
 using SP.Shell.Tasks;
@@ -15,13 +17,20 @@ using SP.Shell.ViewModel;
 
 namespace SP.Shell.Commands
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
     public class FileCommands
     {
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand OpenFileCommand = new RelayCommand(OpenFileCommandExecute);
 
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand SaveToFileCommand = new RelayCommand(SaveToFileCommandExecute);
+
+        public static Func<TabViewModel> CreateNewTabCommand
+        {
+            get
+            {
+                return () => new TabViewModel(GetTabNameService().GetImportedData(GetCurrentTabNames()));
+            }
+        }
 
         private static void OpenFileCommandExecute()
         {
@@ -45,19 +54,18 @@ namespace SP.Shell.Commands
 
         private static IEnumerable<IEnumerable<IEnumerable<string>>> ReadDataFromfile(string filePath)
         {
-            var readService = GetDataReadService();
-
-            return readService.ReadWorksheets(filePath).ToList();
+            return GetDataReadService().ReadWorksheets(filePath).ToList();
         }
 
         private static void ApplyDataFromfile(IEnumerable<IEnumerable<IEnumerable<string>>> data, string fileName)
         {
             var newTab = false;
+            var tabNameService = GetTabNameService();
 
             foreach (var worksheet in data)
             {
                 var tab = GetTab(newTab);
-                tab.LoadRecords(worksheet, fileName);
+                tab.LoadRecords(worksheet, tabNameService.GetImportedData(GetCurrentTabNames(), fileName));
                 newTab = true;
             }
         }
@@ -70,6 +78,11 @@ namespace SP.Shell.Commands
         private static DataReadService GetDataReadService()
         {
             return ServiceLocator.Current.GetInstance<DataReadService>();
+        }
+
+        private static TabNameService GetTabNameService()
+        {
+            return ServiceLocator.Current.GetInstance<TabNameService>();
         }
 
         private static IMessenger GetMessenger()
@@ -86,12 +99,17 @@ namespace SP.Shell.Commands
                 return mainModel.SelectedTab;
             }
 
-            var newTabModel = mainModel.AddNewTabCommand();
+            var newTabModel = CreateNewTabCommand();
 
             mainModel.Tabs.Add(newTabModel);
             mainModel.SelectedTab = newTabModel;
 
             return newTabModel;
+        }
+
+        private static IEnumerable<string> GetCurrentTabNames()
+        {
+            return ServiceLocator.Current.GetInstance<MainViewModel>().Tabs.Select(t => t.Title);
         }
     }
 }

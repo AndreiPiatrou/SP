@@ -27,7 +27,10 @@ namespace SP.Shell.ViewModel
 
             // View models
             SimpleIoc.Default.Register<MainViewModel>();
+
+            // Listeners
             SimpleIoc.Default.Register<SaveToFileCommandListener>(true);
+            SimpleIoc.Default.Register<AnalyzeDataCommandListener>(true);
         }
 
         public MainViewModel Main

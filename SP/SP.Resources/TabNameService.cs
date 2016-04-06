@@ -22,13 +22,18 @@ namespace SP.Resources
 
         public string GetImportedData(IEnumerable<string> existingNames)
         {
+            return GetImportedData(existingNames, Strings.NewTab);
+        }
+
+        public string GetImportedData(IEnumerable<string> existingNames, string newName)
+        {
             var names = existingNames as IList<string> ?? existingNames.ToList();
             var counter = 0;
-            var name = Strings.NewTab;
+            var name = newName;
 
             while (names.Contains(name, StringComparer.OrdinalIgnoreCase))
             {
-                name = string.Format("{0} ({1})", Strings.NewTab, ++counter);
+                name = string.Format("{0} ({1})", newName, ++counter);
             }
 
             return name;

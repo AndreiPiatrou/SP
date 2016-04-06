@@ -181,6 +181,7 @@
     <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MeanChanceViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeanViewModel.cs" />
+    <Compile Include="ViewModel\CommandListeners\AnalyzeDataCommandListener.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
     <Compile Include="ViewModel\EditStringViewModel.cs" />

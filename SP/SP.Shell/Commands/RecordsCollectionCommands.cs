@@ -14,7 +14,6 @@ using SP.Shell.Views;
 namespace SP.Shell.Commands
 {
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
-
     public class RecordsCollectionCommands
     {
         public static ICommand RemoveRowCommand = new GuiListenCommand(RemoveRowExecute, RemoveRowCanExecute);
