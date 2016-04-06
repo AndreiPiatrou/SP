@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 using Dragablz;
 
@@ -18,7 +19,6 @@ namespace SP.Shell.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private int resultsCounter;
         private TabViewModel selectedTab;
 
         public MainViewModel()
@@ -26,7 +26,7 @@ namespace SP.Shell.ViewModel
             MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
             Tabs = new ObservableCollection<TabViewModel>
                        {
-                           new TabViewModel(Strings.NewTab),
+                           new TabViewModel(Strings.NewTab)
                        };
             MessengerInstance.Register<AnalyzeDataMessage>(this, AnalyzeDataExecute);
         }
@@ -51,13 +51,18 @@ namespace SP.Shell.ViewModel
         {
             get
             {
-                return () => new TabViewModel(Strings.NewTab);
+                return () => new TabViewModel(TabNameService.GetImportedData(Tabs.Select(t => t.Title)));
             }
         }
 
         public AnalysisService Service
         {
             get { return ServiceLocator.Current.GetInstance<AnalysisService>(); }
+        }
+
+        public TabNameService TabNameService
+        {
+            get { return ServiceLocator.Current.GetInstance<TabNameService>(); }
         }
 
         public IInterTabClient Client
@@ -70,7 +75,7 @@ namespace SP.Shell.ViewModel
             try
             {
                 var result = Service.Analyze(message.InputData, message.Type);
-                var newTab = new TabViewModel(ExtractTabName(), result.Rows.ToCompleteList());
+                var newTab = new TabViewModel(TabNameService.GetResults(), result.Rows.ToCompleteList());
 
                 Tabs.Add(newTab);
                 SelectedTab = newTab;
@@ -79,18 +84,6 @@ namespace SP.Shell.ViewModel
             {
                 MessengerInstance.Send(new ShowPopupMessage(Strings.ErrorOccured, e.Message));
             }
-        }
-
-        private string ExtractTabName()
-        {
-            if (resultsCounter == 0)
-            {
-                ++resultsCounter;
-
-                return Strings.Result;
-            }
-
-            return Strings.Result + " (" + resultsCounter++ + ")";
         }
     }
 }
