@@ -187,6 +187,24 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вставить колонку.
+        /// </summary>
+        public static string InsertColumn {
+            get {
+                return ResourceManager.GetString("InsertColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вставить строку.
+        /// </summary>
+        public static string InsertRow {
+            get {
+                return ResourceManager.GetString("InsertRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Статистический пакет PSPP.
         /// </summary>
         public static string MainWindowTitle {

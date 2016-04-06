@@ -9,33 +9,46 @@
              xmlns:controls="clr-namespace:SP.Shell.Controls"
              mc:Ignorable="d">
     <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionDarkPopupBox}" 
-                                 VerticalAlignment="Bottom"
-                                 HorizontalAlignment="Right"
-                                 Margin="20"
-                                 ToolTip="{x:Static resources:Strings.Actions}">
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Right"
+                             Margin="20"
+                             PopupMode="Click"
+                             ToolTip="{x:Static resources:Strings.Actions}">
         <materialDesign:PopupBox.ToggleContentTemplate>
             <DataTemplate>
-                <materialDesign:PackIcon Kind="DotsHorizontal"/>
+                <materialDesign:PackIcon Kind="TableEdit"/>
             </DataTemplate>
         </materialDesign:PopupBox.ToggleContentTemplate>
         <StackPanel>
+            <Button Background="{StaticResource ThumbBrush}"
+                    Command="commands:RecordsCollectionCommands.RenameColumnCommand"
+                    CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                    ToolTip="{x:Static resources:Strings.RenameColumn}">
+                <materialDesign:PackIcon Kind="RenameBox"/>
+            </Button>
             <Button Background="{StaticResource ValidationErrorBrush}" 
-                        Command="commands:RecordsCollectionCommands.RemoveRowCommand" 
-                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
-                        ToolTip="{x:Static resources:Strings.RemoveRow}">
+                    Command="commands:RecordsCollectionCommands.RemoveRowCommand" 
+                    CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                    ToolTip="{x:Static resources:Strings.RemoveRow}">
                 <materialDesign:PackIcon Kind="TableRowRemove"/>
             </Button>
             <Button Background="{StaticResource ValidationErrorBrush}"
-                        Command="commands:RecordsCollectionCommands.RemoveColumnCommand"
-                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
-                        ToolTip="{x:Static resources:Strings.RemoveColumn}">
+                    Command="commands:RecordsCollectionCommands.RemoveColumnCommand"
+                    CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                    ToolTip="{x:Static resources:Strings.RemoveColumn}">
                 <materialDesign:PackIcon Kind="TableColumnRemove"/>
             </Button>
-            <Button Background="{StaticResource ValidationErrorBrush}"
-                        Command="commands:RecordsCollectionCommands.RenameColumnCommand"
-                        CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
-                        ToolTip="{x:Static resources:Strings.RenameColumn}">
-                <materialDesign:PackIcon Kind="RenameBox"/>
+            <Button Background="{StaticResource FlatButtonBackgroundBrush}"
+                    Command="commands:RecordsCollectionCommands.InsertColumnCommand"
+                    CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                    ToolTip="{x:Static resources:Strings.InsertColumn}">
+                <materialDesign:PackIcon Kind="TableColumnPlusBefore"/>
+            </Button>
+            <Button Background="{StaticResource FlatButtonBackgroundBrush}"
+                    Command="commands:RecordsCollectionCommands.InsertRowCommand"
+                    CommandParameter="{Binding Records, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ContextActions}}"
+                    ToolTip="{x:Static resources:Strings.InsertRow}">
+                <materialDesign:PackIcon Kind="TableRowPlusBefore"/>
             </Button>
         </StackPanel>
     </materialDesign:PopupBox>

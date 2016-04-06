@@ -13,16 +13,47 @@ using SP.Shell.Views;
 
 namespace SP.Shell.Commands
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+
     public class RecordsCollectionCommands
     {
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand RemoveRowCommand = new GuiListenCommand(RemoveRowExecute, RemoveRowCanExecute);
 
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand RemoveColumnCommand = new GuiListenCommand(RemoveColumnExecute, RemoveColumnCanExecute);
 
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
         public static ICommand RenameColumnCommand = new GuiListenCommand(RenameColumnExecute, RenameColumnCanExecute);
+
+        public static ICommand InsertColumnCommand = new GuiListenCommand(InsertColumnExecute, InsertColumnCanExecute);
+
+        public static ICommand InsertRowCommand = new GuiListenCommand(InsertRowExecute, InsertRowCanExecute);
+
+        private static bool InsertRowCanExecute(object o)
+        {
+            var data = (RecordsCollection)o;
+
+            return data != null && data.SelectedRow > -1;
+        }
+
+        private static void InsertRowExecute(object o)
+        {
+            var data = (RecordsCollection)o;
+
+            data.InsertRow(data.SelectedRow);
+        }
+
+        private static bool InsertColumnCanExecute(object o)
+        {
+            var data = (RecordsCollection)o;
+
+            return data != null && data.SelectedHeader > -1;
+        }
+
+        private static void InsertColumnExecute(object o)
+        {
+            var data = (RecordsCollection)o;
+
+            data.InsertHeader(data.SelectedHeader);
+        }
 
         private static bool RenameColumnCanExecute(object o)
         {
@@ -35,12 +66,12 @@ namespace SP.Shell.Commands
         {
             var data = (RecordsCollection)o;
             var window = new EditStringWindow
-                             {
-                                 DataContext =
+            {
+                DataContext =
                                      new EditStringViewModel(
                                      s => data.RenameHeader(data.SelectedHeader, s),
                                      data.Headers[data.SelectedHeader])
-                             };
+            };
 
             GetMessenger().Send(new OpenChildWindowMessage(window));
         }

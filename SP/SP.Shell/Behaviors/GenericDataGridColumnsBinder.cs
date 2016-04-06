@@ -4,11 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 using SP.Shell.Models;
-using SP.Shell.ViewModel;
 
 namespace SP.Shell.Behaviors
 {
@@ -41,23 +39,22 @@ namespace SP.Shell.Behaviors
                 data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
                 dataGrid.CellEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
                 dataGrid.RowEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
-                dataGrid.SelectedCellsChanged += (sender, args) =>
-                    {
-                        if (!args.AddedCells.Any())
-                        {
-                            data.SelectedRow = -1;
-                            data.SelectedHeader = -1;
-                            Debug.WriteLine("Selection:" + data.SelectedRow + ", " + data.SelectedHeader);
-
-                            return;
-                        }
-
-                        data.SelectedRow = data.Records.IndexOf((ObservableCollection<string>)args.AddedCells[0].Item);
-                        data.SelectedHeader = args.AddedCells[0].Column.DisplayIndex;
-
-                        Debug.WriteLine("Selection:" + data.SelectedRow + ", " + data.SelectedHeader);
-                    };
+                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, data);
             }
+        }
+
+        private static void DataGridSelectionChanged(SelectedCellsChangedEventArgs args, RecordsCollection data)
+        {
+            if (!args.AddedCells.Any())
+            {
+                data.SelectedRow = -1;
+                data.SelectedHeader = -1;
+
+                return;
+            }
+
+            data.SelectedRow = data.Records.IndexOf((ObservableCollection<string>)args.AddedCells[0].Item);
+            data.SelectedHeader = args.AddedCells[0].Column.DisplayIndex;
         }
 
         private static void HandleHeadersCollectionChange(NotifyCollectionChangedEventArgs e, DataGrid dataGrid)
@@ -65,13 +62,14 @@ namespace SP.Shell.Behaviors
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    var style = dataGrid.FindResource("MaterialDesignDataGridColumnHeader") as Style;
                     var indexer = e.NewStartingIndex;
                     foreach (var t in e.NewItems)
                     {
-                        dataGrid.Columns.Add(CreateDataGridColumn(t.ToString(), indexer, style));
+                        dataGrid.Columns.Insert(indexer, CreateDataGridColumn(t.ToString(), indexer));
                         ++indexer;
                     }
+
+                    UpdateBindings(dataGrid);
 
                     break;
                 case NotifyCollectionChangedAction.Remove:
@@ -84,6 +82,15 @@ namespace SP.Shell.Behaviors
             }
         }
 
+        private static void UpdateBindings(DataGrid dataGrid)
+        {
+            var index = 0;
+            foreach (var column in dataGrid.Columns.Cast<DataGridTextColumn>())
+            {
+                column.Binding = CreateBinding(index++);
+            }
+        }
+
         private static void BindData(DataGrid dataGrid, RecordsCollection data)
         {
             dataGrid.Columns.Clear();
@@ -92,45 +99,47 @@ namespace SP.Shell.Behaviors
                 return;
             }
 
+            BindRows(dataGrid);
+            BindHeaders(dataGrid, data);
+        }
+
+        private static void BindRows(DataGrid dataGrid)
+        {
             dataGrid.SetBinding(
                 ItemsControl.ItemsSourceProperty,
                 new Binding("Records.Records")
                 {
                     UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
                 });
-
-            BindHeaders(dataGrid, data);
         }
 
         private static void BindHeaders(DataGrid dataGrid, RecordsCollection data)
         {
-            var style = dataGrid.FindResource("MaterialDesignDataGridColumnHeader") as Style;
             var indexer = 0;
 
             foreach (var column in data.Headers)
             {
-                dataGrid.Columns.Add(CreateDataGridColumn(column, indexer, style));
+                dataGrid.Columns.Add(CreateDataGridColumn(column, indexer));
                 ++indexer;
             }
         }
 
-        private static DataGridColumn CreateDataGridColumn(string column, int index, Style baseStyle)
+        private static DataGridTextColumn CreateDataGridColumn(string column, int index)
         {
-            var element = new DataGridTextColumn
+            return new DataGridTextColumn
             {
                 Header = column,
-                Binding = new Binding("[" + index + "]")
-                {
-                    UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
-                },
+                Binding = CreateBinding(index),
                 IsReadOnly = false
             };
-            
-            //var style = new Style(typeof(DataGridColumnHeader), baseStyle);
-            //style.Setters.Add(new Setter(ToolTipService.ToolTipProperty, column));
-            //element.HeaderStyle = style;
+        }
 
-            return element;
+        private static BindingBase CreateBinding(int index)
+        {
+            return new Binding("[" + index + "]")
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.LostFocus
+            };
         }
     }
 }

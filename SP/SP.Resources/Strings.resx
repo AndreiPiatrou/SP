@@ -159,6 +159,12 @@
   <data name="FileFIlter" xml:space="preserve">
     <value>csv,Excel|*.csv;*.xls;*.xlsx|Все|*.*</value>
   </data>
+  <data name="InsertColumn" xml:space="preserve">
+    <value>Вставить колонку</value>
+  </data>
+  <data name="InsertRow" xml:space="preserve">
+    <value>Вставить строку</value>
+  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Статистический пакет PSPP</value>
   </data>
