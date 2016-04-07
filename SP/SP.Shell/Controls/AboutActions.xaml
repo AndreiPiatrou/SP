@@ -23,6 +23,12 @@
                     <TextBlock Text="{x:Static resources:Strings.AboutProgramm}"/>
                 </StackPanel>
             </Button>
+            <Button Command="{x:Static commands:WindowCommands.GoToProjectSiteCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Web" Margin="0,0,5,0"/>
+                    <TextBlock Text="{x:Static resources:Strings.GoToProjectSite}"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

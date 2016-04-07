@@ -159,6 +159,9 @@
   <data name="FileFIlter" xml:space="preserve">
     <value>csv,Excel|*.csv;*.xls;*.xlsx|Все|*.*</value>
   </data>
+  <data name="GoToProjectSite" xml:space="preserve">
+    <value>Сайт Проекта</value>
+  </data>
   <data name="InsertColumn" xml:space="preserve">
     <value>Вставить колонку</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Открыть файл</value>
+  </data>
+  <data name="ProjectSite" xml:space="preserve">
+    <value>https://github.com/AndreyPetrov1991/SP</value>
   </data>
   <data name="RemoveColumn" xml:space="preserve">
     <value>Удалить колонку</value>

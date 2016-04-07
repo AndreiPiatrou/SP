@@ -187,6 +187,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сайт Проекта.
+        /// </summary>
+        public static string GoToProjectSite {
+            get {
+                return ResourceManager.GetString("GoToProjectSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вставить колонку.
         /// </summary>
         public static string InsertColumn {
@@ -255,6 +264,15 @@ namespace SP.Resources {
         public static string OpenFile {
             get {
                 return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/AndreyPetrov1991/SP.
+        /// </summary>
+        public static string ProjectSite {
+            get {
+                return ResourceManager.GetString("ProjectSite", resourceCulture);
             }
         }
         
