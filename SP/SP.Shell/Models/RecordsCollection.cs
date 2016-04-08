@@ -97,6 +97,7 @@ namespace SP.Shell.Models
             }
 
             Records.RemoveAt(index);
+            UpdateRowsAndHeaders();
         }
 
         public void RemoveColumn(int index)
@@ -107,6 +108,7 @@ namespace SP.Shell.Models
             }
 
             Headers.RemoveAt(index);
+            UpdateRowsAndHeaders();
         }
 
         public void Apply(IList<string> filtered)
@@ -115,6 +117,8 @@ namespace SP.Shell.Models
             {
                 Records.Remove(source);
             }
+
+            UpdateRowsAndHeaders();
         }
 
         public void Apply(double min, double max)
@@ -123,6 +127,8 @@ namespace SP.Shell.Models
             {
                 Records.Remove(source);
             }
+
+            UpdateRowsAndHeaders();
         }
 
         public void RenameHeader(int index, string value)

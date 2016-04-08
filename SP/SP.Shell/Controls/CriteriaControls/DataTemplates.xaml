@@ -27,26 +27,30 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ConcreteCriteriaControl" DataType="viewModel:CriteriaRangeViewModel">
-        <Grid>
-            <Expander IsExpanded="False" 
+        <Expander IsExpanded="False" 
                       Margin="5"
-                      Header="{Binding SelectedValues}" 
-                      MinWidth="400"
                       VerticalAlignment="Center">
-                <ListBox ItemsSource="{Binding Values}">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Value}" IsChecked="{Binding Selected, Mode=TwoWay}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Expander>
-        </Grid>
+            <Expander.Header>
+                <TextBlock Text="{Binding SelectedValues}" MinWidth="400"/>
+            </Expander.Header>
+            <ItemsControl ItemsSource="{Binding Values}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <ToggleButton Content="{Binding Value}" 
+                                      IsChecked="{Binding Selected, Mode=TwoWay}"
+                                      Margin="2, 2, 5, 2" />
+                            <TextBlock Text="{Binding Value}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Expander>
     </DataTemplate>
 
     <criteriaControls:BooleanToValueConverter x:Key="TypeToCriteriaRangeTemplate" 

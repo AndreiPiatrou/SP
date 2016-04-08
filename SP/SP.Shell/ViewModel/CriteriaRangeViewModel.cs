@@ -29,7 +29,7 @@ namespace SP.Shell.ViewModel
                         forceHide = true;
                         RaisePropertyChanged(() => IsVisible);
                     });
-            ApplyCommand = new RelayCommand(ApplyCommandExecute);
+            ApplyCommand = new RelayCommand(ApplyCommandExecute, ApplyCommandCanExecute);
 
             MessengerInstance.Register<DataGridSelectionChangedMessage>(this, SelectionChanged);
         }
@@ -66,7 +66,7 @@ namespace SP.Shell.ViewModel
 
         public ICommand HideCommand { get; private set; }
 
-        public ICommand ApplyCommand { get; private set; }
+        public RelayCommand ApplyCommand { get; private set; }
 
         public double Frequency
         {
@@ -77,8 +77,9 @@ namespace SP.Shell.ViewModel
         {
             get
             {
-                var r = string.Join(", ", Values.Where(v => v.Selected).Select(v => v.Value));
-                return r;
+                return Values == null
+                           ? string.Empty
+                           : string.Join(", ", Values.Where(v => v.Selected).Select(v => v.Value));
             }
         }
 
@@ -120,10 +121,18 @@ namespace SP.Shell.ViewModel
                 Values =
                     SelectedCriteria.Distinct()
                         .Where(v => !string.IsNullOrEmpty(v))
-                        .Select(v => new SelectableValue(v, true, () => RaisePropertyChanged(() => SelectedValues)))
-                        .ToList();
+                        .Select(
+                            v => new SelectableValue(
+                                     v,
+                                     true,
+                                     () =>
+                                         {
+                                             RaisePropertyChanged(() => SelectedValues);
+                                             ApplyCommand.RaiseCanExecuteChanged();
+                                         })).ToList();
 
                 RaisePropertyChanged(() => Values);
+                RaisePropertyChanged(() => SelectedValues);
             }
         }
 
@@ -139,6 +148,11 @@ namespace SP.Shell.ViewModel
             }
 
             SelectionChanged(new DataGridSelectionChangedMessage(selectedCollection));
+        }
+
+        private bool ApplyCommandCanExecute()
+        {
+            return IsNumericRangeSelected || !string.IsNullOrEmpty(SelectedValues);
         }
     }
 }
