@@ -1,15 +1,34 @@
-﻿namespace SP.Shell.Models
+﻿using System;
+
+namespace SP.Shell.Models
 {
     public class SelectableValue
     {
-        public SelectableValue(string value, bool selected)
+        private readonly Action onChange;
+
+        private bool selected;
+
+        public SelectableValue(string value, bool selected, Action onChange)
         {
+            this.onChange = onChange;
+            this.selected = selected;
             Value = value;
-            Selected = selected;
         }
 
         public string Value { get; private set; }
 
-        public bool Selected { get; set; }
+        public bool Selected
+        {
+            get
+            {
+                return selected;
+            }
+
+            set
+            {
+                selected = value;
+                onChange();
+            }
+        }
     }
 }

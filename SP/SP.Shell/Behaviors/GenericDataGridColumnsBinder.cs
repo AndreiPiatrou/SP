@@ -41,9 +41,9 @@ namespace SP.Shell.Behaviors
             if (data != null)
             {
                 data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
-                dataGrid.CellEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
-                dataGrid.RowEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
-                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, data);
+                dataGrid.CellEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+                dataGrid.RowEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, GetDataSource(sender as UIElement));
             }
         }
 

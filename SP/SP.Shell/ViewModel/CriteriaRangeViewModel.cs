@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -74,6 +73,15 @@ namespace SP.Shell.ViewModel
             get { return (Max - Min) / 20; }
         }
 
+        public string SelectedValues
+        {
+            get
+            {
+                var r = string.Join(", ", Values.Where(v => v.Selected).Select(v => v.Value));
+                return r;
+            }
+        }
+
         private void SelectionChanged(DataGridSelectionChangedMessage message)
         {
             selectedCollection = message.Records;
@@ -109,7 +117,11 @@ namespace SP.Shell.ViewModel
             }
             else
             {
-                Values = SelectedCriteria.Select(v => new SelectableValue(v, true));
+                Values =
+                    SelectedCriteria.Distinct()
+                        .Where(v => !string.IsNullOrEmpty(v))
+                        .Select(v => new SelectableValue(v, true, () => RaisePropertyChanged(() => SelectedValues)))
+                        .ToList();
 
                 RaisePropertyChanged(() => Values);
             }

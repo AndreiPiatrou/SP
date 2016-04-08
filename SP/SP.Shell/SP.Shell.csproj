@@ -154,6 +154,7 @@
     <Compile Include="Controls\ContextActions.xaml.cs">
       <DependentUpon>ContextActions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CriteriaControls\BooleanToValueConverter.cs" />
     <Compile Include="Controls\CriteriaControls\CriteriaRange.xaml.cs">
       <DependentUpon>CriteriaRange.xaml</DependentUpon>
     </Compile>
