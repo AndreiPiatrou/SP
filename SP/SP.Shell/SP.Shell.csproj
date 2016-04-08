@@ -173,6 +173,7 @@
     <Compile Include="Messages\ShowPopupMessage.cs" />
     <Compile Include="Models\CheckableHeaderModel.cs" />
     <Compile Include="Models\RecordsCollection.cs" />
+    <Compile Include="Models\SelectableValue.cs" />
     <Compile Include="Services\AnalysisService.cs" />
     <Compile Include="Services\DataWriteService.cs" />
     <Compile Include="Services\FileReadService\CsvReadService.cs" />
@@ -216,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CriteriaControls\CriteriaRange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CriteriaControls\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

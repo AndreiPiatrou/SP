@@ -109,6 +109,22 @@ namespace SP.Shell.Models
             Headers.RemoveAt(index);
         }
 
+        public void Apply(IList<string> filtered)
+        {
+            foreach (var source in Records.Where(record => !filtered.Contains(record[SelectedHeader])).ToList())
+            {
+                Records.Remove(source);
+            }
+        }
+
+        public void Apply(double min, double max)
+        {
+            foreach (var source in Records.Where(record => !record[SelectedHeader].IsNumberAndInRange(min, max)).ToList())
+            {
+                Records.Remove(source);
+            }
+        }
+
         public void RenameHeader(int index, string value)
         {
             Headers[index] = value;

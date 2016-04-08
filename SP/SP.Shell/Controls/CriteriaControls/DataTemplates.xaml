@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModel="clr-namespace:SP.Shell.ViewModel"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+    <DataTemplate x:Key="RangeCriteriaControl" DataType="viewModel:CriteriaRangeViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition  Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Min}" Margin="10,0,5,0" VerticalAlignment="Center"/>
+            <controls:RangeSlider Grid.Column="1"
+                                  AutoToolTipPlacement="TopLeft" 
+                                  Minimum="{Binding Min}" 
+                                  Maximum="{Binding Max}"
+                                  LowerValue="{Binding SelectedMin}"
+                                  UpperValue="{Binding SelectedMax}"
+                                  TickPlacement="BottomRight"
+                                  Margin="0,3,0,0"
+                                  TickFrequency="{Binding Frequency}"/>
+            <TextBlock Grid.Column="2" Text="{Binding Max}" Margin="5,0,10,0" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ConcreteCriteriaControl" DataType="viewModel:CriteriaRangeViewModel">
+        <TextBlock>TODO</TextBlock>
+    </DataTemplate>
+</ResourceDictionary>

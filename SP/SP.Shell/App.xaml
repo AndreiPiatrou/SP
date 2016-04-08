@@ -30,6 +30,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
 
                 <ResourceDictionary Source="Templates/DataTemplates.xaml"/>
+                <ResourceDictionary Source="Controls/CriteriaControls/DataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- MahApps Brushes -->
             <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}" />

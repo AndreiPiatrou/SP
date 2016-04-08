@@ -94,7 +94,7 @@
                                IsActive="False"/>
         <criteriaControls:CriteriaRange x:Name="CriteriaRangeControl"
                                         VerticalAlignment="Bottom" 
-                                        Width="500" 
+                                        Width="600" 
                                         Margin="0,0,0,20" 
                                         HorizontalAlignment="Center" 
                                         Grid.ColumnSpan="5" 
