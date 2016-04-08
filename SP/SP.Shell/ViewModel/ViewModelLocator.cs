@@ -27,6 +27,7 @@ namespace SP.Shell.ViewModel
 
             // View models
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CriteriaRangeViewModel>();
 
             // Listeners
             SimpleIoc.Default.Register<SaveToFileCommandListener>(true);
@@ -40,7 +41,15 @@ namespace SP.Shell.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public CriteriaRangeViewModel CriteriaRange
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CriteriaRangeViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             SimpleIoc.Default.GetInstance<WorkingDirectory>().Dispose();
