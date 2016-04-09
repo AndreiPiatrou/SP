@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Constants;
@@ -16,6 +17,11 @@ namespace SP.PSPP.Integration.Commands.Implementations
 
         protected override string GetCommandScript(InputData inputData, MeanChanceConfiguration configuration)
         {
+            if (!configuration.HasGroups)
+            {
+                return string.Format(CommandConstants.MeanChanceCommonFormat, configuration.TargetVariable.Name);
+            }
+
             var groups = configuration.GetGroups(inputData.Rows);
             var builder = new StringBuilder();
 

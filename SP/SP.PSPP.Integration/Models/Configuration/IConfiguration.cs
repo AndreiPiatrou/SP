@@ -10,6 +10,8 @@ namespace SP.PSPP.Integration.Models.Configuration
 
         IEnumerable<VariableDescription> AllVariables { get; }
 
+        bool HasGroups { get; }
+
         IEnumerable<string> GetAllHeaders();
 
         IEnumerable<GroupDescription> GetGroups(IEnumerable<IEnumerable<string>> rows);

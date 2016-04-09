@@ -1,4 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using System.Collections.Generic;
+
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -26,7 +29,8 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                     {
                         AnalyzeDataExecute();
                         CloseRequested = true;
-                    });
+                    },
+                AnalyzeDataCanExecute);
         }
 
         public bool CloseRequested
@@ -48,7 +52,17 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
         public string Title { get; private set; }
 
         public RelayCommand AnalyzeCommand { get; private set; }
+        
+        protected IEnumerable<CheckableHeaderModel> ExtractHeaders()
+        {
+            for (var i = 0; i < Records.Headers.Count - 1; i++)
+            {
+                yield return new CheckableHeaderModel(Records.Headers[i], i, AnalyzeCommand.RaiseCanExecuteChanged);
+            }
+        }
 
         protected abstract void AnalyzeDataExecute();
+
+        protected abstract bool AnalyzeDataCanExecute();
     }
 }

@@ -7,7 +7,7 @@ namespace SP.PSPP.Integration.Models.Configuration
 {
     public abstract class ConfigurationBase : IConfiguration
     {
-        private EnumerableComparer comparer;
+        private readonly EnumerableComparer comparer;
 
         protected ConfigurationBase(IEnumerable<VariableDescription> groupVariables, VariableDescription targetVariable)
         {
@@ -24,6 +24,11 @@ namespace SP.PSPP.Integration.Models.Configuration
         public virtual IEnumerable<VariableDescription> AllVariables
         {
             get { return GroupVariables.Concat(Enumerable.Repeat(TargetVariable, 1)).OrderBy(v => v.Index); }
+        }
+
+        public bool HasGroups
+        {
+            get { return GroupVariables.Any(); }
         }
 
         public virtual int TargetIndex

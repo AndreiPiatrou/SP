@@ -30,12 +30,9 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             MessengerInstance.Send(new AnalyzeDataMessage(ExtractInputData(), SelectedType));
         }
 
-        private IEnumerable<CheckableHeaderModel> ExtractHeaders()
+        protected override bool AnalyzeDataCanExecute()
         {
-            for (var i = 0; i < Records.Headers.Count - 1; i++)
-            {
-                yield return new CheckableHeaderModel(Records.Headers[i], i);
-            }
+            return Criteria.Any(c => c.IsChecked);
         }
 
         private InputData ExtractInputData()

@@ -33,6 +33,12 @@
                                                           /VARIABLES={2}
                                                           /STATISTICS=MEAN.";
 
+        public const string MeanChanceCommonFormat = @"FREQUENCIES
+                                                               /VARIABLES={0}
+                                                               /FORMAT=AVALUE TABLE
+                                                               /STATISTICS=MEAN STDDEV.
+                                                       FILTER OFF.";
+
         public const string MeanChanceFilterFormat = @"COMPUTE groupVar = {0}.
                                                        EXECUTE.
                                                        FILTER BY groupVar.
