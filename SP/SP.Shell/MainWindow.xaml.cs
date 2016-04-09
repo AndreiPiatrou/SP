@@ -11,6 +11,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 
 using SP.Resources;
+using SP.Shell.Commands;
 using SP.Shell.Controls;
 using SP.Shell.Messages;
 

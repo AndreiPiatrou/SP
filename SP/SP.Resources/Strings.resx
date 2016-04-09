@@ -207,6 +207,12 @@
   <data name="SelectAnalysisType" xml:space="preserve">
     <value>Выберите вид анализа</value>
   </data>
+  <data name="SelectCriteria" xml:space="preserve">
+    <value>Выберите критерий</value>
+  </data>
+  <data name="SelectGroupParameters" xml:space="preserve">
+    <value>Выберите группу</value>
+  </data>
   <data name="SelectVariables" xml:space="preserve">
     <value>Выберите переменные</value>
   </data>

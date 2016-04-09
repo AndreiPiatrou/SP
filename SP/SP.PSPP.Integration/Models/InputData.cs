@@ -6,8 +6,14 @@ namespace SP.PSPP.Integration.Models
 {
     public class InputData
     {
-        public IEnumerable<IEnumerable<string>> Rows { get; set; } 
+        public InputData(IEnumerable<IEnumerable<string>> rows, IConfiguration configuration)
+        {
+            Rows = rows;
+            Configuration = configuration;
+        }
 
-        public IConfiguration Configuration { get; set; }
+        public IEnumerable<IEnumerable<string>> Rows { get; private set; } 
+
+        public IConfiguration Configuration { get; private set; }
     }
 }

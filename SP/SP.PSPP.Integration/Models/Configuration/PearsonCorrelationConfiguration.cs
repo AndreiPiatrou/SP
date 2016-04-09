@@ -2,16 +2,13 @@
 
 namespace SP.PSPP.Integration.Models.Configuration
 {
-    public class PearsonCorrelationConfiguration : IConfiguration
+    public class PearsonCorrelationConfiguration : ConfigurationBase
     {
-        public IEnumerable<string> Variables { get; set; }
-
-        public IEnumerable<string> Headers
+        public PearsonCorrelationConfiguration(
+            IEnumerable<VariableDescription> groupVariables,
+            VariableDescription targetVariable)
+            : base(groupVariables, targetVariable)
         {
-            get
-            {
-                return Variables;
-            }
         }
     }
 }

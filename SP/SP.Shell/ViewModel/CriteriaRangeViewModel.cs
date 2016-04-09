@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -20,11 +19,8 @@ namespace SP.Shell.ViewModel
         private RecordsCollection selectedCollection;
 
         private bool forceHide;
-
         private bool hasChanges;
-
         private double selectedMin;
-
         private double selectedMax;
 
         public CriteriaRangeViewModel()

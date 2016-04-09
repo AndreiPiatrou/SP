@@ -331,6 +331,24 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите критерий.
+        /// </summary>
+        public static string SelectCriteria {
+            get {
+                return ResourceManager.GetString("SelectCriteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите группу.
+        /// </summary>
+        public static string SelectGroupParameters {
+            get {
+                return ResourceManager.GetString("SelectGroupParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите переменные.
         /// </summary>
         public static string SelectVariables {

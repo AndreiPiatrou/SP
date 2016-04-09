@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -36,6 +37,16 @@ namespace SP.Extensions
         public static IEnumerable<T> SkipLast<T>(this IEnumerable<T> list)
         {
             return list.Reverse().Skip(1).Reverse();
-        } 
+        }
+
+        public static bool IsNumberOrEmptyString(this IEnumerable<string> list)
+        {
+            return list.All(i => i.IsNumberOrEmpty());
+        }
+
+        public static string JoinByNewLine<T>(this IEnumerable<T> list, Func<T, string> toStringAction)
+        {
+            return string.Join(Environment.NewLine, list.Select(toStringAction));
+        }
     }
 }

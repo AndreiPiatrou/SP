@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 
 using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Constants;
@@ -14,13 +14,23 @@ namespace SP.PSPP.Integration.Commands.Implementations
         {
         }
 
-        protected override string GetScript(InputData inputData, MeanChanceConfiguration configuration, string inputFilePath)
+        protected override string GetCommandScript(InputData inputData, MeanChanceConfiguration configuration)
         {
-            return string.Format(
-                CommandConstants.MeanChanceFormat,
-                inputFilePath,
-                string.Join(" F4" + Environment.NewLine, configuration.Variables),
-                string.Join(Environment.NewLine, configuration.Variables));
+            var groups = configuration.GetGroups(inputData.Rows);
+            var builder = new StringBuilder();
+
+            foreach (var group in groups)
+            {
+                builder.AppendFormat(
+                    CommandConstants.MeanChanceFilterFormat,
+                    group.ScriptComparison,
+                    group.Labels,
+                    group.TargetVariableName);
+
+                builder.AppendLine();
+            }
+
+            return builder.ToString();
         }
     }
 }

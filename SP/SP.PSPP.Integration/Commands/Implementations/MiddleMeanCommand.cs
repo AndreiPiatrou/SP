@@ -1,7 +1,6 @@
 ﻿using System;
 
 using SP.FIleSystem.Directory;
-using SP.PSPP.Integration.Constants;
 using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Models.Configuration;
 
@@ -14,13 +13,9 @@ namespace SP.PSPP.Integration.Commands.Implementations
         {
         }
 
-        protected override string GetScript(InputData inputData, MiddleMeanConfiguration configuration, string inputFilePath)
+        protected override string GetCommandScript(InputData inputData, MiddleMeanConfiguration configuration)
         {
-            return string.Format(
-                CommandConstants.MiddleMeanFormat,
-                inputFilePath,
-                string.Join(" F4" + Environment.NewLine, configuration.Variables),
-                string.Join(Environment.NewLine, configuration.Variables));
+            throw new NotImplementedException();
         }
     }
 }

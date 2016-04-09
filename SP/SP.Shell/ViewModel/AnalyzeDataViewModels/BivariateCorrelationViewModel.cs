@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -37,17 +38,18 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
         private InputData ExtractInputData()
         {
-            var checkedHeaders = Headers.Where(h => h.IsChecked).ToList();
-            var indexes = checkedHeaders.Select(h => h.Index);
+            throw new NotImplementedException();
+            //var checkedHeaders = Headers.Where(h => h.IsChecked).ToList();
+            //var indexes = checkedHeaders.Select(h => h.Index);
 
-            return new InputData
-            {
-                Configuration = new PearsonCorrelationConfiguration
-                {
-                    Variables = checkedHeaders.Select(h => h.Header)
-                },
-                Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
-            };
+            //return new InputData
+            //{
+            //    Configuration = new PearsonCorrelationConfiguration
+            //    {
+            //        GroupVariables = checkedHeaders.Select(h => h.Header)
+            //    },
+            //    Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
+            //};
         }
     }
 }

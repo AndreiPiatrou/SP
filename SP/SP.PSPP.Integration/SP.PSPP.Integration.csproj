@@ -44,15 +44,19 @@
     <Compile Include="Commands\AnalyzeCommandFactory.cs" />
     <Compile Include="Commands\AnalyzeType.cs" />
     <Compile Include="Commands\IAnalyzeCommand.cs" />
-    <Compile Include="Commands\Implementations\AnalyzeCommandBase.cs" />
+    <Compile Include="Commands\AnalyzeCommandBase.cs" />
     <Compile Include="Commands\Implementations\PearsonCorrelationCommand.cs" />
     <Compile Include="Commands\Implementations\MeanChanceCommand.cs" />
     <Compile Include="Commands\Implementations\MiddleMeanCommand.cs" />
     <Compile Include="Constants\CommandConstants.cs" />
+    <Compile Include="Extensions\VariableDescriptionExtensions.cs" />
+    <Compile Include="Models\Configuration\ConfigurationBase.cs" />
+    <Compile Include="Models\Configuration\GroupDescription.cs" />
     <Compile Include="Models\Configuration\PearsonCorrelationConfiguration.cs" />
     <Compile Include="Models\Configuration\IConfiguration.cs" />
     <Compile Include="Models\Configuration\MeanChanceConfiguration.cs" />
     <Compile Include="Models\Configuration\MiddleMeanConfiguration.cs" />
+    <Compile Include="Models\Configuration\VariableDescription.cs" />
     <Compile Include="Models\InputData.cs" />
     <Compile Include="Models\OutputData.cs" />
     <Compile Include="Services\InputDataWriter.cs" />
@@ -62,6 +66,10 @@
     <Compile Include="StatisticProcessExecutionResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SP.Extensions\SP.Extensions.csproj">
+      <Project>{5f68cc30-6bd2-4469-bc89-302b63e2709f}</Project>
+      <Name>SP.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SP.FIleSystem\SP.FIleSystem.csproj">
       <Project>{197d6be7-fe9a-4175-80be-176081065b1c}</Project>
       <Name>SP.FIleSystem</Name>
