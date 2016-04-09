@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -19,6 +20,12 @@ namespace SP.Shell.ViewModel
         private RecordsCollection selectedCollection;
 
         private bool forceHide;
+
+        private bool hasChanges;
+
+        private double selectedMin;
+
+        private double selectedMax;
 
         public CriteriaRangeViewModel()
         {
@@ -58,9 +65,33 @@ namespace SP.Shell.ViewModel
 
         public double Max { get; set; }
 
-        public double SelectedMin { get; set; }
+        public double SelectedMin
+        {
+            get
+            {
+                return selectedMin;
+            }
 
-        public double SelectedMax { get; set; }
+            set
+            {
+                selectedMin = value;
+                hasChanges = true;
+            }
+        }
+
+        public double SelectedMax
+        {
+            get
+            {
+                return selectedMax;
+            }
+
+            set
+            {
+                selectedMax = value;
+                hasChanges = true;
+            }
+        }
 
         public IEnumerable<SelectableValue> Values { get; private set; }
 
@@ -70,7 +101,7 @@ namespace SP.Shell.ViewModel
 
         public double Frequency
         {
-            get { return (Max - Min) / 20; }
+            get { return (Max - Min) / 20d; }
         }
 
         public string SelectedValues
@@ -87,53 +118,68 @@ namespace SP.Shell.ViewModel
         {
             selectedCollection = message.Records;
             forceHide = false;
+            hasChanges = false;
 
             RaisePropertyChanged(() => IsVisible);
             RaisePropertyChanged(() => IsNumericRangeSelected);
 
             if (IsNumericRangeSelected)
             {
-                var numbers = SelectedCriteria.Where(v => v.IsNumber()).Select(v => v.ToNumber()).ToList();
-
-                if (!numbers.Any())
-                {
-                    Min = 0;
-                    Max = 0;
-                    SelectedMin = 0;
-                    SelectedMax = 0;
-                }
-                else
-                {
-                    Min = numbers.Min();
-                    Max = numbers.Max();
-
-                    SelectedMin = Min;
-                    SelectedMax = Max;
-                }
-
-                RaisePropertyChanged(() => Min);
-                RaisePropertyChanged(() => Max);
-                RaisePropertyChanged(() => SelectedMin);
-                RaisePropertyChanged(() => SelectedMax);
+                UpdateNumericProperties();
             }
             else
             {
-                Values =
-                    SelectedCriteria.Distinct()
-                        .Where(v => !string.IsNullOrEmpty(v))
-                        .Select(
-                            v => new SelectableValue(
-                                     v,
-                                     true,
-                                     () =>
-                                         {
-                                             RaisePropertyChanged(() => SelectedValues);
-                                             ApplyCommand.RaiseCanExecuteChanged();
-                                         })).ToList();
-
-                RaisePropertyChanged(() => Values);
-                RaisePropertyChanged(() => SelectedValues);
+                UpdateConcreteProperties();
             }
+
+            ApplyCommand.RaiseCanExecuteChanged();
+        }
+
+        private void UpdateNumericProperties()
+        {
+            var numbers = SelectedCriteria.Where(v => v.IsNumber()).Select(v => v.ToNumber()).ToList();
+
+            if (!numbers.Any())
+            {
+                Min = 0;
+                Max = 0;
+                selectedMin = 0;
+                selectedMax = 0;
+            }
+            else
+            {
+                Min = numbers.Min();
+                Max = numbers.Max();
+
+                selectedMin = Min;
+                selectedMax = Max;
+            }
+
+            RaisePropertyChanged(() => Min);
+            RaisePropertyChanged(() => Max);
+            RaisePropertyChanged(() => SelectedMin);
+            RaisePropertyChanged(() => SelectedMax);
+            RaisePropertyChanged(() => Frequency);
+        }
+
+        private void UpdateConcreteProperties()
+        {
+            Values =
+                SelectedCriteria.Distinct()
+                    .Where(v => !string.IsNullOrEmpty(v))
+                    .Select(v => new SelectableValue(v, true, SelectedOnChange))
+                    .ToList();
+
+            RaisePropertyChanged(() => Values);
+            RaisePropertyChanged(() => SelectedValues);
+        }
+
+        private void SelectedOnChange()
+        {
+            hasChanges = true;
+
+            RaisePropertyChanged(() => SelectedValues);
+            ApplyCommand.RaiseCanExecuteChanged();
         }
 
         private void ApplyCommandExecute()
@@ -152,7 +198,7 @@ namespace SP.Shell.ViewModel
 
         private bool ApplyCommandCanExecute()
         {
-            return IsNumericRangeSelected || !string.IsNullOrEmpty(SelectedValues);
+            return hasChanges && (IsNumericRangeSelected || !string.IsNullOrEmpty(SelectedValues));
         }
     }
 }

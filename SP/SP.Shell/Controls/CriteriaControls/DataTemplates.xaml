@@ -14,14 +14,17 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Min}" Margin="10,0,5,0" VerticalAlignment="Center"/>
             <controls:RangeSlider Grid.Column="1"
-                                  AutoToolTipPlacement="TopLeft" 
+                                  AutoToolTipPlacement="TopLeft"
+                                  AutoToolTipPrecision="2"
                                   Minimum="{Binding Min}" 
                                   Maximum="{Binding Max}"
                                   LowerValue="{Binding SelectedMin}"
                                   UpperValue="{Binding SelectedMax}"
                                   TickPlacement="BottomRight"
                                   Margin="0,3,0,0"
-                                  TickFrequency="{Binding Frequency}"/>
+                                  TickFrequency="{Binding Frequency}"
+                                  MinRange="0"
+                                  MinRangeWidth="0"/>
             <TextBlock Grid.Column="2" Text="{Binding Max}" Margin="5,0,10,0" VerticalAlignment="Center"/>
         </Grid>
     </DataTemplate>
