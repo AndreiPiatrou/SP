@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using SP.Extensions;
@@ -13,7 +11,7 @@ using SP.PSPP.Integration.Services;
 
 namespace SP.PSPP.Integration.Commands
 {
-    public abstract class AnalyzeCommandBase<T> : IAnalyzeCommand
+    public abstract class AnalyzeCommandBase<T> : IAnalyzeCommand where T : IConfiguration
     {
         protected const string DefaultArgumentsFormat = " \"{0}\" -o \"{1}\"";
         protected readonly WorkingDirectory Directory;
@@ -40,7 +38,24 @@ namespace SP.PSPP.Integration.Commands
             return ReadOutputData(outputFilePath);
         }
 
-        protected abstract string GetCommandScript(InputData inputData, T configuration);
+        protected virtual string GetCommandScript(InputData inputData, T configuration)
+        {
+            if (!configuration.HasGroups)
+            {
+                return GetSimpleCommandScript(configuration);
+            }
+
+            var groups = configuration.GetGroups(inputData.Rows);
+            var builder = new StringBuilder();
+
+            foreach (var group in groups)
+            {
+                builder.Append(GetGroupCommandScript(group));
+                builder.AppendLine();
+            }
+
+            return builder.ToString();
+        }
 
         protected string CreateInputDataFile(InputData inputData)
         {
@@ -66,27 +81,10 @@ namespace SP.PSPP.Integration.Commands
         {
             return new OutputDataReader().Read(filePath);
         }
-        
-        protected IEnumerable<string> GetFilterStrings(IList<VariableDescription> descriptions, InputData data, int skipIndex)
-        {
-            var names = descriptions.Select(d => d.Name).ToList();
-            var groups = data.Rows.Select(r => r.Where((e, i) => i != skipIndex).ToList()).Distinct(new EnumerableComparer()).ToList();
 
-            return groups.Select((g, i) => GetGroupFilter(g.ToList(), names));
-        }
+        protected abstract string GetSimpleCommandScript(T configuration);
 
-        private string GetGroupFilter(IList<string> group, IList<string> names)
-        {
-            var b = new StringBuilder();
-            for (var i = 0; i < group.Count; i++)
-            {
-                var value = group[i].IsNumber() ? group[i] : "'" + group[i] + "'";
-
-                b.Append("( " + names[i] + " = " + value + " ) AND ");
-            }
-
-            return b.ToString().TrimEnd(" AND ".ToCharArray());
-        }
+        protected abstract string GetGroupCommandScript(GroupDescription @group);
 
         private string GetFullCommand(string inputFilePath, InputData inputData)
         {

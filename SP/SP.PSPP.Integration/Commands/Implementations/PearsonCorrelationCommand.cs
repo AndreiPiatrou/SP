@@ -1,7 +1,6 @@
 ﻿using System;
 
 using SP.FIleSystem.Directory;
-using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Models.Configuration;
 
 namespace SP.PSPP.Integration.Commands.Implementations
@@ -13,7 +12,12 @@ namespace SP.PSPP.Integration.Commands.Implementations
         {
         }
 
-        protected override string GetCommandScript(InputData inputData, PearsonCorrelationConfiguration configuration)
+        protected override string GetSimpleCommandScript(PearsonCorrelationConfiguration configuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetGroupCommandScript(GroupDescription @group)
         {
             throw new NotImplementedException();
         }

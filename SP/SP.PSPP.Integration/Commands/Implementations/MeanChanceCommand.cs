@@ -1,9 +1,5 @@
-﻿using System.Linq;
-using System.Text;
-
-using SP.FIleSystem.Directory;
+﻿using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Constants;
-using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Models.Configuration;
 
 namespace SP.PSPP.Integration.Commands.Implementations
@@ -15,28 +11,18 @@ namespace SP.PSPP.Integration.Commands.Implementations
         {
         }
 
-        protected override string GetCommandScript(InputData inputData, MeanChanceConfiguration configuration)
+        protected override string GetSimpleCommandScript(MeanChanceConfiguration configuration)
         {
-            if (!configuration.HasGroups)
-            {
-                return string.Format(CommandConstants.MeanChanceCommonFormat, configuration.TargetVariable.Name);
-            }
+            return string.Format(CommandConstants.MeanChanceCommonFormat, configuration.TargetVariable.Name);
+        }
 
-            var groups = configuration.GetGroups(inputData.Rows);
-            var builder = new StringBuilder();
-
-            foreach (var group in groups)
-            {
-                builder.AppendFormat(
-                    CommandConstants.MeanChanceFilterFormat,
-                    group.ScriptComparison,
-                    group.Labels,
-                    group.TargetVariableName);
-
-                builder.AppendLine();
-            }
-
-            return builder.ToString();
+        protected override string GetGroupCommandScript(GroupDescription group)
+        {
+            return string.Format(
+                CommandConstants.MeanChanceFilterFormat,
+                group.ScriptComparison,
+                group.Labels,
+                group.TargetVariableName);
         }
     }
 }
