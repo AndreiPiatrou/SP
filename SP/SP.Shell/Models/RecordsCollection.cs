@@ -82,7 +82,7 @@ namespace SP.Shell.Models
                 UpdateRowsAndHeaders();
             }
 
-            if (!Records.Last().IsEmptyStringCollection())
+            if (!Records.Any() || !Records.Last().IsEmptyStringCollection())
             {
                 Records.Add(Enumerable.Repeat(string.Empty, Headers.Count).ToObservable());
                 UpdateRowsAndHeaders();
