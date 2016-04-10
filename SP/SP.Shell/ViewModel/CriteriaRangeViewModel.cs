@@ -24,12 +24,7 @@ namespace SP.Shell.ViewModel
         public CriteriaRangeViewModel()
         {
             MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
-            HideCommand = new RelayCommand(
-                () =>
-                    {
-                        forceHide = true;
-                        RaisePropertyChanged(() => IsVisible);
-                    });
+            HideCommand = new RelayCommand(HideCommandExecute);
             ApplyCommand = new RelayCommand(ApplyCommandExecute, ApplyCommandCanExecute);
 
             MessengerInstance.Register<DataGridSelectionChangedMessage>(this, SelectionChanged);
@@ -93,6 +88,12 @@ namespace SP.Shell.ViewModel
         private bool ApplyCommandCanExecute()
         {
             return hasChanges && CurrentSelector.CanApply();
+        }
+
+        private void HideCommandExecute()
+        {
+            forceHide = true;
+            RaisePropertyChanged(() => IsVisible);
         }
 
         private ICriteriaRangeSelector GetSelector()
