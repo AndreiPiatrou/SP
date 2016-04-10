@@ -187,6 +187,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сайт Проекта.
+        /// </summary>
+        public static string GoToProjectSite {
+            get {
+                return ResourceManager.GetString("GoToProjectSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вставить колонку.
         /// </summary>
         public static string InsertColumn {
@@ -259,6 +268,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/AndreyPetrov1991/SP.
+        /// </summary>
+        public static string ProjectSite {
+            get {
+                return ResourceManager.GetString("ProjectSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удалить колонку.
         /// </summary>
         public static string RemoveColumn {
@@ -309,6 +327,24 @@ namespace SP.Resources {
         public static string SelectAnalysisType {
             get {
                 return ResourceManager.GetString("SelectAnalysisType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите критерий.
+        /// </summary>
+        public static string SelectCriteria {
+            get {
+                return ResourceManager.GetString("SelectCriteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите группу.
+        /// </summary>
+        public static string SelectGroupParameters {
+            get {
+                return ResourceManager.GetString("SelectGroupParameters", resourceCulture);
             }
         }
         

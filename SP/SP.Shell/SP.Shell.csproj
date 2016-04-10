@@ -154,6 +154,10 @@
     <Compile Include="Controls\ContextActions.xaml.cs">
       <DependentUpon>ContextActions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CriteriaControls\BooleanToValueConverter.cs" />
+    <Compile Include="Controls\CriteriaControls\CriteriaRange.xaml.cs">
+      <DependentUpon>CriteriaRange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FileActions.xaml.cs">
       <DependentUpon>FileActions.xaml</DependentUpon>
     </Compile>
@@ -161,6 +165,7 @@
     <Compile Include="Factories\AnalyzeDataViewModelFactory.cs" />
     <Compile Include="Messages\AnalyzeDataMessage.cs" />
     <Compile Include="Messages\AskForFilePathMessage.cs" />
+    <Compile Include="Messages\DataGridSelectionChangedMessage.cs" />
     <Compile Include="Messages\LoaderMessage.cs" />
     <Compile Include="Messages\OpenChildWindowMessage.cs" />
     <Compile Include="Messages\PrepareAnalyzeDataMessage.cs" />
@@ -169,6 +174,7 @@
     <Compile Include="Messages\ShowPopupMessage.cs" />
     <Compile Include="Models\CheckableHeaderModel.cs" />
     <Compile Include="Models\RecordsCollection.cs" />
+    <Compile Include="Models\SelectableValue.cs" />
     <Compile Include="Services\AnalysisService.cs" />
     <Compile Include="Services\DataWriteService.cs" />
     <Compile Include="Services\FileReadService\CsvReadService.cs" />
@@ -184,6 +190,7 @@
     <Compile Include="ViewModel\CommandListeners\AnalyzeDataCommandListener.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
+    <Compile Include="ViewModel\CriteriaRangeViewModel.cs" />
     <Compile Include="ViewModel\EditStringViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
@@ -207,6 +214,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ContextActions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CriteriaControls\CriteriaRange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CriteriaControls\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

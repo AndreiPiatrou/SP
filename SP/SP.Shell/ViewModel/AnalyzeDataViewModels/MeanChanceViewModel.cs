@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 using SP.Extensions;
@@ -7,7 +6,6 @@ using SP.PSPP.Integration.Commands;
 using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Models.Configuration;
 using SP.Resources;
-using SP.Shell.Messages;
 using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
@@ -17,37 +15,37 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
         public MeanChanceViewModel(RecordsCollection records)
             : base(records, AnalyzeType.MeanChance, Strings.MeanChance)
         {
-            Headers = ExtractHeaders().ToObservable();
         }
 
-        public ObservableCollection<CheckableHeaderModel> Headers { get; private set; }
-
-        protected override void AnalyzeDataExecute()
+        protected override InputData ExtractInputData()
         {
-            MessengerInstance.Send(new AnalyzeDataMessage(ExtractInputData(), SelectedType));
+            var criteria = Criteria.First(c => c.IsChecked);
+            var checkedHeaders = GroupHeaders.Where(h => h.IsChecked).ToList();
+            var indexes = checkedHeaders.Select(h => h.Index).ToList();
+            var allRows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i) || i == criteria.Index)).ToList();
+
+            var groupVariables = GetGroupVariables(checkedHeaders);
+            var targetVariable = GetTargetVariable(criteria);
+
+            return new InputData(allRows, new MeanChanceConfiguration(groupVariables, targetVariable));
         }
 
-        private IEnumerable<CheckableHeaderModel> ExtractHeaders()
+        private IEnumerable<VariableDescription> GetGroupVariables(List<CheckableHeaderModel> checkedHeaders)
         {
-            for (var i = 0; i < Records.Headers.Count - 1; i++)
-            {
-                yield return new CheckableHeaderModel(Records.Headers[i], i);
-            }
+            return checkedHeaders.Select(
+                h =>
+                new VariableDescription(
+                    h.Index,
+                    h.Header,
+                    Records.Records.Select(e => e.Where((c, i) => h.Index == i)).First().IsNumberOrEmptyString()));
         }
 
-        private InputData ExtractInputData()
+        private VariableDescription GetTargetVariable(CheckableHeaderModel criteria)
         {
-            var checkedHeaders = Headers.Where(h => h.IsChecked).ToList();
-            var indexes = checkedHeaders.Select(h => h.Index);
-
-            return new InputData
-            {
-                Configuration = new MeanChanceConfiguration
-                {
-                    Variables = checkedHeaders.Select(h => h.Header)
-                },
-                Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
-            };
+            return new VariableDescription(
+                criteria.Index,
+                criteria.Header,
+                Records.Records.Select(e => e.Where((c, i) => criteria.Index == i)).First().IsNumberOrEmptyString());
         }
     }
 }

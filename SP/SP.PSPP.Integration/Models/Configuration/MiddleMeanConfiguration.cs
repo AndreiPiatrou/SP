@@ -2,16 +2,13 @@
 
 namespace SP.PSPP.Integration.Models.Configuration
 {
-    public class MiddleMeanConfiguration : IConfiguration
+    public class MiddleMeanConfiguration : ConfigurationBase
     {
-        public IEnumerable<string> Variables { get; set; }
-
-        public IEnumerable<string> Headers
+        public MiddleMeanConfiguration(
+            IEnumerable<VariableDescription> groupVariables,
+            VariableDescription targetVariable)
+            : base(groupVariables, targetVariable)
         {
-            get
-            {
-                return Variables;
-            }
         }
     }
 }

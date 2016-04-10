@@ -5,6 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
+using GalaSoft.MvvmLight.Messaging;
+
+using Microsoft.Practices.ServiceLocation;
+
+using SP.Shell.Messages;
 using SP.Shell.Models;
 
 namespace SP.Shell.Behaviors
@@ -36,9 +41,9 @@ namespace SP.Shell.Behaviors
             if (data != null)
             {
                 data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
-                dataGrid.CellEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
-                dataGrid.RowEditEnding += (sender, args) => data.UpdateRowsAndHeaders();
-                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, data);
+                dataGrid.CellEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+                dataGrid.RowEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, GetDataSource(sender as UIElement));
             }
         }
 
@@ -54,6 +59,8 @@ namespace SP.Shell.Behaviors
 
             data.SelectedRow = data.Records.IndexOf((ObservableCollection<string>)args.AddedCells[0].Item);
             data.SelectedHeader = args.AddedCells[0].Column.DisplayIndex;
+
+            ServiceLocator.Current.GetInstance<Messenger>().Send(new DataGridSelectionChangedMessage(data));
         }
 
         private static void HandleHeadersCollectionChange(NotifyCollectionChangedEventArgs e, DataGrid dataGrid)

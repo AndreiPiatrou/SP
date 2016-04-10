@@ -31,7 +31,7 @@ namespace SP.Shell.Tasks
                 Task.Factory.StartNew(execution).ContinueWith(
                     task =>
                         {
-                            if (task.IsCompleted)
+                            if (task.IsCompleted && !task.IsFaulted)
                             {
                                 callback(task.Result);
                                 GetMessenger().SendLoader(false);

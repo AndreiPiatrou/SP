@@ -8,6 +8,7 @@
                       xmlns:controls1="clr-namespace:SP.Shell.Controls"
                       xmlns:behaviors="clr-namespace:SP.Shell.Behaviors"
                       xmlns:commands="clr-namespace:SP.Shell.Commands"
+                      xmlns:criteriaControls="clr-namespace:SP.Shell.Controls.CriteriaControls"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       WindowTransitionsEnabled="False"
                       Background="{DynamicResource MaterialDesignPaper}"					  
@@ -91,5 +92,12 @@
                                x:Name="Loader" 
                                Foreground="{DynamicResource HighlightBrush}" 
                                IsActive="False"/>
+        <criteriaControls:CriteriaRange x:Name="CriteriaRangeControl"
+                                        VerticalAlignment="Bottom" 
+                                        Width="600" 
+                                        Margin="0,0,0,20" 
+                                        HorizontalAlignment="Center" 
+                                        Grid.ColumnSpan="5" 
+                                        Grid.RowSpan="5"/>
     </Grid>
 </controls:MetroWindow>

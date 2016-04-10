@@ -2,6 +2,14 @@
 {
     public class CommandConstants
     {
+        public const string ConfigurationFormat = @"SET DECIMAL=dot.
+                                                    GET DATA /TYPE=TXT 
+		                                                /FILE=""{0}""
+		                                                /ENCODING=""UTF-8""
+		                                                /DELIMITERS="","" 
+		                                                /FIRSTCASE=2 
+		                                                /VARIABLES={1}.";
+
         public const string PearsonCorrelationCommandFormat = @"SET DECIMAL=dot.
                                                                 GET DATA /TYPE=TXT 
 		                                                             /FILE=""{0}""
@@ -25,17 +33,21 @@
                                                           /VARIABLES={2}
                                                           /STATISTICS=MEAN.";
 
-        public const string MeanChanceFormat = @"SET DECIMAL=dot.
-                                                 GET DATA /TYPE=TXT 
-		                                                  /FILE=""{0}""
-		                                                  /ENCODING=""UTF-8""
-		                                                  /DELIMITERS="","" 
-		                                                  /FIRSTCASE=2 
-		                                                  /VARIABLES={1} F4.
+        public const string MeanChanceCommonFormat = @"FREQUENCIES
+                                                               /VARIABLES={0}
+                                                               /FORMAT=AVALUE TABLE
+                                                               /STATISTICS=MEAN STDDEV.
+                                                       FILTER OFF.";
 
-                                                FREQUENCIES
-                                                         /VARIABLES={2}
-                                                         /FORMAT=AVALUE TABLE
-                                                         /STATISTICS=MEAN STDDEV.";
+        public const string MeanChanceFilterFormat = @"COMPUTE groupVar = {0}.
+                                                       EXECUTE.
+                                                       FILTER BY groupVar.
+                                                       VALUE LABELS 
+		                                                       /{1}
+FREQUENCIES
+                                                               /VARIABLES={2}
+                                                               /FORMAT=AVALUE TABLE
+                                                               /STATISTICS=MEAN STDDEV.
+                                                       FILTER OFF.";
     }
 }

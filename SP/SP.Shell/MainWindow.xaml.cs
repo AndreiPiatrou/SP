@@ -11,6 +11,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 
 using SP.Resources;
+using SP.Shell.Commands;
 using SP.Shell.Controls;
 using SP.Shell.Messages;
 
@@ -27,9 +28,7 @@ namespace SP.Shell
 
         private void RegisterForMessages(IMessenger messenger)
         {
-            messenger.Register<ShowPopupMessage>(
-                this,
-                async message => { await this.ShowMessageAsync(message.Title, message.Content); });
+            messenger.Register<ShowPopupMessage>(this, async message => await ShowPopup(message));
             messenger.Register<PrepareAnalyzeDataMessage>(
                 this,
                 async message => await OpenAnalyzeDataChildWindow(message));
@@ -81,10 +80,18 @@ namespace SP.Shell
             LoaderGrid.Visibility = message.IsActive ? Visibility.Visible : Visibility.Collapsed;
             Loader.IsActive = message.IsActive;
         }
-        
+
         private async Task OpenChildWindow(OpenChildWindowMessage message)
         {
             await this.ShowChildWindowAsync(message.Window, ChildWindowManager.OverlayFillBehavior.FullWindow);
+        }
+
+        private async Task ShowPopup(ShowPopupMessage message)
+        {
+            var title = message.Title;
+            var content = message.Content.Length > 300 ? message.Content.Substring(0, 300) + "..." : message.Content;
+
+            await this.ShowMessageAsync(title, content);
         }
     }
 }

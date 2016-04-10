@@ -15,9 +15,10 @@ namespace SP.Shell.ViewModel.CommandListeners
 
         private void HandleSaveToFileMessage(SaveRecordsToFileMessage message)
         {
-            var writer = ServiceLocator.Current.GetInstance<DataWriteService>();
-
-            TaskService.WrapToTask(() => writer.WriteToFile(message.Records.Rows, message.FilePath));
+            TaskService.WrapToTask(
+                () =>
+                ServiceLocator.Current.GetInstance<DataWriteService>()
+                    .WriteToFile(message.Records.Rows, message.FilePath));
         }
     }
 }

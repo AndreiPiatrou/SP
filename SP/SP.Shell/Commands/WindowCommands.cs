@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,6 +10,7 @@ using MahApps.Metro.SimpleChildWindow;
 
 using Microsoft.Practices.ServiceLocation;
 
+using SP.Resources;
 using SP.Shell.Messages;
 using SP.Shell.Views;
 
@@ -22,6 +24,13 @@ namespace SP.Shell.Commands
         public static ICommand CloseApplication = new RelayCommand(() => Application.Current.Shutdown());
 
         public static ICommand AboutCommand = new GalaSoft.MvvmLight.CommandWpf.RelayCommand(SendOpenAboutMessage);
+
+        public static ICommand GoToProjectSiteCommand = new GalaSoft.MvvmLight.CommandWpf.RelayCommand(GoToProjectSite);
+
+        private static void GoToProjectSite()
+        {
+            Process.Start(Strings.ProjectSite);
+        }
 
         private static void SendOpenAboutMessage()
         {

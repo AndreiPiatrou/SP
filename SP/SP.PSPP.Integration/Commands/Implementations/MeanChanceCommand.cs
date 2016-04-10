@@ -1,8 +1,5 @@
-﻿using System;
-
-using SP.FIleSystem.Directory;
+﻿using SP.FIleSystem.Directory;
 using SP.PSPP.Integration.Constants;
-using SP.PSPP.Integration.Models;
 using SP.PSPP.Integration.Models.Configuration;
 
 namespace SP.PSPP.Integration.Commands.Implementations
@@ -14,13 +11,18 @@ namespace SP.PSPP.Integration.Commands.Implementations
         {
         }
 
-        protected override string GetScript(InputData inputData, MeanChanceConfiguration configuration, string inputFilePath)
+        protected override string GetSimpleCommandScript(MeanChanceConfiguration configuration)
+        {
+            return string.Format(CommandConstants.MeanChanceCommonFormat, configuration.TargetVariable.Name);
+        }
+
+        protected override string GetGroupCommandScript(GroupDescription group)
         {
             return string.Format(
-                CommandConstants.MeanChanceFormat,
-                inputFilePath,
-                string.Join(" F4" + Environment.NewLine, configuration.Variables),
-                string.Join(Environment.NewLine, configuration.Variables));
+                CommandConstants.MeanChanceFilterFormat,
+                group.ScriptComparison,
+                group.Labels,
+                group.TargetVariableName);
         }
     }
 }

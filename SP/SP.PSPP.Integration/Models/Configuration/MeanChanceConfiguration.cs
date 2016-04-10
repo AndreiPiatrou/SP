@@ -2,16 +2,13 @@ using System.Collections.Generic;
 
 namespace SP.PSPP.Integration.Models.Configuration
 {
-    public class MeanChanceConfiguration : IConfiguration
+    public class MeanChanceConfiguration : ConfigurationBase
     {
-        public IEnumerable<string> Variables { get; set; }
-
-        public IEnumerable<string> Headers
+        public MeanChanceConfiguration(
+            IEnumerable<VariableDescription> groupVariables,
+            VariableDescription targetVariable)
+            : base(groupVariables, targetVariable)
         {
-            get
-            {
-                return Variables;
-            }
         }
     }
 }
