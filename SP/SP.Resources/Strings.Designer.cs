@@ -106,6 +106,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Примерить выбранный фильтр.
+        /// </summary>
+        public static string ApplyFilterTooltip {
+            get {
+                return ResourceManager.GetString("ApplyFilterTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Среднее значение.
         /// </summary>
         public static string AverageValue {
@@ -300,6 +309,15 @@ namespace SP.Resources {
         public static string RenameColumn {
             get {
                 return ResourceManager.GetString("RenameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сбросить фильтр.
+        /// </summary>
+        public static string ResetToSource {
+            get {
+                return ResourceManager.GetString("ResetToSource", resourceCulture);
             }
         }
         

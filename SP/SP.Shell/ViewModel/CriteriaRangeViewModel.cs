@@ -20,18 +20,11 @@ namespace SP.Shell.ViewModel
 
         private bool forceHide;
         private bool hasChanges;
-        private double selectedMin;
-        private double selectedMax;
 
         public CriteriaRangeViewModel()
         {
             MessengerInstance = ServiceLocator.Current.GetInstance<Messenger>();
-            HideCommand = new RelayCommand(
-                () =>
-                    {
-                        forceHide = true;
-                        RaisePropertyChanged(() => IsVisible);
-                    });
+            HideCommand = new RelayCommand(HideCommandExecute);
             ApplyCommand = new RelayCommand(ApplyCommandExecute, ApplyCommandCanExecute);
 
             MessengerInstance.Register<DataGridSelectionChangedMessage>(this, SelectionChanged);
@@ -39,7 +32,11 @@ namespace SP.Shell.ViewModel
 
         public bool IsVisible
         {
-            get { return !forceHide && selectedCollection != null && selectedCollection.SelectedHeader > -1; }
+            get
+            {
+                return (!forceHide && selectedCollection != null && selectedCollection.SelectedHeader > -1) ||
+                       CurrentSelector == null;
+            }
         }
 
         public bool IsNumericRangeSelected
@@ -57,58 +54,11 @@ namespace SP.Shell.ViewModel
             }
         }
 
-        public double Min { get; set; }
-
-        public double Max { get; set; }
-
-        public double SelectedMin
-        {
-            get
-            {
-                return selectedMin;
-            }
-
-            set
-            {
-                selectedMin = value;
-                hasChanges = true;
-            }
-        }
-
-        public double SelectedMax
-        {
-            get
-            {
-                return selectedMax;
-            }
-
-            set
-            {
-                selectedMax = value;
-                hasChanges = true;
-            }
-        }
-
-        public IEnumerable<SelectableValue> Values { get; private set; }
-
         public ICommand HideCommand { get; private set; }
 
         public RelayCommand ApplyCommand { get; private set; }
 
-        public double Frequency
-        {
-            get { return (Max - Min) / 20d; }
-        }
-
-        public string SelectedValues
-        {
-            get
-            {
-                return Values == null
-                           ? string.Empty
-                           : string.Join(", ", Values.Where(v => v.Selected).Select(v => v.Value));
-            }
-        }
+        public ICriteriaRangeSelector CurrentSelector { get; private set; }
 
         private void SelectionChanged(DataGridSelectionChangedMessage message)
         {
@@ -116,85 +66,48 @@ namespace SP.Shell.ViewModel
             forceHide = false;
             hasChanges = false;
 
-            RaisePropertyChanged(() => IsVisible);
-            RaisePropertyChanged(() => IsNumericRangeSelected);
-
-            if (IsNumericRangeSelected)
-            {
-                UpdateNumericProperties();
-            }
-            else
-            {
-                UpdateConcreteProperties();
-            }
-
+            CurrentSelector = GetSelector();
             ApplyCommand.RaiseCanExecuteChanged();
-        }
 
-        private void UpdateNumericProperties()
-        {
-            var numbers = SelectedCriteria.Where(v => v.IsNumber()).Select(v => v.ToNumber()).ToList();
-
-            if (!numbers.Any())
-            {
-                Min = 0;
-                Max = 0;
-                selectedMin = 0;
-                selectedMax = 0;
-            }
-            else
-            {
-                Min = numbers.Min();
-                Max = numbers.Max();
-
-                selectedMin = Min;
-                selectedMax = Max;
-            }
-
-            RaisePropertyChanged(() => Min);
-            RaisePropertyChanged(() => Max);
-            RaisePropertyChanged(() => SelectedMin);
-            RaisePropertyChanged(() => SelectedMax);
-            RaisePropertyChanged(() => Frequency);
-        }
-
-        private void UpdateConcreteProperties()
-        {
-            Values =
-                SelectedCriteria.Distinct()
-                    .Where(v => !string.IsNullOrEmpty(v))
-                    .Select(v => new SelectableValue(v, true, SelectedOnChange))
-                    .ToList();
-
-            RaisePropertyChanged(() => Values);
-            RaisePropertyChanged(() => SelectedValues);
+            RaisePropertyChanged(() => CurrentSelector);
+            RaisePropertyChanged(() => IsVisible);
         }
 
         private void SelectedOnChange()
         {
             hasChanges = true;
-
-            RaisePropertyChanged(() => SelectedValues);
             ApplyCommand.RaiseCanExecuteChanged();
         }
 
         private void ApplyCommandExecute()
         {
-            if (IsNumericRangeSelected)
-            {
-                selectedCollection.Apply(SelectedMin, SelectedMax);
-            }
-            else
-            {
-                selectedCollection.Apply(Values.Where(v => v.Selected).Select(v => v.Value).ToList());
-            }
-
+            CurrentSelector.Apply();
             SelectionChanged(new DataGridSelectionChangedMessage(selectedCollection));
         }
 
         private bool ApplyCommandCanExecute()
         {
-            return hasChanges && (IsNumericRangeSelected || !string.IsNullOrEmpty(SelectedValues));
+            return hasChanges && CurrentSelector.CanApply();
+        }
+
+        private void HideCommandExecute()
+        {
+            forceHide = true;
+            RaisePropertyChanged(() => IsVisible);
+        }
+
+        private ICriteriaRangeSelector GetSelector()
+        {
+            return IsNumericRangeSelected
+                       ? (ICriteriaRangeSelector)
+                         new NumericCriteriaRangeViewModel(
+                             SelectedOnChange,
+                             () => SelectedCriteria,
+                             () => selectedCollection)
+                       : new DiscreteCriteriaRangeViewModel(
+                             SelectedOnChange,
+                             () => SelectedCriteria,
+                             () => selectedCollection);
         }
     }
 }

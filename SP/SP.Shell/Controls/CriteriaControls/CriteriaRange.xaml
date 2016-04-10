@@ -6,6 +6,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                      xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
+                     xmlns:commands="clr-namespace:SP.Shell.Commands"
                      DataContext="{Binding CriteriaRange, Source={StaticResource Locator}}"
                      mc:Ignorable="d" 
                      Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -17,11 +18,23 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <ContentControl ContentTemplate="{Binding IsNumericRangeSelected, Converter={StaticResource TypeToCriteriaRangeTemplate}}"
-                        Content="{Binding }"/>
-        <Button Grid.Column="2" Content="{x:Static resources:Strings.Apply}" Command="{Binding ApplyCommand}" Margin="0,10,10,10" />
+        <ContentControl Content="{Binding CurrentSelector}"/>
+        <Button Grid.Column="2" 
+                Content="{x:Static resources:Strings.Apply}" 
+                Command="{Binding ApplyCommand}" 
+                Margin="0,10,10,10"
+                ToolTip="{x:Static resources:Strings.ApplyFilterTooltip}"/>
         <Button Grid.Column="4" 
+                Style="{StaticResource MaterialDesignToolButton}" 
+                Margin="0,0,10,0" 
+                ToolTip="{x:Static resources:Strings.ResetToSource}"
+                Command="{x:Static commands:RecordsCollectionCommands.ResetToSourceCommand}"
+                CommandParameter="{Binding Main.SelectedTab, Source={StaticResource Locator}}">
+            <materialDesign:PackIcon Kind="Undo" />
+        </Button>
+        <Button Grid.Column="5" 
                 Style="{StaticResource MaterialDesignToolButton}" 
                 Margin="0,0,10,0" 
                 ToolTip="{x:Static resources:Strings.Close}"

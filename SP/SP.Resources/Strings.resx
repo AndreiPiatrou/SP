@@ -132,6 +132,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="ApplyFilterTooltip" xml:space="preserve">
+    <value>Примерить выбранный фильтр</value>
+  </data>
   <data name="AverageValue" xml:space="preserve">
     <value>Среднее значение</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="RenameColumn" xml:space="preserve">
     <value>Переименовать колонку</value>
+  </data>
+  <data name="ResetToSource" xml:space="preserve">
+    <value>Сбросить фильтр</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Результат</value>
