@@ -26,6 +26,15 @@ namespace SP.Shell.Commands
 
         public static ICommand InsertRowCommand = new GuiListenCommand(InsertRowExecute, InsertRowCanExecute);
 
+        public static ICommand ResetToSourceCommand = new GuiListenCommand(ResetToSourceExecute, o => true);
+
+        private static void ResetToSourceExecute(object model)
+        {
+            var tab = (TabViewModel)model;
+
+            tab.ResetToSource();
+        }
+
         private static bool InsertRowCanExecute(object o)
         {
             var data = (RecordsCollection)o;

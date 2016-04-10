@@ -3,6 +3,7 @@ using System.Linq;
 
 using GalaSoft.MvvmLight;
 
+using SP.Extensions;
 using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel
@@ -11,17 +12,20 @@ namespace SP.Shell.ViewModel
     {
         private string title;
         private RecordsCollection records;
+        private List<List<string>> sourceCollection;
 
         public TabViewModel(string title)
         {
             Title = title;
             Records = new RecordsCollection();
+            sourceCollection = new List<List<string>>();
         }
 
         public TabViewModel(string title, List<List<string>> list)
         {
             Title = title;
             Records = new RecordsCollection(list);
+            sourceCollection = list;
         }
 
         public string Title
@@ -52,10 +56,18 @@ namespace SP.Shell.ViewModel
             }
         }
 
+        public void ResetToSource()
+        {
+            Records = new RecordsCollection(sourceCollection);
+        }
+
         public void LoadRecords(IEnumerable<IEnumerable<string>> newRecords, string fileName)
         {
+            var enumerable = newRecords as IList<IEnumerable<string>> ?? newRecords.ToList();
+
             Title = fileName;
-            Records = new RecordsCollection(newRecords.Select(i => i.ToList()).ToList());
+            Records = new RecordsCollection(enumerable.Select(i => i.ToList()).ToList());
+            sourceCollection = enumerable.ToCompleteList();
         }
     }
 }

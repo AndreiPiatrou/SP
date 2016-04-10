@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -97,7 +98,7 @@ namespace SP.Shell.ViewModel
 
         public double Frequency
         {
-            get { return (Max - Min) / 20d; }
+            get { return Math.Abs(Min - Max) > 0 ? (Max - Min) / 20d : 1; }
         }
 
         public string SelectedValues

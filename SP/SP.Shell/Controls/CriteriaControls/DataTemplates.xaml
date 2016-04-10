@@ -34,7 +34,7 @@
                       Margin="5"
                       VerticalAlignment="Center">
             <Expander.Header>
-                <TextBlock Text="{Binding SelectedValues}" MinWidth="400"/>
+                <TextBlock Text="{Binding SelectedValues}" MinWidth="400" Style="{StaticResource MaterialDesignButtonTextBlock}"/>
             </Expander.Header>
             <ItemsControl ItemsSource="{Binding Values}">
                 <ItemsControl.ItemsPanel>
