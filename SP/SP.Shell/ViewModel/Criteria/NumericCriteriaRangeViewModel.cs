@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 using SP.Extensions;
 using SP.Shell.Models;
 
-namespace SP.Shell.ViewModel
+namespace SP.Shell.ViewModel.Criteria
 {
     public class NumericCriteriaRangeViewModel : ViewModelBase, ICriteriaRangeSelector
     {

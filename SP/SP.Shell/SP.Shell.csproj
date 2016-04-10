@@ -189,12 +189,12 @@
     <Compile Include="ViewModel\CommandListeners\AnalyzeDataCommandListener.cs" />
     <Compile Include="ViewModel\CommandListeners\CommandListenerBase.cs" />
     <Compile Include="ViewModel\CommandListeners\SaveToFileCommandListener.cs" />
-    <Compile Include="ViewModel\CriteriaRangeViewModel.cs" />
-    <Compile Include="ViewModel\DiscreteCriteriaRangeViewModel.cs" />
+    <Compile Include="ViewModel\Criteria\CriteriaRangeViewModel.cs" />
+    <Compile Include="ViewModel\Criteria\DiscreteCriteriaRangeViewModel.cs" />
     <Compile Include="ViewModel\EditStringViewModel.cs" />
-    <Compile Include="ViewModel\ICriteriaRangeSelector.cs" />
+    <Compile Include="ViewModel\Criteria\ICriteriaRangeSelector.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NumericCriteriaRangeViewModel.cs" />
+    <Compile Include="ViewModel\Criteria\NumericCriteriaRangeViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\About.xaml.cs">
