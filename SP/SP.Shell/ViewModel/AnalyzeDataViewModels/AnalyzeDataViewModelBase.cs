@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -7,7 +8,10 @@ using GalaSoft.MvvmLight.Messaging;
 
 using Microsoft.Practices.ServiceLocation;
 
+using SP.Extensions;
 using SP.PSPP.Integration.Commands;
+using SP.PSPP.Integration.Models;
+using SP.Shell.Messages;
 using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
@@ -31,6 +35,9 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                         CloseRequested = true;
                     },
                 AnalyzeDataCanExecute);
+
+            GroupHeaders = ExtractHeaders().ToObservable();
+            Criteria = ExtractHeaders().ToObservable();
         }
 
         public bool CloseRequested
@@ -46,12 +53,16 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                 RaisePropertyChanged(() => CloseRequested);
             }
         }
+        
+        public ObservableCollection<CheckableHeaderModel> GroupHeaders { get; protected set; }
+
+        public ObservableCollection<CheckableHeaderModel> Criteria { get; protected set; }
 
         public AnalyzeType SelectedType { get; private set; }
 
-        public string Title { get; private set; }
+        public string Title { get; protected set; }
 
-        public RelayCommand AnalyzeCommand { get; private set; }
+        public RelayCommand AnalyzeCommand { get; protected set; }
         
         protected IEnumerable<CheckableHeaderModel> ExtractHeaders()
         {
@@ -61,8 +72,17 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             }
         }
 
-        protected abstract void AnalyzeDataExecute();
+        protected virtual void AnalyzeDataExecute()
+        {
+            MessengerInstance.Send(new AnalyzeDataMessage(ExtractInputData(), SelectedType));
+        }
 
-        protected abstract bool AnalyzeDataCanExecute();
+        protected virtual bool AnalyzeDataCanExecute()
+        {
+            return Criteria.Any(c => c.IsChecked) &&
+                   GroupHeaders.Where(g => g.IsChecked).All(g => g.Index != Criteria.First(c => c.IsChecked).Index);
+        }
+
+        protected abstract InputData ExtractInputData();
     }
 }

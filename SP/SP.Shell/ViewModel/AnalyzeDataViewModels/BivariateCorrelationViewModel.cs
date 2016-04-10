@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
-using SP.Extensions;
 using SP.PSPP.Integration.Commands;
 using SP.PSPP.Integration.Models;
-using SP.PSPP.Integration.Models.Configuration;
 using SP.Resources;
-using SP.Shell.Messages;
 using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
@@ -18,35 +12,11 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
         public PearsonCorrelationViewModel(RecordsCollection records)
             : base(records, AnalyzeType.PearsonCorrelation, Strings.CorrelationCoefficient)
         {
-            Headers = ExtractHeaders().ToObservable();
         }
 
-        public ObservableCollection<CheckableHeaderModel> Headers { get; private set; }
-
-        protected override void AnalyzeDataExecute()
-        {
-            MessengerInstance.Send(new AnalyzeDataMessage(ExtractInputData(), SelectedType));
-        }
-
-        protected override bool AnalyzeDataCanExecute()
+        protected override InputData ExtractInputData()
         {
             throw new NotImplementedException();
-        }
-
-        private InputData ExtractInputData()
-        {
-            throw new NotImplementedException();
-            //var checkedHeaders = Headers.Where(h => h.IsChecked).ToList();
-            //var indexes = checkedHeaders.Select(h => h.Index);
-
-            //return new InputData
-            //{
-            //    Configuration = new PearsonCorrelationConfiguration
-            //    {
-            //        GroupVariables = checkedHeaders.Select(h => h.Header)
-            //    },
-            //    Rows = Records.Records.SkipLast().Select(list => list.Where((r, i) => indexes.Contains(i)))
-            //};
         }
     }
 }
