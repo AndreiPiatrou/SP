@@ -20,8 +20,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <ContentControl ContentTemplate="{Binding IsNumericRangeSelected, Converter={StaticResource TypeToCriteriaRangeTemplate}}"
-                        Content="{Binding }"/>
+        <ContentControl Content="{Binding CurrentSelector}"/>
         <Button Grid.Column="2" 
                 Content="{x:Static resources:Strings.Apply}" 
                 Command="{Binding ApplyCommand}" 
