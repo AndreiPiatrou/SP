@@ -5,7 +5,7 @@
                     xmlns:models="clr-namespace:SP.Shell.Models"
                     xmlns:resources="clr-namespace:SP.Resources;assembly=SP.Resources"
                     xmlns:analyzeDataViewModels="clr-namespace:SP.Shell.ViewModel.AnalyzeDataViewModels">
-    <Style x:Key="DataGridHeaderStyleWittTooltip" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+    <Style x:Key="DataGridHeaderStyleWithTooltip" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Column.Header}"/>
         <Setter Property="BorderThickness" Value="0, 0, 1, 0"/>
         <Setter Property="BorderBrush" Value="DarkGray"/>
@@ -46,11 +46,11 @@
                   CanUserReorderColumns="False"
                   HorizontalGridLinesBrush="DarkGray"
                   VerticalGridLinesBrush="DarkGray"
-                  CanUserSortColumns="False"
+                  CanUserSortColumns="True"
                   SelectionMode="Single"
                   SelectionUnit="Cell"
                   Style="{StaticResource MaterialDesignDataGrid}"
-                  ColumnHeaderStyle="{StaticResource DataGridHeaderStyleWittTooltip}"
+                  ColumnHeaderStyle="{StaticResource DataGridHeaderStyleWithTooltip}"
                   CellStyle="{StaticResource DataGridCellWithBorder}"
                   behaviors:GenericDataGridColumnsBinder.DataSource="{Binding Records, NotifyOnSourceUpdated=True, Mode=OneWay}">
         </DataGrid>

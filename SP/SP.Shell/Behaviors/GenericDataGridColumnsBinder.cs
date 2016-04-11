@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,13 +40,35 @@ namespace SP.Shell.Behaviors
             var data = (RecordsCollection)e.NewValue;
 
             BindData(dataGrid, data);
-            if (data != null)
+            if (data == null)
             {
-                data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
-                dataGrid.CellEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
-                dataGrid.RowEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
-                dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, GetDataSource(sender as UIElement));
+                return;
             }
+
+            data.Headers.CollectionChanged += (sender, args) => HandleHeadersCollectionChange(args, dataGrid);
+
+            if (e.OldValue != null)
+            {
+                return;
+            }
+                
+            dataGrid.CellEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+            dataGrid.RowEditEnding += (sender, args) => GetDataSource(sender as UIElement).UpdateRowsAndHeaders();
+            dataGrid.SelectedCellsChanged += (sender, args) => DataGridSelectionChanged(args, GetDataSource(sender as UIElement));
+            dataGrid.Sorting += DataGridOnSorting;
+        }
+
+        private static void DataGridOnSorting(object sender, DataGridSortingEventArgs e)
+        {
+            var dataGrid = (DataGrid)sender;
+            var data = GetDataSource(dataGrid);
+            var ascending = e.Column.SortDirection == ListSortDirection.Ascending;
+            var direction = ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
+            data.Sort(e.Column.DisplayIndex, ascending);
+
+            e.Column.SortDirection = direction;
+            e.Handled = true;
         }
 
         private static void DataGridSelectionChanged(SelectedCellsChangedEventArgs args, RecordsCollection data)

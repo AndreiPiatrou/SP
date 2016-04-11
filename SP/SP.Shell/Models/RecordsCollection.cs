@@ -8,6 +8,8 @@ namespace SP.Shell.Models
 {
     public class RecordsCollection
     {
+        private static IComparer<string> comparer = new PossibleNumberStringComparer();
+
         private int columnsCounter = 1;
 
         public RecordsCollection()
@@ -82,6 +84,12 @@ namespace SP.Shell.Models
                 UpdateRowsAndHeaders();
             }
 
+            if (Records.Any() && Records.First().IsEmptyStringCollection())
+            {
+                Records.RemoveAt(0);
+                UpdateRowsAndHeaders();
+            }
+
             if (!Records.Any() || !Records.Last().IsEmptyStringCollection())
             {
                 Records.Add(Enumerable.Repeat(string.Empty, Headers.Count).ToObservable());
@@ -149,6 +157,21 @@ namespace SP.Shell.Models
         public void InsertRow(int index)
         {
             Records.Insert(index, Enumerable.Repeat(string.Empty, Headers.Count).ToObservable());
+        }
+
+        public void Sort(int displayIndex, bool ascending)
+        {
+            var sorted = ascending
+                             ? Records.OrderBy(c => c[displayIndex], comparer).ToList()
+                             : Records.OrderByDescending(c => c[displayIndex], comparer).ToList();
+            Records.Clear();
+
+            foreach (var s in sorted)
+            {
+                Records.Add(s);
+            }
+
+            UpdateRowsAndHeaders();
         }
 
         private bool TryExtractHeaders(IList<string> firstLine, out ObservableCollection<string> headers)
