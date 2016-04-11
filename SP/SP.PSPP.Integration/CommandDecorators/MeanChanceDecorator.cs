@@ -36,21 +36,9 @@ namespace SP.PSPP.Integration.CommandDecorators
             var result = new List<GroupTable>();
             var table = new List<List<string>>();
 
-            foreach (var enumerable in data.Rows.Select(row => row as IList<string> ?? row.ToList()))
+            foreach (var row in data.Rows.Select(r => r.ToList()).Where(IsMeaningRow))
             {
-                if (enumerable.First().StartsWith("Table: "))
-                {
-                    table.Add(enumerable.ToList());
-
-                    continue;
-                }
-
-                if (enumerable.First() == "Value Label")
-                {
-                    continue;
-                }
-
-                if (enumerable.First() == "Total" && table.Any())
+                if (row.First() == "Total" && table.Any())
                 {
                     result.Add(new GroupTable(table.ToList()));
                     table.Clear();
@@ -58,13 +46,15 @@ namespace SP.PSPP.Integration.CommandDecorators
                     continue;
                 }
 
-                if (!enumerable.IsEmptyStringCollection())
-                {
-                    table.Add(enumerable.ToList());
-                }
+                table.Add(row.ToList());
             }
 
             return result;
+        }
+
+        private bool IsMeaningRow(IList<string> row)
+        {
+            return !row.IsEmptyStringCollection() && row.ElementAt(0) != "Value Label";
         }
 
         protected class GroupTable
@@ -80,17 +70,10 @@ namespace SP.PSPP.Integration.CommandDecorators
             {
                 get
                 {
-                    return table.Skip(1).First().SelectMany(
-                        c =>
-                            {
-                                return
-                                    Regex.Split(c, " & ")
-                                        .Where(s => !string.IsNullOrEmpty(s) && s.Contains("="))
-                                        .Select(
-                                            g =>
-                                            new GroupPart(Regex.Split(g, "=")[0], Regex.Split(g, "=")[1].Trim('\'')))
-                                        .Distinct();
-                            });
+                    var groupCell = table.Skip(1).First().First();
+                    return groupCell.Contains(" & ")
+                               ? Regex.Split(groupCell, " & ").Select(GetGroupPart).Distinct()
+                               : Enumerable.Empty<GroupPart>();
                 }
             }
 
@@ -131,6 +114,13 @@ namespace SP.PSPP.Integration.CommandDecorators
             public string VariableName
             {
                 get { return table.First().First().TrimStart("Table: ".ToCharArray()); }
+            }
+
+            private GroupPart GetGroupPart(string groupPartString)
+            {
+                var parts = Regex.Split(groupPartString.Trim(), "=");
+
+                return new GroupPart(parts[0], parts[1]);
             }
         }
 
