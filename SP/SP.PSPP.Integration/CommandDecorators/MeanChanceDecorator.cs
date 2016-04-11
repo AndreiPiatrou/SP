@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -28,7 +30,26 @@ namespace SP.PSPP.Integration.CommandDecorators
         private IEnumerable<IEnumerable<string>> Aggregate(OutputData data)
         {
             var tables = GetTables(data).ToList();
-            return Enumerable.Repeat(tables[0].Headers, 1).Concat(tables.SelectMany(t => t.Rows));
+            var rows = tables.SelectMany(t => t.Rows).ToCompleteList();
+
+            yield return tables[0].Headers;
+
+            foreach (var row in UpdatePercent(rows))
+            {
+                yield return row;
+            }
+        }
+
+        private IEnumerable<List<string>> UpdatePercent(List<List<string>> rows)
+        {
+            var totalCount = rows.Sum(t => Convert.ToInt32(t[t.Count - 2]));
+
+            foreach (var row in rows)
+            {
+                row[row.Count - 1] = (Convert.ToInt32(row[row.Count - 2]) * 100d / totalCount).ToString("F");
+            }
+
+            return rows;
         }
 
         private IEnumerable<GroupTable> GetTables(OutputData data)
@@ -105,7 +126,7 @@ namespace SP.PSPP.Integration.CommandDecorators
                                 {
                                     table.ElementAt(i).ElementAt(1).Trim(),
                                     table.ElementAt(i).ElementAt(2).Trim(),
-                                    table.ElementAt(i).ElementAt(3).Trim()
+                                    string.Empty
                                 });
                     }
                 }
