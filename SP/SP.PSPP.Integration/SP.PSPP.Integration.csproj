@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandDecorators\MeanChanceDecorator.cs" />
     <Compile Include="Commands\AnalyzeCommandFactory.cs" />
     <Compile Include="Commands\AnalyzeType.cs" />
     <Compile Include="Commands\IAnalyzeCommand.cs" />

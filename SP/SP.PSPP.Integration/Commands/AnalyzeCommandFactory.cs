@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using SP.FIleSystem.Directory;
+using SP.PSPP.Integration.CommandDecorators;
 using SP.PSPP.Integration.Commands.Implementations;
 
 namespace SP.PSPP.Integration.Commands
@@ -12,7 +13,7 @@ namespace SP.PSPP.Integration.Commands
         {
             { AnalyzeType.PearsonCorrelation, directory => new PearsonCorrelationCommand(directory) },
             { AnalyzeType.MiddleMean, directory => new MiddleMeanCommand(directory) },
-            { AnalyzeType.MeanChance, directory => new MeanChanceCommand(directory) }
+            { AnalyzeType.MeanChance, directory => new MeanChanceDecorator(new MeanChanceCommand(directory)) }
         };
 
         public static IAnalyzeCommand CreateCommand(AnalyzeType commandType, WorkingDirectory workingDirectory)
