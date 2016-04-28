@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SP.Shell.Models
 {
@@ -7,6 +9,8 @@ namespace SP.Shell.Models
         private readonly Action onSelectionChange;
 
         private bool isChecked;
+
+        private IEnumerable<string> values;
 
         public CheckableHeaderModel(string header, int index, Action onSelectionChange)
         {
@@ -18,6 +22,22 @@ namespace SP.Shell.Models
         public string Header { get; private set; }
 
         public int Index { get; private set; }
+
+        public IEnumerable<string> Values
+        {
+            get
+            {
+                return values;
+            }
+
+            set
+            {
+                values = value.Distinct().Where(s => !string.IsNullOrEmpty(s));
+                SelectedValue = values.FirstOrDefault();
+            }
+        }
+
+        public string SelectedValue { get; set; }
 
         public bool IsChecked
         {

@@ -1,29 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using SP.Extensions;
-
 namespace SP.PSPP.Integration.Models.Configuration
 {
     public abstract class ConfigurationBase : IConfiguration
     {
-        private readonly EnumerableComparer comparer;
+        private readonly GroupDescriptionComparer comparer;
 
-        protected ConfigurationBase(IEnumerable<VariableDescription> groupVariables, VariableDescription targetVariable)
+        protected ConfigurationBase(IEnumerable<VariableDescription> groupVariables, IEnumerable<VariableDescription> targetVariables)
         {
             GroupVariables = groupVariables;
-            TargetVariable = targetVariable;
+            TargetVariables = targetVariables;
 
-            comparer = new EnumerableComparer();
+            comparer = new GroupDescriptionComparer();
         }
 
         public virtual IEnumerable<VariableDescription> GroupVariables { get; private set; }
 
-        public virtual VariableDescription TargetVariable { get; private set; }
+        public IEnumerable<VariableDescription> TargetVariables { get; private set; }
 
         public virtual IEnumerable<VariableDescription> AllVariables
         {
-            get { return GroupVariables.Concat(Enumerable.Repeat(TargetVariable, 1)).OrderBy(v => v.Index); }
+            get { return GroupVariables.Concat(TargetVariables).OrderBy(v => v.Index); }
         }
 
         public bool HasGroups
@@ -31,24 +29,62 @@ namespace SP.PSPP.Integration.Models.Configuration
             get { return GroupVariables.Any(); }
         }
 
-        public virtual int TargetIndex
-        {
-            get { return AllVariables.ToList().IndexOf(TargetVariable); }
-        }
-
         public virtual IEnumerable<string> GetAllHeaders()
         {
             return AllVariables.Select(v => v.Name);
         }
 
-        public IEnumerable<GroupDescription> GetGroups(IEnumerable<IEnumerable<string>> rows)
+        public IEnumerable<GroupDescription> GetGroups()
         {
-            var enumerable = rows as IList<IEnumerable<string>> ?? rows.ToList();
+            return ExtractGroupCombinations().Distinct(comparer).SelectMany(ConcatWithTarget);
+        }
 
-            var groups = enumerable.Select(r => r.Where((e, i) => i != TargetIndex)).Distinct(comparer).ToList();
-            var criteriaValues = enumerable.Select(r => r.Where((e, i) => i == TargetIndex)).Select(r => r.First()).Distinct().ToList();
+        private IEnumerable<GroupDescription> ConcatWithTarget(IEnumerable<VariableDescription> description)
+        {
+            return TargetVariables.Select(t => new GroupDescription(description.ToList(), t));
+        }
 
-            return groups.Select(g => new GroupDescription(GroupVariables.ToList(), g.ToList(), criteriaValues, TargetVariable.Name));
+        private IEnumerable<IEnumerable<VariableDescription>> ExtractGroupCombinations()
+        {
+            for (var i = 0; i < GroupVariables.First().Values.Count(); i++)
+            {
+                var i1 = i;
+                yield return
+                    GroupVariables.Select(
+                        g =>
+                        new VariableDescription(
+                            g.Index,
+                            g.Name,
+                            g.IsNumeric,
+                            Enumerable.Empty<string>(),
+                            g.Values.ElementAt(i1)));
+            }
+        }
+
+        protected class GroupDescriptionComparer : IEqualityComparer<IEnumerable<VariableDescription>>
+        {
+            public bool Equals(IEnumerable<VariableDescription> left, IEnumerable<VariableDescription> right)
+            {
+                var leftArray = left as VariableDescription[] ?? left.ToArray();
+                var rightArray = right as VariableDescription[] ?? right.ToArray();
+
+                if (leftArray.Length != rightArray.Length)
+                {
+                    return false;
+                }
+
+                return !leftArray.Where((t, i) => !Equals(leftArray.ElementAt(i), rightArray.ElementAt(i))).Any();
+            }
+
+            public int GetHashCode(IEnumerable<VariableDescription> obj)
+            {
+                return 0;
+            }
+
+            private bool Equals(VariableDescription x, VariableDescription y)
+            {
+                return x.TargetValue == y.TargetValue && x.Index == y.Index;
+            }
         }
     }
 }

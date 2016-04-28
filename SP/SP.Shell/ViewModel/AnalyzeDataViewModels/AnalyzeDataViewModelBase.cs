@@ -68,7 +68,11 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
         {
             for (var i = 0; i < Records.Headers.Count - 1; i++)
             {
-                yield return new CheckableHeaderModel(Records.Headers[i], i, AnalyzeCommand.RaiseCanExecuteChanged);
+                var localIndex = i;
+                yield return new CheckableHeaderModel(Records.Headers[i], i, AnalyzeCommand.RaiseCanExecuteChanged)
+                                 {
+                                     Values = Records.Records.Select(r => r[localIndex])
+                                 };
             }
         }
 

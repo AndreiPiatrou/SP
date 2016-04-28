@@ -45,7 +45,7 @@ namespace SP.PSPP.Integration.Commands
                 return GetSimpleCommandScript(configuration);
             }
 
-            var groups = configuration.GetGroups(inputData.Rows);
+            var groups = configuration.GetGroups();
             var builder = new StringBuilder();
 
             foreach (var group in groups)

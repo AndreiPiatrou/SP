@@ -6,7 +6,7 @@ namespace SP.PSPP.Integration.Models.Configuration
     {
         IEnumerable<VariableDescription> GroupVariables { get; }
 
-        VariableDescription TargetVariable { get;}
+        IEnumerable<VariableDescription> TargetVariables { get; }
 
         IEnumerable<VariableDescription> AllVariables { get; }
 
@@ -14,6 +14,6 @@ namespace SP.PSPP.Integration.Models.Configuration
 
         IEnumerable<string> GetAllHeaders();
 
-        IEnumerable<GroupDescription> GetGroups(IEnumerable<IEnumerable<string>> rows);
+        IEnumerable<GroupDescription> GetGroups();
     }
 }

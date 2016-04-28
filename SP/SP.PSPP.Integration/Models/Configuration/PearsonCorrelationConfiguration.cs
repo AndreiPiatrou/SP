@@ -6,8 +6,8 @@ namespace SP.PSPP.Integration.Models.Configuration
     {
         public PearsonCorrelationConfiguration(
             IEnumerable<VariableDescription> groupVariables,
-            VariableDescription targetVariable)
-            : base(groupVariables, targetVariable)
+            IEnumerable<VariableDescription> targetVariables)
+            : base(groupVariables, targetVariables)
         {
         }
     }
