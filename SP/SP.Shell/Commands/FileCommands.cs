@@ -94,7 +94,7 @@ namespace SP.Shell.Commands
         {
             var mainModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
-            if (!newTab)
+            if (!newTab && mainModel.SelectedTab != null)
             {
                 return mainModel.SelectedTab;
             }
