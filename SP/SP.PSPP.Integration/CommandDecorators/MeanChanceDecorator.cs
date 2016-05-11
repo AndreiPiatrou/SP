@@ -12,13 +12,10 @@ namespace SP.PSPP.Integration.CommandDecorators
     public class MeanChanceDecorator : IAnalyzeCommand
     {
         private readonly IAnalyzeCommand inner;
-        private readonly EnumerableComparer comparer;
 
         public MeanChanceDecorator(IAnalyzeCommand inner)
         {
             this.inner = inner;
-
-            comparer = new EnumerableComparer();
         }
 
         public OutputData Analyze(InputData inputData)

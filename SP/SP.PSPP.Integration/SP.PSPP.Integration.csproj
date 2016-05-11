@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandDecorators\MeanChanceDecorator.cs" />
+    <Compile Include="CommandDecorators\MiddleMeanDecorator.cs" />
     <Compile Include="Commands\AnalyzeCommandFactory.cs" />
     <Compile Include="Commands\AnalyzeType.cs" />
     <Compile Include="Commands\IAnalyzeCommand.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Extensions\VariableDescriptionExtensions.cs" />
     <Compile Include="Models\Configuration\ConfigurationBase.cs" />
     <Compile Include="Models\Configuration\GroupDescription.cs" />
+    <Compile Include="Models\Configuration\GroupDescriptionComparer.cs" />
     <Compile Include="Models\Configuration\PearsonCorrelationConfiguration.cs" />
     <Compile Include="Models\Configuration\IConfiguration.cs" />
     <Compile Include="Models\Configuration\MeanChanceConfiguration.cs" />
