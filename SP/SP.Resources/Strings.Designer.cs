@@ -367,6 +367,15 @@ namespace SP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите числовой критерий.
+        /// </summary>
+        public static string SelectNumericCriteria {
+            get {
+                return ResourceManager.GetString("SelectNumericCriteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите переменные.
         /// </summary>
         public static string SelectVariables {
