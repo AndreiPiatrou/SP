@@ -73,10 +73,6 @@ namespace SP.PSPP.Integration.CommandDecorators
             foreach (var table in tables)
             {
                 yield return table.Key + " #";
-            }
-
-            foreach (var table in tables)
-            {
                 yield return table.Key + " Middle Mean";
             }
         }
