@@ -5,14 +5,14 @@ namespace SP.PSPP.Integration.Models.Configuration
 {
     public abstract class ConfigurationBase : IConfiguration
     {
-        private readonly GroupDescriptionComparer comparer;
+        protected readonly GroupDescriptionComparer Comparer;
 
         protected ConfigurationBase(IEnumerable<VariableDescription> groupVariables, IEnumerable<VariableDescription> targetVariables)
         {
             GroupVariables = groupVariables;
             TargetVariables = targetVariables;
 
-            comparer = new GroupDescriptionComparer();
+            Comparer = new GroupDescriptionComparer();
         }
 
         public virtual IEnumerable<VariableDescription> GroupVariables { get; private set; }
@@ -36,10 +36,10 @@ namespace SP.PSPP.Integration.Models.Configuration
 
         public IEnumerable<GroupDescription> GetGroups()
         {
-            return ExtractGroupCombinations().Distinct(comparer).SelectMany(ConcatWithTarget);
+            return ExtractGroupCombinations().Distinct(Comparer).SelectMany(ConcatWithTarget);
         }
 
-        private IEnumerable<GroupDescription> ConcatWithTarget(IEnumerable<VariableDescription> description)
+        protected virtual IEnumerable<GroupDescription> ConcatWithTarget(IEnumerable<VariableDescription> description)
         {
             return TargetVariables.Select(t => new GroupDescription(description.ToList(), t));
         }

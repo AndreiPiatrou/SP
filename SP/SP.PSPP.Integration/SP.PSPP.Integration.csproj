@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CommandDecorators\MeanChanceDecorator.cs" />
     <Compile Include="CommandDecorators\MiddleMeanDecorator.cs" />
+    <Compile Include="CommandDecorators\PearsonCorrelationDecorator.cs" />
     <Compile Include="Commands\AnalyzeCommandFactory.cs" />
     <Compile Include="Commands\AnalyzeType.cs" />
     <Compile Include="Commands\IAnalyzeCommand.cs" />

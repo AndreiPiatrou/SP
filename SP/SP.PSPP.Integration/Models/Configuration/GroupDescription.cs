@@ -24,6 +24,7 @@ namespace SP.PSPP.Integration.Models.Configuration
             {
                 var label = string.Join(" & ", Variables.Select((v, i) => v.Name + "=" + v.TargetValue));
                 var builder = new StringBuilder(TargetVariable.Name);
+
                 foreach (var targetVariableValue in TargetVariable.Values)
                 {
                     builder.AppendFormat(" '{0}' '{1}'", targetVariableValue, label);
@@ -57,6 +58,35 @@ namespace SP.PSPP.Integration.Models.Configuration
         private string GetVariableValue(string value, bool isNumeric)
         {
             return isNumeric ? value : "'" + value + "'";
+        }
+    }
+
+    public class PearsonCorrelationGroupDescription : GroupDescription
+    {
+        public PearsonCorrelationGroupDescription(
+            IList<VariableDescription> variables,
+            IList<VariableDescription> targetVariables)
+            : base(variables, targetVariables.FirstOrDefault())
+        {
+            TargetVariables = targetVariables;
+        }
+
+        public IList<VariableDescription> TargetVariables { get; private set; }
+
+        public string TargetVariableNames
+        {
+            get
+            {
+                var builder = new StringBuilder();
+
+                foreach (var variableDescription in TargetVariables)
+                {
+                    builder.Append(variableDescription.Name);
+                    builder.Append(" ");
+                }
+
+                return builder.ToString().Trim();
+            }
         }
     }
 }

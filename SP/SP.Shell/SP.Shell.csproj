@@ -183,7 +183,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Tasks\TaskService.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\AnalyzeDataViewModelBase.cs" />
-    <Compile Include="ViewModel\AnalyzeDataViewModels\BivariateCorrelationViewModel.cs" />
+    <Compile Include="ViewModel\AnalyzeDataViewModels\PearsonCorrelationViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MeanChanceViewModel.cs" />
     <Compile Include="ViewModel\AnalyzeDataViewModels\MiddleMeanViewModel.cs" />
     <Compile Include="ViewModel\CommandListeners\AnalyzeDataCommandListener.cs" />

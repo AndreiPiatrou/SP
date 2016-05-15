@@ -86,6 +86,11 @@ namespace SP.PSPP.Integration.Commands
 
         protected abstract string GetGroupCommandScript(GroupDescription @group);
 
+        protected virtual string GetOptionalEndScript(T configuration)
+        {
+            return string.Empty;
+        }
+
         private string GetFullCommand(string inputFilePath, InputData inputData)
         {
             return GetConfigurationCommand(inputFilePath, inputData.Configuration) + Environment.NewLine +

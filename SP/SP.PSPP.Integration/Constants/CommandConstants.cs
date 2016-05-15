@@ -9,17 +9,18 @@
 		                                                /DELIMITERS="","" 
 		                                                /FIRSTCASE=2 
 		                                                /VARIABLES={1}.";
+        public const string PearsonCorrelationCommonFormat = @"CORRELATION
+                                                                   /VARIABLES={0}.
+                                                               FILTER OFF.";
 
-        public const string PearsonCorrelationCommandFormat = @"SET DECIMAL=dot.
-                                                                GET DATA /TYPE=TXT 
-		                                                             /FILE=""{0}""
-		                                                             /ENCODING=""UTF-8""
-		                                                             /DELIMITERS="","" 
-		                                                             /FIRSTCASE=2 
-		                                                             /VARIABLES={1} F4.
-
-                                                                CORRELATION
-	                                                                /VARIABLES= {2}.";
+        public const string PearsonCorrelationFilterFormat = @"COMPUTE groupVar = {0}.
+                                                               EXECUTE.
+                                                               FILTER BY groupVar.
+                                                               VALUE LABELS 
+		                                                            /{1}
+CORRELATION
+	                                                                /VARIABLES={2}.
+                                                               FILTER OFF.";
 
         public const string MiddleMeanCommonFormat = @"DESCRIPTIVES
                                                                /VARIABLES={0}

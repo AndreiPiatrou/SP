@@ -83,8 +83,10 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
         protected virtual bool AnalyzeDataCanExecute()
         {
-            return Criteria.Any(c => c.IsChecked) &&
-                   GroupHeaders.Where(g => g.IsChecked).All(g => g.Index != Criteria.First(c => c.IsChecked).Index);
+            var selectedCriteria = Criteria.Where(c => c.IsChecked).Select(c => c.Index).ToList();
+            var selectedHeaders = GroupHeaders.Where(gh => gh.IsChecked).Select(gh => gh.Index).ToList();
+
+            return selectedCriteria.Any() && selectedHeaders.All(h => !selectedCriteria.Contains(h));
         }
 
         protected abstract InputData ExtractInputData();

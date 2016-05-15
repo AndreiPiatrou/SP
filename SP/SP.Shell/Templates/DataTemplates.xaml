@@ -57,24 +57,60 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type analyzeDataViewModels:PearsonCorrelationViewModel}">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{x:Static resources:Strings.SelectVariables}"/>
-            <ListView ItemsSource="{Binding Headers}" 
-                      Margin="0, 0, 0, 10" 
-                      Height="200" 
-                      Width="300">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="models:CheckableHeaderModel">
-                        <StackPanel Orientation="Horizontal">
-                            <ToggleButton IsChecked="{Binding IsChecked}" 
-                                          Margin="5, 0" 
-                                          VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Static resources:Strings.SelectNumericCriteria}" Margin="0,0,0,5"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{x:Static resources:Strings.SelectGroupParameters}" Margin="0,0,0,5"/>
+            <ScrollViewer Grid.Row="1" 
+                          Grid.Column="0"
+                          Height="200" 
+                          Width="400"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Criteria}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:CheckableHeaderModel">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox IsChecked="{Binding IsChecked}" 
+                                             Margin="5, 2"
+                                             VerticalAlignment="Center"
+                                          Name="CheckBox">
+                                    <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
+                                </CheckBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <ScrollViewer Grid.Row="1" 
+                          Grid.Column="2"
+                          Height="200" 
+                          Width="200"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding GroupHeaders}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:CheckableHeaderModel">
+                            <CheckBox IsChecked="{Binding IsChecked}" 
+                                          Margin="5, 2" 
+                                          VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
+                            </CheckBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type analyzeDataViewModels:MiddleMeanViewModel}">
