@@ -19,7 +19,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
         protected override bool AnalyzeDataCanExecute()
         {
-            return base.AnalyzeDataCanExecute() && Criteria.Count(c => c.IsChecked) == 2 && AllCriteriaAreNumeric();
+            return base.AnalyzeDataCanExecute() && Criteria.Count(c => c.IsChecked) == 2;
         }
 
         protected override InputData ExtractInputData()
@@ -34,6 +34,11 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             var targetVariable = GetCriteriaVariables(criteria);
 
             return new InputData(allRows, new PearsonCorrelationConfiguration(groupVariables, targetVariable));
+        }
+
+        protected override bool IsAcceptableForCriteria(CheckableHeaderModel model)
+        {
+            return model.Values.IsNumberOrEmptyString();
         }
 
         private IEnumerable<VariableDescription> GetGroupVariables(IEnumerable<CheckableHeaderModel> criteria)
@@ -59,11 +64,6 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                         Records.Records.Select(e => e.Where((cr, i) => c.Index == i)).First().IsNumberOrEmptyString(),
                         Records.Records.Select(e => e.Where((cr, i) => c.Index == i).First()).SkipLast(),
                         c.SelectedValue));
-        }
-
-        private bool AllCriteriaAreNumeric()
-        {
-            return Criteria.Where(c => c.IsChecked).All(c => c.Values.IsNumberOrEmptyString());
         }
     }
 }

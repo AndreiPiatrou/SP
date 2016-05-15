@@ -31,9 +31,9 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             return new InputData(allRows, new MiddleMeanConfiguration(groupVariables, targetVariable));
         }
 
-        protected override bool AnalyzeDataCanExecute()
+        protected override bool IsAcceptableForCriteria(CheckableHeaderModel model)
         {
-            return base.AnalyzeDataCanExecute() && AllCriteriaAreNumeric();
+            return model.Values.IsNumberOrEmptyString();
         }
 
         private IEnumerable<VariableDescription> GetGroupVariables(IEnumerable<CheckableHeaderModel> criteria)
@@ -59,11 +59,6 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                         Records.Records.Select(e => e.Where((cr, i) => c.Index == i)).First().IsNumberOrEmptyString(),
                         Records.Records.Select(e => e.Where((cr, i) => c.Index == i).First()).SkipLast(),
                         c.SelectedValue));
-        }
-
-        private bool AllCriteriaAreNumeric()
-        {
-            return Criteria.Where(c => c.IsChecked).All(c => c.Values.IsNumberOrEmptyString());
         }
     }
 }
