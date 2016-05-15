@@ -7,6 +7,7 @@ using SP.FIleSystem.Directory;
 using SP.Resources;
 using SP.Shell.Services;
 using SP.Shell.ViewModel.CommandListeners;
+using SP.Shell.ViewModel.Criteria;
 
 namespace SP.Shell.ViewModel
 {

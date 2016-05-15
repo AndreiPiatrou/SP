@@ -8,31 +8,24 @@ namespace SP.PSPP.Integration.Models.Configuration
     {
         public GroupDescription(
             IList<VariableDescription> variables,
-            IList<string> values,
-            IEnumerable<string> targetVariableValues,
-            string targetVariableName)
+            VariableDescription targetVariable)
         {
             Variables = variables;
-            Values = values;
-            TargetVariableValues = targetVariableValues;
-            TargetVariableName = targetVariableName;
+            TargetVariable = targetVariable;
         }
 
         public IList<VariableDescription> Variables { get; private set; }
 
-        public IEnumerable<string> TargetVariableValues { get; private set; }
-
-        public string TargetVariableName { get; private set; }
-
-        public IList<string> Values { get; private set; }
+        public VariableDescription TargetVariable { get; private set; }
 
         public string Labels
         {
             get
             {
-                var label = string.Join(" & ", Variables.Select((v, i) => v.Name + "=" + Values[i]));
-                var builder = new StringBuilder(TargetVariableName);
-                foreach (var targetVariableValue in TargetVariableValues)
+                var label = string.Join(" & ", Variables.Select((v, i) => v.Name + "=" + v.TargetValue));
+                var builder = new StringBuilder(TargetVariable.Name);
+
+                foreach (var targetVariableValue in TargetVariable.Values)
                 {
                     builder.AppendFormat(" '{0}' '{1}'", targetVariableValue, label);
                 }
@@ -50,7 +43,7 @@ namespace SP.PSPP.Integration.Models.Configuration
                 for (var i = 0; i < Variables.Count; i++)
                 {
                     builder.Append(
-                        "( " + Variables[i].Name + " = " + GetVariableValue(Values[i], Variables[i].IsNumeric) + " )");
+                        "( " + Variables[i].Name + " = " + GetVariableValue(Variables[i].TargetValue, Variables[i].IsNumeric) + " )");
 
                     if (i != Variables.Count - 1)
                     {
@@ -65,6 +58,35 @@ namespace SP.PSPP.Integration.Models.Configuration
         private string GetVariableValue(string value, bool isNumeric)
         {
             return isNumeric ? value : "'" + value + "'";
+        }
+    }
+
+    public class PearsonCorrelationGroupDescription : GroupDescription
+    {
+        public PearsonCorrelationGroupDescription(
+            IList<VariableDescription> variables,
+            IList<VariableDescription> targetVariables)
+            : base(variables, targetVariables.FirstOrDefault())
+        {
+            TargetVariables = targetVariables;
+        }
+
+        public IList<VariableDescription> TargetVariables { get; private set; }
+
+        public string TargetVariableNames
+        {
+            get
+            {
+                var builder = new StringBuilder();
+
+                foreach (var variableDescription in TargetVariables)
+                {
+                    builder.Append(variableDescription.Name);
+                    builder.Append(" ");
+                }
+
+                return builder.ToString().Trim();
+            }
         }
     }
 }

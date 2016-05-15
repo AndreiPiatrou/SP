@@ -37,7 +37,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                 AnalyzeDataCanExecute);
 
             GroupHeaders = ExtractHeaders().ToObservable();
-            Criteria = ExtractHeaders().ToObservable();
+            Criteria = ExtractHeaders().Where(IsAcceptableForCriteria).ToObservable();
         }
 
         public bool CloseRequested
@@ -53,7 +53,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
                 RaisePropertyChanged(() => CloseRequested);
             }
         }
-        
+
         public ObservableCollection<CheckableHeaderModel> GroupHeaders { get; protected set; }
 
         public ObservableCollection<CheckableHeaderModel> Criteria { get; protected set; }
@@ -63,13 +63,42 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
         public string Title { get; protected set; }
 
         public RelayCommand AnalyzeCommand { get; protected set; }
-        
+
         protected IEnumerable<CheckableHeaderModel> ExtractHeaders()
         {
             for (var i = 0; i < Records.Headers.Count - 1; i++)
             {
-                yield return new CheckableHeaderModel(Records.Headers[i], i, AnalyzeCommand.RaiseCanExecuteChanged);
+                var localIndex = i;
+                yield return new CheckableHeaderModel(Records.Headers[i], i, OnSelectionChanged)
+                {
+                    Values = Records.Records.Select(r => r[localIndex])
+                };
             }
+        }
+
+        protected void OnSelectionChanged()
+        {
+            AnalyzeCommand.RaiseCanExecuteChanged();
+
+            DisableUnAcceptable();
+        }
+
+        protected void DisableUnAcceptable()
+        {
+            foreach (var header in GroupHeaders)
+            {
+                header.Enabled = Criteria.All(c => !c.IsChecked || c.Index != header.Index);
+            }
+
+            foreach (var header in Criteria)
+            {
+                header.Enabled = GroupHeaders.All(c => !c.IsChecked || c.Index != header.Index);
+            }
+        }
+
+        protected virtual bool IsAcceptableForCriteria(CheckableHeaderModel model)
+        {
+            return true;
         }
 
         protected virtual void AnalyzeDataExecute()
@@ -79,8 +108,10 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 
         protected virtual bool AnalyzeDataCanExecute()
         {
-            return Criteria.Any(c => c.IsChecked) &&
-                   GroupHeaders.Where(g => g.IsChecked).All(g => g.Index != Criteria.First(c => c.IsChecked).Index);
+            var selectedCriteria = Criteria.Where(c => c.IsChecked).Select(c => c.Index).ToList();
+            var selectedHeaders = GroupHeaders.Where(gh => gh.IsChecked).Select(gh => gh.Index).ToList();
+
+            return selectedCriteria.Any() && selectedHeaders.All(h => !selectedCriteria.Contains(h));
         }
 
         protected abstract InputData ExtractInputData();

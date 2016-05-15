@@ -45,7 +45,7 @@ namespace SP.PSPP.Integration.Commands
                 return GetSimpleCommandScript(configuration);
             }
 
-            var groups = configuration.GetGroups(inputData.Rows);
+            var groups = configuration.GetGroups();
             var builder = new StringBuilder();
 
             foreach (var group in groups)
@@ -85,6 +85,11 @@ namespace SP.PSPP.Integration.Commands
         protected abstract string GetSimpleCommandScript(T configuration);
 
         protected abstract string GetGroupCommandScript(GroupDescription @group);
+
+        protected virtual string GetOptionalEndScript(T configuration)
+        {
+            return string.Empty;
+        }
 
         private string GetFullCommand(string inputFilePath, InputData inputData)
         {

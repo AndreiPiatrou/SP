@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SP.PSPP.Integration.Models.Configuration
 {
@@ -6,9 +7,17 @@ namespace SP.PSPP.Integration.Models.Configuration
     {
         public PearsonCorrelationConfiguration(
             IEnumerable<VariableDescription> groupVariables,
-            VariableDescription targetVariable)
-            : base(groupVariables, targetVariable)
+            IEnumerable<VariableDescription> targetVariables)
+            : base(groupVariables, targetVariables)
         {
+        }
+
+        protected override IEnumerable<GroupDescription> ConcatWithTarget(IEnumerable<VariableDescription> description)
+        {
+            return
+                Enumerable.Repeat(
+                    new PearsonCorrelationGroupDescription(description.ToList(), TargetVariables.ToList()),
+                    1);
         }
     }
 }

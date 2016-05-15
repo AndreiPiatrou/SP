@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Linq;
 
 using SP.FIleSystem.Directory;
+using SP.PSPP.Integration.Constants;
 using SP.PSPP.Integration.Models.Configuration;
 
 namespace SP.PSPP.Integration.Commands.Implementations
@@ -14,12 +15,21 @@ namespace SP.PSPP.Integration.Commands.Implementations
 
         protected override string GetSimpleCommandScript(PearsonCorrelationConfiguration configuration)
         {
-            throw new NotImplementedException();
+            return string.Format(CommandConstants.PearsonCorrelationCommonFormat, configuration.TargetVariables.First().Name);
         }
 
         protected override string GetGroupCommandScript(GroupDescription @group)
         {
-            throw new NotImplementedException();
+            return GetGroupCommandScript(group as PearsonCorrelationGroupDescription);
+        }
+
+        private string GetGroupCommandScript(PearsonCorrelationGroupDescription group)
+        {
+            return string.Format(
+                CommandConstants.PearsonCorrelationFilterFormat,
+                group.ScriptComparison,
+                group.Labels,
+                group.TargetVariableNames);
         }
     }
 }

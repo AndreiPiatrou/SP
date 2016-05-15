@@ -219,6 +219,9 @@
   <data name="SelectGroupParameters" xml:space="preserve">
     <value>Выберите группу</value>
   </data>
+  <data name="SelectNumericCriteria" xml:space="preserve">
+    <value>Выберите числовой критерий</value>
+  </data>
   <data name="SelectVariables" xml:space="preserve">
     <value>Выберите переменные</value>
   </data>

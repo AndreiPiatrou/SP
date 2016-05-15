@@ -59,6 +59,7 @@ namespace SP.Shell.ViewModel
         public void ResetToSource()
         {
             Records = new RecordsCollection(sourceCollection);
+            Records.UpdateRowsAndHeaders();
         }
 
         public void LoadRecords(IEnumerable<IEnumerable<string>> newRecords, string fileName)

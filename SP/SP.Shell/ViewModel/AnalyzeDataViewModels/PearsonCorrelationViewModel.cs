@@ -10,11 +10,16 @@ using SP.Shell.Models;
 
 namespace SP.Shell.ViewModel.AnalyzeDataViewModels
 {
-    public class MiddleMeanViewModel : AnalyzeDataViewModelBase
+    public class PearsonCorrelationViewModel : AnalyzeDataViewModelBase
     {
-        public MiddleMeanViewModel(RecordsCollection records)
-            : base(records, AnalyzeType.MiddleMean, Strings.MiddleMean)
+        public PearsonCorrelationViewModel(RecordsCollection records)
+            : base(records, AnalyzeType.PearsonCorrelation, Strings.CorrelationCoefficient)
         {
+        }
+
+        protected override bool AnalyzeDataCanExecute()
+        {
+            return base.AnalyzeDataCanExecute() && Criteria.Count(c => c.IsChecked) == 2;
         }
 
         protected override InputData ExtractInputData()
@@ -28,7 +33,7 @@ namespace SP.Shell.ViewModel.AnalyzeDataViewModels
             var groupVariables = GetGroupVariables(checkedHeaders);
             var targetVariable = GetCriteriaVariables(criteria);
 
-            return new InputData(allRows, new MiddleMeanConfiguration(groupVariables, targetVariable));
+            return new InputData(allRows, new PearsonCorrelationConfiguration(groupVariables, targetVariable));
         }
 
         protected override bool IsAcceptableForCriteria(CheckableHeaderModel model)

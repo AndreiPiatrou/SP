@@ -11,7 +11,7 @@ namespace SP.PSPP.Integration.Services
         {
             return new OutputData
             {
-                Rows = File.ReadAllLines(filePath).Select(line => line.Split(",".ToCharArray()))
+                Rows = File.ReadAllLines(filePath).Select(line => line.Split(",".ToCharArray()).Select(c => c.Trim()))
             };
         }
     }

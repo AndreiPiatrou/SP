@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModel="clr-namespace:SP.Shell.ViewModel"
-                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:criteria="clr-namespace:SP.Shell.ViewModel.Criteria">
 
-    <DataTemplate DataType="{x:Type viewModel:NumericCriteriaRangeViewModel}">
+    <DataTemplate DataType="{x:Type criteria:NumericCriteriaRangeViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -27,7 +27,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModel:DiscreteCriteriaRangeViewModel}">
+    <DataTemplate DataType="{x:Type criteria:DiscreteCriteriaRangeViewModel}">
         <Expander IsExpanded="False" 
                       Margin="5"
                       VerticalAlignment="Center">

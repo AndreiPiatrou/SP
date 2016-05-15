@@ -1,4 +1,4 @@
-namespace SP.Shell.ViewModel
+namespace SP.Shell.ViewModel.Criteria
 {
     public interface ICriteriaRangeSelector
     {
