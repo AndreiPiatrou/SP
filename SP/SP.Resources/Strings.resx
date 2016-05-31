@@ -172,7 +172,7 @@
     <value>Вставить строку</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
-    <value>Статистический пакет PSPP</value>
+    <value>Статистический пакет</value>
   </data>
   <data name="MeanChance" xml:space="preserve">
     <value>Вероятность заданного значения</value>

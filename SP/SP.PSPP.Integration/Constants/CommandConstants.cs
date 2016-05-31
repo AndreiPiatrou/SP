@@ -42,7 +42,7 @@ DESCRIPTIVES
         public const string MeanChanceCommonFormat = @"FREQUENCIES
                                                                /VARIABLES={0}
                                                                /FORMAT=AVALUE TABLE
-                                                               /STATISTICS=MEAN STDDEV.
+                                                               /STATISTICS=MEAN.
                                                        FILTER OFF.";
 
         public const string MeanChanceFilterFormat = @"COMPUTE groupVar = {0}.
@@ -53,7 +53,7 @@ DESCRIPTIVES
 FREQUENCIES
                                                                /VARIABLES={2}
                                                                /FORMAT=AVALUE TABLE
-                                                               /STATISTICS=MEAN STDDEV.
+                                                               /STATISTICS=MEAN.
                                                        FILTER OFF.";
     }
 }
