@@ -223,7 +223,7 @@ namespace SP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Статистический пакет PSPP.
+        ///   Looks up a localized string similar to Статистический пакет.
         /// </summary>
         public static string MainWindowTitle {
             get {
