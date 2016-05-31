@@ -1,4 +1,6 @@
-﻿namespace SP.Extensions
+﻿using System;
+
+namespace SP.Extensions
 {
     public static class StringExtensions
     {
@@ -29,6 +31,16 @@
             var number = value.ToNumber();
 
             return number >= min && number <= max;
+        }
+
+        public static bool IsEqualAsDoubleFirst(this string value, string another)
+        {
+            if (value.IsNumber() && another.IsNumber())
+            {
+                return Math.Abs(value.ToNumber() - another.ToNumber()) < 0.00000001;
+            }
+
+            return string.Equals(value, another, StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

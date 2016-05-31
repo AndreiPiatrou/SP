@@ -85,7 +85,7 @@ namespace SP.PSPP.Integration.CommandDecorators
 
             foreach (var row in data.Rows.Select(r => r.ToList()).Where(IsMeaningRow).ToList())
             {
-                if (row.First().StartsWith("Table"))
+                if (row.First().StartsWith("Table:"))
                 {
                     table.Clear();
                 }
@@ -201,10 +201,7 @@ namespace SP.PSPP.Integration.CommandDecorators
                         {
                             var enumerable = r as string[] ?? r.ToArray();
                             return enumerable.Length == 1 ||
-                                   string.Equals(
-                                       enumerable.ElementAt(1),
-                                       targetValues[VariableName],
-                                       StringComparison.CurrentCultureIgnoreCase);
+                                   enumerable.ElementAt(1).IsEqualAsDoubleFirst(targetValues[VariableName]);
                         }).ToList();
 
                 return new GroupTable(newtable, total);
