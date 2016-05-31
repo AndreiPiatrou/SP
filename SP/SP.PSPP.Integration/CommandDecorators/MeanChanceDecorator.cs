@@ -13,9 +13,19 @@ namespace SP.PSPP.Integration.CommandDecorators
     {
         private readonly IAnalyzeCommand inner;
 
+        private readonly List<string> skipCells; 
+
         public MeanChanceDecorator(IAnalyzeCommand inner)
         {
             this.inner = inner;
+
+            skipCells = new List<string>
+                            {
+                                "N",
+                                "Mean",
+                                "Value Label",
+                                string.Empty
+                            };
         }
 
         public OutputData Analyze(InputData inputData)
@@ -73,8 +83,13 @@ namespace SP.PSPP.Integration.CommandDecorators
             var result = new List<GroupTable>();
             var table = new List<List<string>>();
 
-            foreach (var row in data.Rows.Select(r => r.ToList()).Where(IsMeaningRow))
+            foreach (var row in data.Rows.Select(r => r.ToList()).Where(IsMeaningRow).ToList())
             {
+                if (row.First().StartsWith("Table"))
+                {
+                    table.Clear();
+                }
+
                 if (row.First() == "Total" && table.Any())
                 {
                     result.Add(new GroupTable(table.ToList(), Convert.ToInt32(row[2])));
@@ -91,7 +106,7 @@ namespace SP.PSPP.Integration.CommandDecorators
 
         private bool IsMeaningRow(IList<string> row)
         {
-            return !row.IsEmptyStringCollection() && row.ElementAt(0) != "Value Label";
+            return !row.IsEmptyStringCollection() && !skipCells.Contains(row.ElementAt(0));
         }
 
         protected class GroupTable
@@ -181,18 +196,18 @@ namespace SP.PSPP.Integration.CommandDecorators
 
             public GroupTable Filter(IDictionary<string, string> targetValues)
             {
-                return new GroupTable(
-                    table.Where(
-                        r =>
-                            {
-                                var enumerable = r as string[] ?? r.ToArray();
-                                return enumerable.Length == 1 ||
-                                       string.Equals(
-                                           enumerable.ElementAt(1),
-                                           targetValues[VariableName],
-                                           StringComparison.CurrentCultureIgnoreCase);
-                            }),
-                    total);
+                var newtable = table.Where(
+                    r =>
+                        {
+                            var enumerable = r as string[] ?? r.ToArray();
+                            return enumerable.Length == 1 ||
+                                   string.Equals(
+                                       enumerable.ElementAt(1),
+                                       targetValues[VariableName],
+                                       StringComparison.CurrentCultureIgnoreCase);
+                        }).ToList();
+
+                return new GroupTable(newtable, total);
             }
 
             private GroupPart GetGroupPart(string groupPartString)
